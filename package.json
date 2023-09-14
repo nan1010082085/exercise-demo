@@ -8,7 +8,14 @@
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
     "test": "vitest",
-    "test:ui": "vitest --ui"
+    "test:ui": "vitest --ui",
+    "commit": "git cz"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-git",
+      "czConfig": "./cz.config.js"
+    }
   },
   "dependencies": {
     "normalcss": "^2.0.5",
@@ -21,6 +28,8 @@
     "@vitejs/plugin-vue": "^4.2.3",
     "@vitejs/plugin-vue-jsx": "^3.0.2",
     "@vitest/ui": "^0.34.4",
+    "commitizen": "^4.3.0",
+    "cz-git": "^1.7.1",
     "sass": "^1.66.1",
     "typescript": "^5.0.2",
     "vite": "^4.4.5",
