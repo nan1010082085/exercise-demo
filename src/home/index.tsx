@@ -1,10 +1,12 @@
 import { defineComponent } from 'vue';
 import styles from './index.module.scss';
 
-export default defineComponent({
+const HomeComponent = defineComponent({
   setup() {
     return () => {
       return <div class={styles.wrapper}></div>;
     };
   }
 });
+
+export default HomeComponent;

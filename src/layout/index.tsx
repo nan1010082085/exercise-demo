@@ -6,7 +6,7 @@ export default defineComponent({
     return () => {
       return (
         <div>
-          <RouterView />;
+          <RouterView />
         </div>
       );
     };
