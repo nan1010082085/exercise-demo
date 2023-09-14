@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "jsx": "preserve",
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}

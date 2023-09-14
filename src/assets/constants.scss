@@ -1,0 +1,80 @@
+$px-5: 5px;
+$px-10: 10px;
+
+// mr
+.ml5 {
+  margin-left: $px-5;
+}
+
+.mr5 {
+  margin-right: $px-5;
+}
+
+// ml
+.ml10 {
+  margin-left: $px-10;
+}
+
+.mr10 {
+  margin-right: $px-10;
+}
+
+// pl
+.pl5 {
+  padding-left: $px-5;
+}
+
+.pl10 {
+  padding-left: $px-10;
+}
+
+// pr
+.pr5 {
+  padding-right: $px-5;
+}
+
+.pr10 {
+  padding-right: $px-10;
+}
+
+// mlr mtb
+.mlr5 {
+  margin-left: $px-5;
+  margin-right: $px-5;
+}
+
+.mlr10 {
+  margin-left: $px-10;
+  margin-right: $px-10;
+}
+
+.mtb5 {
+  margin-top: $px-5;
+  margin-bottom: $px-5;
+}
+
+.mtb10 {
+  margin-top: $px-10;
+  margin-bottom: $px-10;
+}
+
+// plr ptb
+.plr5 {
+  padding-left: $px-5;
+  padding-right: $px-5;
+}
+
+.plr10 {
+  padding-left: $px-10;
+  padding-right: $px-10;
+}
+
+.ptb5 {
+  padding-top: $px-5;
+  padding-bottom: $px-5;
+}
+
+.ptb10 {
+  padding-top: $px-10;
+  padding-bottom: $px-10;
+}
