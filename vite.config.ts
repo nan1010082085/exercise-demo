@@ -7,13 +7,17 @@ import JSX from '@vitejs/plugin-vue-jsx';
 export default defineConfig(({ command, mode }) => {
   return {
     base: './',
-    define: {},
     resolve: {
       alias: {
         '@': `${process.cwd()}/src`
       }
     },
     plugins: [vue(), JSX()],
-    test: {}
+    define: {
+      'import.meta.vitest': false
+    },
+    test: {
+      includeSource: ['src/**/*.(t|j)s']
+    }
   };
 });
