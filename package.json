@@ -9,6 +9,7 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:watch": "vitest watch",
+    "add:cm": "git add . & git cz",
     "commit": "git cz"
   },
   "config": {

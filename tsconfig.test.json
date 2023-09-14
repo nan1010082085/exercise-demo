@@ -7,5 +7,5 @@
       "vitest/importMeta"
     ]
   },
-  "include": ["src/**/*.test-d.ts "]
+  "include": ["src/**/*.test.ts", "src/**/*.test-d.ts"]
 }
