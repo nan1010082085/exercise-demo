@@ -1,0 +1,9 @@
+{
+  "include": ["src/**/__test__/*"],
+  "exclude": [],
+  "compilerOptions": {
+    "composite": true,
+    "lib": [],
+    "types": ["node", "jsdom", "vitest/importMeta"]
+  }
+}
