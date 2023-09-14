@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import { defineConfig, loadEnv } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import JSX from '@vitejs/plugin-vue-jsx';
@@ -9,9 +10,10 @@ export default defineConfig(({ command, mode }) => {
     define: {},
     resolve: {
       alias: {
-        '@': `${process.cwd()}/src`,
+        '@': `${process.cwd()}/src`
       }
     },
-    plugins: [vue(), JSX()]
+    plugins: [vue(), JSX()],
+    test: {}
   };
 });
