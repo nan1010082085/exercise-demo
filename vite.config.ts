@@ -2,6 +2,7 @@
 import { defineConfig, loadEnv } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import JSX from '@vitejs/plugin-vue-jsx';
+import { fileURLToPath, URL } from 'node:url';
 
 const proxy = {};
 
@@ -15,7 +16,7 @@ export default defineConfig(({ command, mode }) => {
     },
     resolve: {
       alias: {
-        '@': `${process.cwd()}/src`
+        '@': fileURLToPath(new URL('./src', import.meta.url))
       }
     },
     plugins: [vue(), JSX()],

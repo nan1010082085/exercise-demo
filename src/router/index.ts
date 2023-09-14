@@ -16,7 +16,7 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/home')
   },
   {
-    path: 'redirect/:path(.*)',
+    path: '/redirect/:path(.*)',
     component: () => import('@/views/redirect')
   }
 ];
@@ -30,7 +30,7 @@ const { beforeEach } = router;
 
 // 全局前置守卫
 beforeEach((to, from, next) => {
-  console.log(to, from);
+  // console.log(to, from);
   next()
 });
 

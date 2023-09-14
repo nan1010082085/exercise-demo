@@ -4,7 +4,7 @@ import styles from './index.module.scss';
 const HomeComponent = defineComponent({
   setup() {
     return () => {
-      return <div class={styles.wrapper}></div>;
+      return <div class={styles.wrapper}></div>
     };
   }
 });
