@@ -55,13 +55,14 @@ module.exports = {
       name: 'chore:    其他修改 | Other changes that do not modify src or test files'
     }
   ],
-  useEmoji: false,
+  useEmoji: true,
   emojiAlign: 'center',
   themeColorCode: '',
   scopes: [
     { value: 'views', name: 'views:          模块' },
     { value: 'package', name: 'package:        依赖' },
-    { value: 'test', name: 'test:           测试' }
+    { value: 'test', name: 'test:           测试' },
+    { value: 'other', name: 'other:          其他' },
   ],
   allowCustomScopes: true,
   allowEmptyScopes: false,
