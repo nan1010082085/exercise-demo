@@ -1,9 +1,9 @@
 {
-  "include": ["src/**/__test__/*"],
+  "extends": ["./tsconfig.app.json"],
   "exclude": [],
   "compilerOptions": {
     "composite": true,
     "lib": [],
-    "types": ["node", "jsdom", "vitest/importMeta"]
+    "types": ["node", "vitest/importMeta"]
   }
 }
