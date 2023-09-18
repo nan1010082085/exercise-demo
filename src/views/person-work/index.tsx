@@ -4,7 +4,9 @@ export default defineComponent({
   name: 'PersonWork',
   setup() {
     return () => {
-      return <div></div>;
+      return <div>
+        PersonWork
+      </div>;
     };
   }
 });

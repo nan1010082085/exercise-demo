@@ -65,7 +65,7 @@ module.exports = {
     { value: 'other', name: 'other:          其他' },
   ],
   allowCustomScopes: true,
-  allowEmptyScopes: false,
+  allowEmptyScopes: true,
   customScopesAlign: 'bottom',
   customScopesAlias: '自定义范围',
   emptyScopesAlias: 'empty',
