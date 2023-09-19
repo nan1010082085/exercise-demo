@@ -1,12 +1,15 @@
 import { languageKeyByLabel, languageKeyByValue } from '@/constants';
 import { useLayoutStore } from '@/store/layout-store';
-import { Header } from 'tdesign-vue-next';
+import { Button, Header, Select } from 'tdesign-vue-next';
 import { computed, defineComponent, ref } from 'vue';
 import styles from './index.module.scss';
 import { HomeIcon } from 'tdesign-icons-vue-next';
+import { useRouter } from 'vue-router';
 
 const LHeader = defineComponent({
   setup() {
+    const router = useRouter();
+
     const { zh, changeLanguage } = useLayoutStore();
 
     const selValue = ref(languageKeyByLabel[zh]);
@@ -20,22 +23,26 @@ const LHeader = defineComponent({
       });
     });
 
+    const routePush = (name: string) => {
+      router.push({ name });
+    };
+
     return () => {
       return (
         <Header class={styles.wrapper}>
           <div class={styles['h-left']}>header</div>
           <div class={styles['h-right']}>
-            <t-button variant="text">
+            <Button variant="text" onClick={() => routePush('home')}>
               {{
                 icon: () => <HomeIcon />
               }}
-            </t-button>
-            <t-select
+            </Button>
+            <Select
               v-model={selValue.value}
               options={languageOptions.value}
-              pagination={'请选择语言'}
-              onChange={changeLanguage}
-            ></t-select>
+              placeholder={'请选择语言'}
+              on-change={changeLanguage}
+            ></Select>
           </div>
         </Header>
       );

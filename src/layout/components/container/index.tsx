@@ -1,14 +1,15 @@
 import { defineComponent } from 'vue';
 import { RouterView } from 'vue-router';
 import styles from './index.module.scss'
+import { Content } from 'tdesign-vue-next';
 
 const LContainer = defineComponent({
   setup() {
     return () => {
       return (
-        <t-content class={styles.layoutContainer}>
+        <Content class={styles.layoutContainer}>
           <RouterView />
-        </t-content>
+        </Content>
       );
     };
   }

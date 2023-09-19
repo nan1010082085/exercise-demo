@@ -5,6 +5,7 @@ import { merge } from 'lodash-es';
 import { useLayoutStore } from './store/layout-store';
 import zhCn from 'tdesign-vue-next/es/locale/zh_CN';
 import enUs from 'tdesign-vue-next/es/locale/en_US';
+import { ConfigProvider } from 'tdesign-vue-next';
 
 export default defineComponent({
   setup() {
@@ -28,9 +29,9 @@ export default defineComponent({
 
     return () => {
       return (
-        <t-config-provider globalConfig={config.value}>
+        <ConfigProvider globalConfig={config.value}>
           <RouterView />
-        </t-config-provider>
+        </ConfigProvider>
       );
     };
   }

@@ -1,10 +1,11 @@
 import { defineComponent } from 'vue';
 import styles from './index.module.scss';
+import { Aside } from 'tdesign-vue-next';
 
 const LMenu = defineComponent({
   setup() {
     return () => {
-      return <t-aside class={styles.layoutMenus}>menu</t-aside>;
+      return <Aside class={styles.layoutMenus}>menu</Aside>;
     };
   }
 });
