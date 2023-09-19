@@ -1,6 +1,6 @@
 {
-  "extends": "@vue/tsconfig/tsconfig.dom.json",
-  "include": ["src/**/*"],
+  "extends": ["@vue/tsconfig/tsconfig.dom.json"],
+  "include": ["src/**/*", "tdesign-vue-nest/global.d.ts"],
   "exclude": ["src/**/__test__/*"],
   "compilerOptions": {
     "composite": true,
