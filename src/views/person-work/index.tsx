@@ -1,12 +1,25 @@
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
+import { useThrottledRefHistory } from '@vueuse/core';
 
-export default defineComponent({
+const PersonWork = defineComponent({
   name: 'PersonWork',
   setup() {
+    const def = ref({ a: 1 });
+
+    const { history, undo, redo } = useThrottledRefHistory(def, { deep: true, throttle: 1000 });
+
+
+
     return () => {
       return <div>
-        PersonWork
+        <div>PersonWork</div>
+
+        <div>
+          {history.value}
+        </div>
       </div>;
     };
   }
 });
+
+export default PersonWork;

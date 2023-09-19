@@ -29,9 +29,7 @@ export default defineComponent({
     return () => {
       return (
         <t-config-provider globalConfig={config.value}>
-          <div class={'global-config-wrapper'}>
-            <RouterView />;
-          </div>
+          <RouterView />
         </t-config-provider>
       );
     };

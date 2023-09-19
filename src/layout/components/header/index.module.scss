@@ -1,0 +1,11 @@
+.wrapper {
+  display: flex;
+
+  .h-left {
+    width: 65%;
+  }
+
+  .h-right {
+    flex: 1;
+  }
+}

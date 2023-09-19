@@ -1,6 +1,6 @@
 import { createApp } from 'vue';
 import 'normalcss';
-import './assets/index.module.scss';
+import './assets/index.scss';
 import App from './App';
 import router from './router';
 import pinpa from './store';
