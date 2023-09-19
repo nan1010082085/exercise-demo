@@ -3,6 +3,7 @@ import { useLayoutStore } from '@/store/layout-store';
 import { Header } from 'tdesign-vue-next';
 import { computed, defineComponent, ref } from 'vue';
 import styles from './index.module.scss';
+import { HomeIcon } from 'tdesign-icons-vue-next';
 
 const LHeader = defineComponent({
   setup() {
@@ -24,6 +25,11 @@ const LHeader = defineComponent({
         <Header class={styles.wrapper}>
           <div class={styles['h-left']}>header</div>
           <div class={styles['h-right']}>
+            <t-button variant="text">
+              {{
+                icon: () => <HomeIcon />
+              }}
+            </t-button>
             <t-select
               v-model={selValue.value}
               options={languageOptions.value}

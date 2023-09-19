@@ -20,6 +20,9 @@ dependencies:
   pinia:
     specifier: ^2.1.6
     version: 2.1.6(typescript@5.2.2)(vue@3.3.4)
+  tdesign-icons-vue-next:
+    specifier: ^0.2.2
+    version: 0.2.2(vue@3.3.4)
   tdesign-vue-next:
     specifier: ^1.5.6
     version: 1.5.6(vue@3.3.4)
