@@ -1,5 +1,7 @@
 $px-5: 5px;
 $px-10: 10px;
+$px-15: 15px;
+$px-20: 20px;
 
 // mr
 .ml5 {
@@ -48,6 +50,16 @@ $px-10: 10px;
   margin-right: $px-10;
 }
 
+.mlr15 {
+  margin-left: $px-15;
+  margin-right: $px-15;
+}
+
+.mlr20 {
+  margin-left: $px-20;
+  margin-right: $px-20;
+}
+
 .mtb5 {
   margin-top: $px-5;
   margin-bottom: $px-5;
@@ -56,6 +68,16 @@ $px-10: 10px;
 .mtb10 {
   margin-top: $px-10;
   margin-bottom: $px-10;
+}
+
+.mtb15 {
+  margin-top: $px-15;
+  margin-bottom: $px-15;
+}
+
+.mtb20 {
+  margin-top: $px-20;
+  margin-bottom: $px-20;
 }
 
 // plr ptb
@@ -69,6 +91,16 @@ $px-10: 10px;
   padding-right: $px-10;
 }
 
+.plr15 {
+  padding-left: $px-15;
+  padding-right: $px-15;
+}
+
+.plr20 {
+  padding-left: $px-20;
+  padding-right: $px-20;
+}
+
 .ptb5 {
   padding-top: $px-5;
   padding-bottom: $px-5;
@@ -77,4 +109,14 @@ $px-10: 10px;
 .ptb10 {
   padding-top: $px-10;
   padding-bottom: $px-10;
+}
+
+.ptb15 {
+  padding-top: $px-15;
+  padding-bottom: $px-15;
+}
+
+.ptb20 {
+  padding-top: $px-20;
+  padding-bottom: $px-20;
 }

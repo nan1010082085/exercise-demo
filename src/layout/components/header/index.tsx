@@ -1,9 +1,9 @@
 import { languageKeyByLabel, languageKeyByValue } from '@/constants';
 import { useLayoutStore, type LanguageT } from '@/store/layout-store';
 import { Button, Divider, Dropdown, Header, Popup, Space, type TdDropdownItemProps } from 'tdesign-vue-next';
+import { Call1Icon, HomeIcon, LogoQqIcon, LogoWechatIcon, TranslateIcon } from 'tdesign-icons-vue-next';
 import { computed, defineComponent } from 'vue';
 import styles from './index.module.scss';
-import { Call1Icon, HomeIcon, LogoQqIcon, LogoWechatIcon, TranslateIcon } from 'tdesign-icons-vue-next';
 import { useRouter } from 'vue-router';
 
 type DropdownOption = Pick<TdDropdownItemProps, 'content'> & { value: LanguageT };
@@ -27,13 +27,16 @@ const LHeader = defineComponent({
     });
 
     const routerPush = (pathName: string) => {
-      router.push({ name: pathName });
+      router.replace({ name: pathName });
     };
 
     return () => {
       return (
         <Header class={styles.wrapper}>
           <div class={styles['h-left']}>
+            <div class={styles.logo}>
+              <h1>Exercise Demo</h1>
+            </div>
             <Button variant="text" icon={() => <HomeIcon />} onClick={() => routerPush('Home')} />
           </div>
           <div class={styles['h-right']}>

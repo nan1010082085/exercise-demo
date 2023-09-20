@@ -11,10 +11,7 @@ const LMenu = defineComponent({
     return () => {
       return (
         <Aside class={styles.layoutMenus}>
-          <Header class={styles.menuLogo}>
-            <h1>Exercise Demo</h1>
-          </Header>
-          <Menu>{menuItemRender}</Menu>
+          {/* <Menu>{menuItemRender}</Menu> */}
         </Aside>
       );
     };

@@ -6,7 +6,9 @@ const Login = defineComponent({
     return () => {
       return (
         <div class={styles.wrapper}>
-          <div class={styles.formWrapper}>111</div>
+          <div> logo </div>
+          <div class={styles.formWrapper}> form content </div>
+          <div> footer </div>
         </div>
       );
     };

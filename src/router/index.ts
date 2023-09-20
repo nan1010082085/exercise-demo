@@ -4,11 +4,12 @@ import cardPaths from './path/card';
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    redirect: '/home',
+    redirect: '/login',
     component: () => import('@/layout'),
     children: cardPaths
   },
   {
+    name: 'Login',
     path: '/login',
     component: () => import('@/login')
   },

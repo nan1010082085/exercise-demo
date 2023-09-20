@@ -15,7 +15,7 @@ const PersonWork = defineComponent({
         <div>PersonWork</div>
 
         <div>
-          {history.value}
+          {/* {history.value} */}
         </div>
       </div>;
     };

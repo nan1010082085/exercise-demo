@@ -11,9 +11,9 @@ export default defineComponent({
     return () => {
       return (
         <Layout class={styles.wrapper}>
-          <LMenu />
+          <LHeader />
           <Layout>
-            <LHeader />
+            <LMenu />
             <LContainer />
           </Layout>
         </Layout>
