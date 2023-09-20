@@ -1,48 +1,73 @@
 import { languageKeyByLabel, languageKeyByValue } from '@/constants';
-import { useLayoutStore } from '@/store/layout-store';
-import { Button, Header, Select } from 'tdesign-vue-next';
-import { computed, defineComponent, ref } from 'vue';
+import { useLayoutStore, type LanguageT } from '@/store/layout-store';
+import { Button, Divider, Dropdown, Header, Popup, Space, type TdDropdownItemProps } from 'tdesign-vue-next';
+import { computed, defineComponent } from 'vue';
 import styles from './index.module.scss';
-import { HomeIcon } from 'tdesign-icons-vue-next';
+import { Call1Icon, HomeIcon, LogoQqIcon, LogoWechatIcon, TranslateIcon } from 'tdesign-icons-vue-next';
 import { useRouter } from 'vue-router';
+
+type DropdownOption = Pick<TdDropdownItemProps, 'content'> & { value: LanguageT };
 
 const LHeader = defineComponent({
   setup() {
     const router = useRouter();
 
-    const { zh, changeLanguage } = useLayoutStore();
+    const layoutStore = useLayoutStore();
+    const { changeLanguage } = layoutStore;
+    const selValue = computed(() => languageKeyByLabel[layoutStore.zh]);
 
-    const selValue = ref(languageKeyByLabel[zh]);
-
+    // Dropdown
     const languageOptions = computed(() => {
       return Reflect.ownKeys(languageKeyByValue).map((item) => {
         return {
-          label: item,
+          content: item as string,
           value: Reflect.get(languageKeyByValue, item)
-        };
+        } as DropdownOption;
       });
     });
 
-    const routePush = (name: string) => {
-      router.push({ name });
+    const routerPush = (pathName: string) => {
+      router.push({ name: pathName });
     };
 
     return () => {
       return (
         <Header class={styles.wrapper}>
-          <div class={styles['h-left']}>header</div>
+          <div class={styles['h-left']}>
+            <Button variant="text" icon={() => <HomeIcon />} onClick={() => routerPush('Home')} />
+          </div>
           <div class={styles['h-right']}>
-            <Button variant="text" onClick={() => routePush('home')}>
-              {{
-                icon: () => <HomeIcon />
-              }}
-            </Button>
-            <Select
-              v-model={selValue.value}
-              options={languageOptions.value}
-              placeholder={'请选择语言'}
-              on-change={changeLanguage}
-            ></Select>
+            <Space>
+              <Dropdown options={languageOptions.value} on-click={(e: DropdownOption) => changeLanguage(e.value)}>
+                <Space>
+                  <Button variant="text" icon={() => <TranslateIcon />}>
+                    {selValue.value}
+                  </Button>
+                </Space>
+              </Dropdown>
+              <Popup overlayClassName={styles.popupContent}>
+                {{
+                  default: () => (
+                    <div class={styles.userLogo}>
+                      <img src="/image/user.jpg" alt="" />
+                    </div>
+                  ),
+                  content: () => (
+                    <>
+                      <Button shape="circle" icon={() => <LogoWechatIcon />} />
+                      <Button variant="text">nam1010082085</Button>
+                      <Divider />
+                      <Button shape="circle" icon={() => <LogoQqIcon />} />
+                      <Button variant="text">1010082085</Button>
+                      <Divider />
+                      <Button shape="circle" icon={() => <Call1Icon />} />
+                      <Button variant="text">15117960621</Button>
+                      <Divider />
+                    </>
+                  )
+                }}
+              </Popup>
+            </Space>
           </div>
         </Header>
       );

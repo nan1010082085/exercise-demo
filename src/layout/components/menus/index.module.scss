@@ -1,3 +1,9 @@
 .layoutMenus {
   height: 100%;
+
+  .menuLogo {
+    display: flex;
+    align-items: center;
+    justify-content: center
+  }
 }

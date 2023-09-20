@@ -7,7 +7,7 @@ const LContainer = defineComponent({
   setup() {
     return () => {
       return (
-        <Content class={styles.layoutContainer}>
+        <Content class={[styles.layoutContainer, 'plr10', 'ptb10']}>
           <RouterView />
         </Content>
       );

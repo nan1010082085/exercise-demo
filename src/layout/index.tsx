@@ -12,10 +12,10 @@ export default defineComponent({
       return (
         <Layout class={styles.wrapper}>
           <LMenu />
-          <t-layout>
+          <Layout>
             <LHeader />
             <LContainer />
-          </t-layout>
+          </Layout>
         </Layout>
       );
     };
