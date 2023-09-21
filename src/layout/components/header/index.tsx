@@ -1,7 +1,15 @@
 import { languageKeyByLabel, languageKeyByValue } from '@/constants';
 import { useLayoutStore, type LanguageT } from '@/store/layout-store';
 import { Button, Divider, Dropdown, Header, Popup, Space, type TdDropdownItemProps } from 'tdesign-vue-next';
-import { Call1Icon, HomeIcon, LogoQqIcon, LogoWechatIcon, TranslateIcon } from 'tdesign-icons-vue-next';
+import {
+  Call1Icon,
+  HomeIcon,
+  LogoQqIcon,
+  LogoWechatIcon,
+  MenuFoldIcon,
+  MenuUnfoldIcon,
+  TranslateIcon
+} from 'tdesign-icons-vue-next';
 import { computed, defineComponent } from 'vue';
 import styles from './index.module.scss';
 import { useRouter } from 'vue-router';
@@ -13,8 +21,9 @@ const LHeader = defineComponent({
     const router = useRouter();
 
     const layoutStore = useLayoutStore();
-    const { changeLanguage } = layoutStore;
+    const { changeLanguage, visibleMenu } = layoutStore;
     const selValue = computed(() => languageKeyByLabel[layoutStore.zh]);
+    const menuDisplay = computed(() => layoutStore.showMenu);
 
     // Dropdown
     const languageOptions = computed(() => {
@@ -37,16 +46,31 @@ const LHeader = defineComponent({
             <div class={styles.logo}>
               <h1>Exercise Demo</h1>
             </div>
-            <Button variant="text" icon={() => <HomeIcon />} onClick={() => routerPush('Home')} />
+            <Button
+              variant="text"
+              icon={() => (menuDisplay.value ? <MenuFoldIcon /> : <MenuUnfoldIcon />)}
+              onClick={visibleMenu}
+            />
           </div>
           <div class={styles['h-right']}>
             <Space>
-              <Dropdown options={languageOptions.value} on-click={(e: DropdownOption) => changeLanguage(e.value)}>
-                <Space>
-                  <Button variant="text" icon={() => <TranslateIcon />}>
-                    {selValue.value}
-                  </Button>
-                </Space>
+              <Button
+                theme="primary"
+                shape="circle"
+                variant="text"
+                icon={() => <HomeIcon />}
+                onClick={() => routerPush('Home')}
+              />
+            </Space>
+            <Space>
+              <Dropdown
+                options={languageOptions.value}
+                trigger="click"
+                on-click={(e: DropdownOption) => changeLanguage(e.value)}
+              >
+                <Button variant="text" icon={() => <TranslateIcon />}>
+                  {selValue.value}
+                </Button>
               </Dropdown>
               <Popup overlayClassName={styles.popupContent}>
                 {{
