@@ -1,32 +1,6 @@
 {
   "name": "exercise-demo",
-  "private": true,
   "version": "0.0.0",
-  "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc && vite build",
-    "preview": "vite preview",
-    "test": "vitest",
-    "test:ui": "vitest --ui",
-    "test:watch": "vitest watch",
-    "add:commit": "git add . && git cz",
-    "commit": "git cz",
-    "build:V": "ts-node-esm ./build/index.ts"
-  },
-  "config": {
-    "commitizen": {
-      "path": "node_modules/cz-git",
-      "czConfig": "./cz.config.js"
-    }
-  },
-  "ava": {
-    "extensions": [
-      "ts"
-    ],
-    "require": [
-      "ts-node/register"
-    ]
-  },
   "dependencies": {
     "@vueuse/core": "^10.4.1",
     "axios": "^1.5.0",
@@ -47,6 +21,7 @@
     "@vitejs/plugin-vue-jsx": "^3.0.2",
     "@vitest/ui": "^0.34.4",
     "@vue/tsconfig": "^0.4.0",
+    "chalk": "^5.3.0",
     "commitizen": "^4.3.0",
     "cz-git": "^1.7.1",
     "kolorist": "^1.8.0",
@@ -60,8 +35,5 @@
     "vitest": "^0.34.4",
     "vue-tsc": "^1.8.5"
   },
-  "engines": {
-    "node": ">=16",
-    "pnpm": ">=8"
-  }
+  "time": "2023-10-07 13:05:45"
 }
