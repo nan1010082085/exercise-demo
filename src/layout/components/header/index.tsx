@@ -1,11 +1,8 @@
 import { languageKeyByLabel, languageKeyByValue } from '@/constants';
 import { useLayoutStore, type LanguageT } from '@/store/layout-store';
-import { Button, Divider, Dropdown, Header, Popup, Space, type TdDropdownItemProps } from 'tdesign-vue-next';
+import { Button, Dropdown, Header, Space, type TdDropdownItemProps } from 'tdesign-vue-next';
 import {
-  Call1Icon,
   HomeIcon,
-  LogoQqIcon,
-  LogoWechatIcon,
   MenuFoldIcon,
   MenuUnfoldIcon,
   TranslateIcon
@@ -13,6 +10,7 @@ import {
 import { computed, defineComponent } from 'vue';
 import styles from './index.module.scss';
 import { useRouter } from 'vue-router';
+import UserLogo from './components/user-logo';
 
 type DropdownOption = Pick<TdDropdownItemProps, 'content'> & { value: LanguageT };
 
@@ -72,28 +70,7 @@ const LHeader = defineComponent({
                   {selValue.value}
                 </Button>
               </Dropdown>
-              <Popup overlayClassName={styles.popupContent}>
-                {{
-                  default: () => (
-                    <div class={styles.userLogo}>
-                      <img src="/image/user.jpg" alt="" />
-                    </div>
-                  ),
-                  content: () => (
-                    <>
-                      <Button shape="circle" icon={() => <LogoWechatIcon />} />
-                      <Button variant="text">nam1010082085</Button>
-                      <Divider />
-                      <Button shape="circle" icon={() => <LogoQqIcon />} />
-                      <Button variant="text">1010082085</Button>
-                      <Divider />
-                      <Button shape="circle" icon={() => <Call1Icon />} />
-                      <Button variant="text">15117960621</Button>
-                      <Divider />
-                    </>
-                  )
-                }}
-              </Popup>
+              <UserLogo />
             </Space>
           </div>
         </Header>

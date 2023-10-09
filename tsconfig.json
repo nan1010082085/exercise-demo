@@ -1,6 +1,7 @@
 {
   "files": [],
   "compilerOptions": {
+    "noEmit": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true
   },

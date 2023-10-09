@@ -1,6 +1,6 @@
 import { defineComponent, reactive } from 'vue';
 import styles from './index.module.scss';
-import { Button, Content, Form, FormItem, Space, Input as TInput } from 'tdesign-vue-next';
+import { Button, Form, FormItem, MessagePlugin, Space, Input as TInput } from 'tdesign-vue-next';
 import { LockOnIcon, User1Icon } from 'tdesign-icons-vue-next';
 import { useRouter } from 'vue-router';
 
@@ -14,7 +14,8 @@ const Login = defineComponent({
     });
 
     const submit = () => {
-      router.push({ name: 'Home' });
+      MessagePlugin.success('登陆成功');
+      router.push({ name: 'PersonWork' });
     };
 
     return () => {
