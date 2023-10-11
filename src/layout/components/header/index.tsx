@@ -1,12 +1,7 @@
 import { languageKeyByLabel, languageKeyByValue } from '@/constants';
 import { useLayoutStore, type LanguageT } from '@/store/layout-store';
-import { Button, Dropdown, Header, Space, type TdDropdownItemProps } from 'tdesign-vue-next';
-import {
-  HomeIcon,
-  MenuFoldIcon,
-  MenuUnfoldIcon,
-  TranslateIcon
-} from 'tdesign-icons-vue-next';
+import { Button, Dropdown, Header, Space, Tooltip, type TdDropdownItemProps } from 'tdesign-vue-next';
+import { ControlPlatformIcon, HomeIcon, MenuFoldIcon, MenuUnfoldIcon, TranslateIcon } from 'tdesign-icons-vue-next';
 import { computed, defineComponent } from 'vue';
 import styles from './index.module.scss';
 import { useRouter } from 'vue-router';
@@ -52,13 +47,26 @@ const LHeader = defineComponent({
           </div>
           <div class={styles['h-right']}>
             <Space>
-              <Button
-                theme="primary"
-                shape="circle"
-                variant="text"
-                icon={() => <HomeIcon />}
-                onClick={() => routerPush('Home')}
-              />
+              <Tooltip content={'返回 Home'}>
+                <Button
+                  theme="primary"
+                  shape="circle"
+                  variant="text"
+                  icon={() => <HomeIcon />}
+                  onClick={() => routerPush('Home')}
+                />
+              </Tooltip>
+            </Space>
+            <Space>
+              <Tooltip content={'Vue 测试题'}>
+                <Button
+                  theme="primary"
+                  shape="circle"
+                  variant="text"
+                  icon={() => <ControlPlatformIcon />}
+                  onClick={() => routerPush('TestV')}
+                />
+              </Tooltip>
             </Space>
             <Space>
               <Dropdown

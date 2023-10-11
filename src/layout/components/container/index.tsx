@@ -10,7 +10,6 @@ const LContainer = defineComponent({
     const menuDisplay = computed(() => !layoutStore.showMenu);
 
     return () => {
-      console.log(menuDisplay.value)
       return (
         <Content class={[styles.layoutContainer, menuDisplay.value ? styles.translateLeft150 : '']}>
           <RouterView />
