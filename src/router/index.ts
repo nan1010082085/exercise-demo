@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory, type RouteRecordRaw, type Router } from 'vue-router';
 import cardPaths from './path/card';
+import TextView from './path/text-view';
 
 const routes: RouteRecordRaw[] = [
   {
@@ -7,6 +8,12 @@ const routes: RouteRecordRaw[] = [
     redirect: '/login',
     component: () => import('@/layout'),
     children: cardPaths
+  },
+  {
+    path: '/test-v',
+    name: 'TestV',
+    component: () => import('@/test-v'),
+    children: TextView
   },
   {
     name: 'Login',
@@ -33,7 +40,7 @@ const { beforeEach } = router;
 
 // 全局前置守卫
 beforeEach((to, from, next) => {
-  console.log(to, from);
+  // console.log(to, from);
   next();
 });
 
