@@ -46,7 +46,7 @@ const LHeader = defineComponent({
             />
           </div>
           <div class={styles['h-right']}>
-            <Space>
+            <Space direction={'horizontal'}>
               <Tooltip content={'返回 Home'}>
                 <Button
                   theme="primary"
@@ -56,8 +56,6 @@ const LHeader = defineComponent({
                   onClick={() => routerPush('Home')}
                 />
               </Tooltip>
-            </Space>
-            <Space>
               <Tooltip content={'Vue 测试题'}>
                 <Button
                   theme="primary"
@@ -67,8 +65,6 @@ const LHeader = defineComponent({
                   onClick={() => routerPush('TestV')}
                 />
               </Tooltip>
-            </Space>
-            <Space>
               <Dropdown
                 options={languageOptions.value}
                 trigger="click"
