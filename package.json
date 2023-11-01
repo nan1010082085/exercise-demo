@@ -11,7 +11,9 @@
     "test:watch": "vitest watch",
     "add:commit": "git add . && git cz",
     "commit": "git cz",
-    "build:V": "ts-node-esm ./build/index.ts"
+    "build:V": "ts-node-esm ./build/index.ts",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "config": {
     "commitizen": {
@@ -41,6 +43,13 @@
     "vue-router": "^4.2.4"
   },
   "devDependencies": {
+    "@storybook/addon-essentials": "7.5.2",
+    "@storybook/addon-interactions": "7.5.2",
+    "@storybook/addon-links": "7.5.2",
+    "@storybook/blocks": "7.5.2",
+    "@storybook/testing-library": "0.2.2",
+    "@storybook/vue3": "7.5.2",
+    "@storybook/vue3-vite": "7.5.2",
     "@tsconfig/node18": "^18.2.2",
     "@types/lodash-es": "^4.17.9",
     "@types/node": "^20.6.0",
@@ -51,7 +60,10 @@
     "commitizen": "^4.3.0",
     "cz-git": "^1.7.1",
     "kolorist": "^1.8.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
     "sass": "^1.66.1",
+    "storybook": "7.5.2",
     "ts-node": "^10.9.1",
     "tslib": "^2.6.2",
     "typescript": "^5.0.2",
