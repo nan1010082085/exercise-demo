@@ -3,10 +3,9 @@
   "include": ["src/**/*", "src/utils/v.json", "test-demo/*", "test-demo/**/*"],
   "exclude": ["src/**/__test__/*"],
   "compilerOptions": {
-    "composite": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["src/*"]
     }
   }
 }

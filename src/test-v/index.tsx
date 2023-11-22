@@ -9,14 +9,14 @@ const TextViews = defineComponent({
   setup() {
     const route = useRoute();
     const router = useRouter();
-    const subActive = ref('');
+    const subActive = ref<string[]>([]);
     const active = ref('');
 
     onMounted(() => {
       const { path, name } = route;
       const sub = path.match(/[a-z]+-components+/g);
       if (sub) {
-        subActive.value = sub[0] || '';
+        subActive.value = sub[0] ? [sub[0]] : [];
         active.value = `${sub[0]}-${(name as string) || ''}`;
       }
     });
@@ -29,7 +29,7 @@ const TextViews = defineComponent({
               .filter((text) => text.creategory === sub)
               .map((text) => {
                 const { name, path } = text;
-                return <MenuItem value={`${sub}-${name}`}>{name}</MenuItem>;
+                return <MenuItem to={`${path}`}>{name}</MenuItem>;
               })}
           </Submenu>
         );
@@ -38,10 +38,6 @@ const TextViews = defineComponent({
 
     const back = () => {
       router.push('/person-work');
-    };
-
-    const menuChange = () => {
-      router.push(active.value);
     };
 
     return () => {
@@ -55,7 +51,7 @@ const TextViews = defineComponent({
           </Header>
           <Layout>
             <Aside class={styles.aside}>
-              <Menu v-model:expanded={subActive.value} value={active.value} onChange={menuChange}>
+              <Menu v-model:expanded={[subActive.value]} value={active.value}>
                 {subMenus.value}
               </Menu>
             </Aside>

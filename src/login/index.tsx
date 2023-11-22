@@ -15,7 +15,7 @@ const Login = defineComponent({
 
     const submit = () => {
       MessagePlugin.success('登陆成功');
-      router.push({ name: 'PersonWork' });
+      router.push({ name: 'Home' });
     };
 
     return () => {

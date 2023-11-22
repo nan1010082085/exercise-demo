@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory, type RouteRecordRaw, type Router } from 'vue-router';
 import cardPaths from './path/card';
 import TextView from './path/text-view';
+import { useGlobalStore } from '@/store/global-store';
 
 const routes: RouteRecordRaw[] = [
   {
@@ -21,11 +22,6 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/login')
   },
   {
-    name: 'Home',
-    path: '/home',
-    component: () => import('@/home')
-  },
-  {
     path: '/redirect/:path(.*)',
     component: () => import('@/views/redirect')
   }
@@ -40,7 +36,10 @@ const { beforeEach } = router;
 
 // 全局前置守卫
 beforeEach((to, from, next) => {
-  // console.log(to, from);
+  const { setBreadcrumbHistory } = useGlobalStore();
+  const { name, path, meta } = to;
+  const history = { name, path, meta } as RouteRecordRaw;
+  setBreadcrumbHistory(history);
   next();
 });
 

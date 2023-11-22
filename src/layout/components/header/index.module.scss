@@ -1,10 +1,8 @@
 .wrapper {
   display: flex;
   align-items: center;
-  padding: 0 15px 0 0;
-  justify-content: space-between;
   box-sizing: border-box;
-  box-shadow: 0.5px 2px 4px #000;
+  // box-shadow: 0.5px 2px 4px #000;
 
   .h-left {
     display: flex;
@@ -14,8 +12,16 @@
       text-align: center;
     }
   }
+  .h-center {
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
 
   .h-right {
+    position: absolute;
+    right: 15px;
     display: flex;
     align-items: center;
     justify-content: flex-end;

@@ -6,18 +6,24 @@ export interface RandomObj {
   width: number;
   height: number;
 }
+
+export enum IType {
+  'container',
+  'table',
+  'input'
+}
+
 export const getRandomObj = () => {
   const schema = buildSchema(`
   type Query {
-    id: ID
+    id: ID!
     type: [String]!
-    width: Int
-    height: Int
+    width: Int!
+    height: Int!
   }`);
-  const source = `{ id,type,width,height }`;
+  const source = `{ id,width,height }`;
   const rootValue = {
     id: Math.ceil(Math.random() * 10000000),
-    type: () => ['container', 'table', 'input'],
     width: Math.ceil(Math.random() * 1000),
     height: Math.ceil(Math.random() * 500)
   };

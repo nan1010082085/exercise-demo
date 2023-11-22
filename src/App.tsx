@@ -1,4 +1,4 @@
-import { computed, defineComponent, onMounted, watch } from 'vue';
+import { computed, defineComponent } from 'vue';
 import { RouterView } from 'vue-router';
 import { useGlobalStore } from './store/global-store';
 import { merge } from 'lodash-es';

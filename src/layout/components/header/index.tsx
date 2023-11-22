@@ -6,6 +6,7 @@ import { computed, defineComponent } from 'vue';
 import styles from './index.module.scss';
 import { useRouter } from 'vue-router';
 import UserLogo from './components/user-logo';
+import EBreadcrumb from '@/components/e-breadcrumb';
 
 type DropdownOption = Pick<TdDropdownItemProps, 'content'> & { value: LanguageT };
 
@@ -45,6 +46,7 @@ const LHeader = defineComponent({
               onClick={visibleMenu}
             />
           </div>
+          <div class={styles['h-center']}><EBreadcrumb /></div>
           <div class={styles['h-right']}>
             <Space direction={'horizontal'}>
               <Tooltip content={'返回 Home'}>

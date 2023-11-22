@@ -11,7 +11,7 @@ const creategoryRoutes = Array.from(new Set(...creategoryKey));
 
 const textViewRoutes = Object.keys(routes).map((key) => {
   const KeyArrs = key.split('/');
-  const creategory = key.match(/[a-z]+-components+/g);
+  const creategory = key.match(/[a-z]+-components/g);
   const name = KeyArrs[KeyArrs.length - 1].split('.')[0];
   return {
     name,
