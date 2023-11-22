@@ -14,7 +14,7 @@ export default <RouteRecordRaw[]>[
     name: 'PersonWork',
     path: '/person-work',
     meta: {
-      title: '个人工作台',
+      title: '工作台',
       icon: 'user'
     },
     component: () => import('@/views/person-work')

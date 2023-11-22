@@ -7,15 +7,7 @@ const EBreadcrumb = defineComponent({
   setup() {
     const { breadcrumbHistory } = useGlobalStore();
 
-    watch(
-      () => breadcrumbHistory,
-      () => {
-        console.log('breadcrumbHistory', breadcrumbHistory);
-      }
-    );
-
     return () => {
-      
       return (
         <Breadcrumb class={styles.ebwrapper} maxItemWidth="120px">
           {breadcrumbHistory.map((item, index) => {
