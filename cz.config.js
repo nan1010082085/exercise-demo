@@ -61,6 +61,7 @@ module.exports = {
   scopes: [
     { value: 'views', name: 'views:          模块' },
     { value: 'package', name: 'package:        依赖' },
+    { value: 'composables', name: 'composables:    组合' },
     { value: 'test', name: 'test:           测试' },
     { value: 'other', name: 'other:          其他' },
   ],
