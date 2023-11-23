@@ -6,7 +6,7 @@
  * @Description
  */
 
-import DebugGlobal, { type DebugGlobalProps } from './debug';
+import DebugGlobal, { type DebugGlobalProps } from '../plugins/debug';
 
 const usePlugin = () => {
   const debug = (option: DebugGlobalProps) => new DebugGlobal(option);

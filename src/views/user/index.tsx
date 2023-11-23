@@ -2,7 +2,7 @@
 import EPageHeader from '@/components/e-page-header';
 import styels from './index.module.scss';
 import { defineComponent, onMounted, ref } from 'vue';
-import { Button, Form, FormItem, Icon, Input, Layout, Space, Switch, Tooltip } from 'tdesign-vue-next';
+import { Button, Form, FormItem, Input, Space, Switch, Tooltip } from 'tdesign-vue-next';
 import { getUserInfo } from '@/api/user.api';
 import type { UserInfoModels } from '@/constants/user.models';
 import {
@@ -13,7 +13,7 @@ import {
   QqOutlined,
   QuestionCircleOutlined
 } from '@ant-design/icons-vue';
-import usePlugin from '@/plugins';
+import usePlugin from '@/composables/usePlugin';
 import { DebugType } from '@/constants/debug.models';
 import { getDebugMessage } from '@/utils/debug';
 import { useRoute } from 'vue-router';

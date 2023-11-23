@@ -14,7 +14,7 @@ const EPageHeader = defineComponent({
       return (
         <div class={styles['pager-wrapper']}>
           <div class={styles.title}>{title.value}</div>
-          <div></div>
+          <div class={styles.content}>{slots.default?.()}</div>
         </div>
       );
     };

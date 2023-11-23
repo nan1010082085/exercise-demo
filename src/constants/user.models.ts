@@ -7,3 +7,9 @@ export interface UserInfoModels {
   phone: string;
   isPush: boolean;
 }
+
+export interface UserAdminModels extends UserInfoModels {
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+}
