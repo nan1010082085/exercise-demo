@@ -8,7 +8,17 @@ import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import { TDesignResolver } from 'unplugin-vue-components/resolvers';
 
-const proxy = {};
+const target = 'http://localhost:6606/';
+
+const proxy = {
+  '/public': {
+    target,
+    changeOrigin: true,
+    rewrite: (path: string) => {
+      return path.replace(/^\/public/, '')
+    }
+  }
+};
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
@@ -20,7 +30,8 @@ export default defineConfig(({ command, mode }) => {
     },
     resolve: {
       alias: {
-        '@': fileURLToPath(new URL('./src', import.meta.url))
+        '@': fileURLToPath(new URL('./src', import.meta.url)),
+        '@public': fileURLToPath(new URL('./public', import.meta.url))
       }
     },
     plugins: [
