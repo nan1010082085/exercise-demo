@@ -16,9 +16,11 @@ import {
 import usePlugin from '@/plugins';
 import { DebugType } from '@/constants/debug.models';
 import { getDebugMessage } from '@/utils/debug';
+import { useRoute } from 'vue-router';
 
 const EUser = defineComponent({
   setup() {
+    const route = useRoute();
     const { debug } = usePlugin();
 
     const userInfo = ref<UserInfoModels>({
@@ -38,7 +40,8 @@ const EUser = defineComponent({
     };
 
     const onSave = () => {
-      debug({ type: DebugType.USER, message: getDebugMessage('user.on-save'), status: 'info' });
+      const path = route.path + ' -> user.on-save';
+      debug({ type: DebugType.USER, path, message: getDebugMessage('user.on-save'), status: 'info' });
     };
 
     onMounted(() => {

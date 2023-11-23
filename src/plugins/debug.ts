@@ -6,8 +6,6 @@
  * @Description
  */
 
-import { useRoute } from 'vue-router';
-
 export interface DebugGlobalProps {
   type: string;
   path?: string;
@@ -17,32 +15,46 @@ export interface DebugGlobalProps {
 }
 
 class DebugGlobal {
-  route = useRoute();
   path: string;
   status: string;
+  statusBgColor: string;
+  env: string;
   constructor(option: DebugGlobalProps) {
     const { type, path, alias = '', message, status } = option;
+    this.env = import.meta.env.VITE_APP_DEBUG;
     this.path = this.getPath(path);
-    this.status = this.getStatus(status);
+    const { t, c } = this.getStatus(status);
+    this.status = t;
+    this.statusBgColor = c;
     this.init(type, alias, message);
   }
 
   init(type: string, alias: string, message: string) {
-    console.log(`[${type}] ${alias} ${this.status} ${message} ${this.path}`);
+    alias = alias ? ` (${alias})` : '';
+    const bgStatus = `background: linear-gradient(${this.statusBgColor});border-radius:2px;padding:2px 2px;font-weight:bold;color:#000`;
+    const bgType = 'background: linear-gradient(#fff, #00f, #fff);border-radius:2px;padding:2px 2px;color:#fff';
+    this.env &&
+      console.log(
+        `%c${this.status}%c: %c[${type}]${alias}%c ${message} ${this.path}`,
+        bgStatus,
+        '',
+        bgType,
+        'color:#000'
+      );
   }
 
   getPath(path: string | undefined): string {
-    return path ? `\n ${path}` : '';
+    return path ? `\n${path}` : '';
   }
 
-  getStatus(status: DebugGlobalProps['status']): string {
+  getStatus(status: DebugGlobalProps['status']): { t: string; c: string } {
     switch (status) {
       case 'error':
-        return `error :`;
+        return { t: `error`, c: '#f00, #fff,#fff, #f00' };
       case 'success':
-        return `success :`;
+        return { t: `success`, c: '#0f0, #fff, #fff, #0f0' };
       default:
-        return `info :`;
+        return { t: `info`, c: '#00f, #fff, #fff, #00f' };
     }
   }
 }
