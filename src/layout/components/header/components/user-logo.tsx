@@ -1,16 +1,26 @@
-import { defineComponent } from 'vue';
+import { defineComponent, onMounted, ref } from 'vue';
 import styles from '../index.module.scss';
 import { Button, Divider, Popup, Space, MessagePlugin } from 'tdesign-vue-next';
 import { Call1Icon, LogoQqIcon, LogoWechatIcon } from 'tdesign-icons-vue-next';
 import { useRouter } from 'vue-router';
 import VERSION from '@/utils/v.json';
+import type { UserInfoModels } from '@/constants/user.models';
+import { getUserInfo } from '@/api/user.api';
 
 const UserLogo = defineComponent({
   setup() {
     const router = useRouter();
 
+    const userInfo = ref<UserInfoModels>();
+
+    const init = () => {
+      getUserInfo().then((res) => {
+        userInfo.value = res.data;
+      });
+    };
+
     const onUserEdit = () => {
-      MessagePlugin.info('修改用户信息。');
+      router.push({ name: 'User' });
     };
 
     const onLogout = () => {
@@ -18,9 +28,13 @@ const UserLogo = defineComponent({
       router.push({ name: 'Login' });
     };
 
+    onMounted(() => {
+      init();
+    });
+
     return () => {
       return (
-        <Popup overlayClassName={styles.popupContent} trigger="click">
+        <Popup overlayClassName={styles.popupContent} trigger="hover">
           {{
             default: () => (
               <div class={styles.userLogo}>
@@ -29,7 +43,9 @@ const UserLogo = defineComponent({
             ),
             content: () => (
               <Space direction="vertical" style={{ width: '100%' }}>
-                <Space>Yang Dong nan</Space>
+                <Space>
+                  <Button variant='text'>{userInfo.value?.name}</Button>
+                </Space>
                 <Divider layout="vertical">版本</Divider>
                 <Space>
                   <Button variant="text">更新时间：{VERSION.time}</Button>
@@ -37,15 +53,15 @@ const UserLogo = defineComponent({
                 <Divider layout="vertical">信息</Divider>
                 <Space>
                   <Button shape="circle" icon={() => <LogoWechatIcon />} />
-                  <Button variant="text">nam1010082085</Button>
+                  <Button variant="text">{userInfo.value?.wechat}</Button>
                 </Space>
                 <Space>
                   <Button shape="circle" icon={() => <LogoQqIcon />} />
-                  <Button variant="text">1010082085</Button>
+                  <Button variant="text">{userInfo.value?.qq}</Button>
                 </Space>
                 <Space>
                   <Button shape="circle" icon={() => <Call1Icon />} />
-                  <Button variant="text">15117960621</Button>
+                  <Button variant="text">{userInfo.value?.phone}</Button>
                 </Space>
                 <Divider layout="vertical">操作</Divider>
                 <Space>
