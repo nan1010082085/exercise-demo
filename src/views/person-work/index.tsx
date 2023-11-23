@@ -1,9 +1,10 @@
 import { defineComponent, ref } from 'vue';
 import { Button } from 'tdesign-vue-next';
 import { getRandomObj, type RandomObj } from '@/api/preson-work-api';
+import EPageHeader from '@/components/e-page-header';
+import styles from './index.module.scss';
 
 const PersonWork = defineComponent({
-  name: 'PersonWork',
   setup() {
     // 假设有一个缓存
     // 每次执行缓存查询时过期的缓存被（替换或删除）
@@ -78,8 +79,8 @@ const PersonWork = defineComponent({
 
     return () => {
       return (
-        <div>
-          <div>PersonWork</div>
+        <div class={styles['person-work-wrapper']}>
+          <EPageHeader title="工作台"></EPageHeader>
           <div>
             <Button onClick={add}>增加</Button>
           </div>

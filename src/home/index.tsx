@@ -3,6 +3,7 @@ import styles from './index.module.scss';
 import { Button, DialogPlugin } from 'tdesign-vue-next';
 import { useRouter } from 'vue-router';
 import useDialog from '@/composables/useDialog';
+import EPageHeader from '@/components/e-page-header';
 
 const HomeComponent = defineComponent({
   setup() {
@@ -16,7 +17,7 @@ const HomeComponent = defineComponent({
     return () => {
       return (
         <div class={styles.wrapper}>
-          home
+          <EPageHeader title="首页"></EPageHeader>
           <Button onClick={onConfirm}>on Confirm</Button>
         </div>
       );

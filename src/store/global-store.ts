@@ -7,6 +7,10 @@ export const useGlobalStore = defineStore('global', () => {
 
   const breadcrumbHistory = ref<RouteRecordRaw[]>([]);
 
+  const clearBreadcrumbHistory = () => {
+    breadcrumbHistory.value = [];
+  };
+
   const setBreadcrumbHistory = (data: RouteRecordRaw) => {
     // login remove history
     if (data.path === '/login') {
@@ -32,6 +36,7 @@ export const useGlobalStore = defineStore('global', () => {
   return {
     globalConfig,
     breadcrumbHistory,
-    setBreadcrumbHistory
+    setBreadcrumbHistory,
+    clearBreadcrumbHistory
   };
 });

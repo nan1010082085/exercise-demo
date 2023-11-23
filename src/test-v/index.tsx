@@ -4,6 +4,7 @@ import styles from './index.module.scss';
 import { Aside, Button, Content, Header, Layout, Menu, Submenu, MenuItem, Space } from 'tdesign-vue-next';
 import { creategoryRoutes, textViewRoutes } from '@/router/path/text-view';
 import { RollbackIcon } from 'tdesign-icons-vue-next';
+import { useGlobalStore } from '@/store/global-store';
 
 const TextViews = defineComponent({
   setup() {
@@ -11,6 +12,7 @@ const TextViews = defineComponent({
     const router = useRouter();
     const subActive = ref<string[]>([]);
     const active = ref('');
+    const { clearBreadcrumbHistory } = useGlobalStore();
 
     onMounted(() => {
       const { path, name } = route;
@@ -37,7 +39,8 @@ const TextViews = defineComponent({
     });
 
     const back = () => {
-      router.push('/person-work');
+      clearBreadcrumbHistory();
+      router.push('/home');
     };
 
     return () => {

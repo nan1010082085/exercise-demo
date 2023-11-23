@@ -1,6 +1,6 @@
 import { computed, defineComponent } from 'vue';
 import styles from './index.module.scss';
-import { Aside, Header, Layout, Menu, MenuItem, Submenu } from 'tdesign-vue-next';
+import { Aside, Header, Icon, Layout, Menu, MenuItem, Submenu } from 'tdesign-vue-next';
 import { useLayoutStore } from '@/store/layout-store';
 import { MenuData, type EMenu } from '@/constants/menus-view';
 import { useRoute } from 'vue-router';
@@ -17,6 +17,7 @@ const LMenu = defineComponent({
           return (
             <Submenu key={item.path} value={item.path}>
               {{
+                icon: () => (item.meta.icon ? <Icon name={item.meta.icon} /> : null),
                 title: () => <span>{item.name}</span>,
                 content: () => createChildMenu(item.children, item.path)
               }}
@@ -30,7 +31,10 @@ const LMenu = defineComponent({
     const createMenuItem = (item: EMenu) => {
       return (
         <MenuItem key={item.path} to={item.path} value={item.path}>
-          {item.name}
+          {{
+            icon: () => (item.meta.icon ? <Icon name={item.meta.icon} /> : null),
+            default: () => item.name
+          }}
         </MenuItem>
       );
     };
@@ -38,16 +42,20 @@ const LMenu = defineComponent({
     const createChildMenu = (children: EMenu[] = [], prefix = '') => {
       return children.map((i) => (
         <MenuItem key={i.path} to={i.path} value={prefix + i.path}>
-          {i.name}
+          {{
+            icon: () => (i.meta.icon ? <Icon name={i.meta.icon} /> : null),
+            default: () => i.name
+          }}
         </MenuItem>
       ));
     };
 
     return () => {
-      console.log(route.path);
+      // visible.value ? styles.visible : ''
+      // theme="dark"
       return (
-        <Aside class={[styles.layoutMenus, visible.value ? styles.visible : '']}>
-          <Menu width={300} value={route.path}>
+        <Aside class={[styles.layoutMenus, styles.visible]}>
+          <Menu width={300} value={route.path} collapsed={!visible.value}>
             {{
               default: () => menuItemRender.value
             }}

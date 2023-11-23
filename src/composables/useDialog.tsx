@@ -21,6 +21,8 @@ export interface ResolveType {
 }
 
 const useDialog = () => {
+  
+  // dialog confirm
   const confirm = (title: string, message: string, option: useDialogOptionProps = {}): Promise<ResolveType> => {
     const {
       cancelText = '取消',
@@ -56,6 +58,7 @@ const useDialog = () => {
     });
   };
 
+  // dialog alert
   const alert = (title: string, message: string, option: useDialogOptionProps = {}): Promise<ResolveType> => {
     const { confirmText = '确定', showClose = false } = option;
     return new Promise((resolve) => {
