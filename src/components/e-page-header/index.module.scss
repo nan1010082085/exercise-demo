@@ -4,13 +4,16 @@
   padding: 10px 15px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
   .title {
+    width: 120px;
     font-size: 18px;
     font-weight: bold;
   }
-
+  
   .content {
+    flex: 1;
     display: flex;
     justify-content: flex-end;
   }

@@ -1,4 +1,4 @@
-import { computed, defineComponent } from 'vue';
+import { computed, defineComponent, ref } from 'vue';
 import styles from './index.module.scss';
 import { Aside, Header, Icon, Layout, Menu, MenuItem, Submenu } from 'tdesign-vue-next';
 import { useLayoutStore } from '@/store/layout-store';
@@ -29,12 +29,7 @@ const LMenu = defineComponent({
     });
 
     // 二级导航展开
-    const expanded = computed(() => {
-      if (/\/[a-z]*\/\w*/i.test(route.path)) {
-        return [route.path.match(/^\/[a-z]*/i)?.[0] || ''];
-      }
-      return [''];
-    });
+    const expanded = ref([route.path.match(/^\/[a-z]*/i)?.[0]]);
 
     const createMenuItem = (item: EMenu) => {
       return (
@@ -64,8 +59,8 @@ const LMenu = defineComponent({
       // visible.value ? styles.visible : ''
       // theme="dark"
       return (
-        <Aside class={[styles.layoutMenus, styles.visible]}>
-          <Menu width={300} value={route.path} expanded={expanded.value} collapsed={!visible.value}>
+        <Aside class={[styles.layoutMenus, styles.visible, !visible.value ? styles.miniWidth : '']}>
+          <Menu width={300} value={route.path} v-model:expanded={expanded.value} collapsed={!visible.value}>
             {{
               default: () => menuItemRender.value
             }}

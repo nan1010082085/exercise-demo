@@ -34,7 +34,6 @@ const EUser = defineComponent({
 
     const getUser = () => {
       getUserInfo().then((res) => {
-        console.log(res.data);
         userInfo.value = res.data;
       });
     };
