@@ -1,3 +1,12 @@
-.page-role {
-  width: 100%;
+.page-user-role {
+  height: 100%;
+  .container {
+    height: calc(100% - 60px);
+
+    .footer {
+      height: 60px;
+      display: flex;
+      align-items: center;
+    }
+  }
 }
