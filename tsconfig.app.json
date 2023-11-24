@@ -8,7 +8,8 @@
       "@/*": ["src/*"],
       "@composables/*": ["src/composables/*"],
       "@public/*": ["src/public/*"],
-      "@assets/*": ["src/assets/*"]
+      "@assets/*": ["src/assets/*"],
+      "@workers/*": ["src/workers/*"]
     }
   }
 }

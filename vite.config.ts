@@ -33,7 +33,8 @@ export default defineConfig(({ command, mode }) => {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
         '@public': fileURLToPath(new URL('./src/public', import.meta.url)),
         '@composables': fileURLToPath(new URL('./src/composables', import.meta.url)),
-        '@assets': fileURLToPath(new URL('./src/assets', import.meta.url))
+        '@assets': fileURLToPath(new URL('./src/assets', import.meta.url)),
+        '@workers': fileURLToPath(new URL('./src/workers', import.meta.url))
       }
     },
     plugins: [
