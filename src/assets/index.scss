@@ -13,3 +13,13 @@
   height: 100%;
 }
 
+
+.table-container {
+  height: calc(100% - 60px);
+
+  .footer {
+    height: 60px;
+    display: flex;
+    align-items: center;
+  }
+}

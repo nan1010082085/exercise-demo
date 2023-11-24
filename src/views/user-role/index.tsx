@@ -63,7 +63,9 @@ const EUserRole = defineComponent({
             return (
               <Space size={'small'}>
                 <Button onClick={() => onEdit(row)}>编辑</Button>
-                <Button theme='default' onClick={() => onDel(row)}>删除</Button>
+                <Button theme="default" onClick={() => onDel(row)}>
+                  删除
+                </Button>
               </Space>
             );
           }
@@ -92,6 +94,7 @@ const EUserRole = defineComponent({
       const path = route.path + ' -> userRole.on-edit';
       debug({ type: DebugType.USER_ROLE, alias: '编辑', path, message: row, status: 'info' });
     };
+    
     const onDel = (row: UserRoleModels) => {
       const path = route.path + ' -> userRole.on-del';
       debug({ type: DebugType.USER_ROLE, alias: '删除', path, message: row, status: 'info' });
@@ -105,14 +108,14 @@ const EUserRole = defineComponent({
       return (
         <div class={styles['page-user-role']}>
           <EPageHeader title="角色管理"></EPageHeader>
-          <Space class={styles.container} direction="vertical">
+          <Space class={'table-container'} direction="vertical">
             <BaseTable
               rowKey="id"
               data={roleData.value}
               columns={roleColums.value}
               onRowClick={({ row }) => onRowClick(row as UserRoleModels)}
             ></BaseTable>
-            <div class={styles.footer}>
+            <div class={'footer'}>
               <Pagination total={pagination.total} current={pagination.paga} pageSize={pagination.limit}></Pagination>
             </div>
           </Space>

@@ -2,7 +2,7 @@
 export enum DebugType {
   HTTP_REQUSET = 'HTTP请求',
   HTTP_RESPONSE = 'HTTP响应',
-  PERSON_WORK = '工作台',
+  DASHBOAR = '仪表板',
   USER = '个人中心',
   USER_ADMIN = '用户管理',
   USER_ROLE = '角色管理',
