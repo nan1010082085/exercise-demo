@@ -12,6 +12,8 @@ import axios, {
   type AxiosResponse,
   type CreateAxiosDefaults
 } from 'axios';
+import DebugGlobal, { type DebugGlobalProps } from './debug';
+import { DebugType } from '@/constants/debug.models';
 
 export enum Method {
   GET = 'GET',
@@ -34,11 +36,20 @@ class ApiHttp {
   }
 
   init() {
+    const debug = (option: DebugGlobalProps) => new DebugGlobal(option);
+
     this.instance.interceptors.request.use(
       (config) => {
         return config;
       },
       (error) => {
+        debug({
+          type: DebugType.HTTP_REQUSET,
+          path: error.config.url,
+          alias: 'request',
+          message: error.message,
+          status: 'error'
+        });
         return Promise.reject(error);
       }
     );
@@ -48,6 +59,13 @@ class ApiHttp {
         return reponse;
       },
       (error) => {
+        debug({
+          type: DebugType.HTTP_RESPONSE,
+          path: error.config.url,
+          alias: 'response',
+          message: error.message,
+          status: 'error'
+        });
         return Promise.reject(error);
       }
     );
