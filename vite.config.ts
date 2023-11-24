@@ -17,6 +17,13 @@ const proxy = {
     rewrite: (path: string) => {
       return path.replace(/^\/public/, '')
     }
+  },
+  '/workers': {
+    target,
+    changeOrigin: true,
+    rewrite: (path: string) => {
+      return path.replace(/^\/workers/, '')
+    }
   }
 };
 

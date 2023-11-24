@@ -1,4 +1,4 @@
-import { computed, defineComponent } from 'vue';
+import { computed, defineComponent, onMounted } from 'vue';
 import { RouterView } from 'vue-router';
 import { useGlobalStore } from './store/global-store';
 import { merge } from 'lodash-es';
@@ -41,6 +41,38 @@ export default defineComponent({
           languageDef = zhCn;
       }
       return merge(languageDef, globalConfig);
+    });
+
+    const workerMessage = (e: MessageEvent) => {
+      console.log('worker message', e);
+    };
+    const workerError = (e: ErrorEvent) => {
+      console.log('worker.error', e);
+    };
+
+    onMounted(() => {
+      // 注册一个 service.worker
+      // if ("serviceWorker" in navigator) {
+      //   const serviceWorker = navigator.serviceWorker.register('./workers/test-service-worker.js');
+      //   console.log(serviceWorker)
+      // }
+
+
+      // -------------------------
+      // 使用worker
+      // const url = new URL('@workers/test-worker.js', import.meta.url).href;
+      // const worker = new Worker(url);
+      // // 监听worker消息
+      // worker.onmessage = workerMessage;
+      // worker.onerror = workerError;
+      // // 测试向线程中发送消息
+      // worker.postMessage('app');
+      // // 结束worker调用
+      // const stop = () => {
+      //   console.log('提前结束worker调用');
+      //   worker.terminate();
+      // };
+
     });
 
     return () => {

@@ -4,7 +4,8 @@
     "name": "普通管理员",
     "roles": [
       {
-        "name": "普通管理员"
+        "name": "首页",
+        "path": "/home"
       }
     ],
     "status": 1,
