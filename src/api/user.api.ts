@@ -1,4 +1,4 @@
-import type { UserAdminModels, UserInfoModels } from '@/constants/user.models';
+import type { UserAdminModels, UserInfoModels, UserRoleModels } from '@/constants/user.models';
 import apiHttp, { Method } from '@/plugins/axios-http';
 
 export const getUserInfo = () => {
@@ -12,5 +12,12 @@ export const getUserAmdinList = () => {
   return apiHttp.requset<UserAdminModels[]>({
     method: Method.GET,
     url: '/public/assets/json/user-admin.json'
+  });
+};
+
+export const getUserRoleList = () => {
+  return apiHttp.requset<UserRoleModels[]>({
+    method: Method.GET,
+    url: '/public/assets/json/user-role.json'
   });
 };

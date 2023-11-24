@@ -19,13 +19,21 @@ const LMenu = defineComponent({
               {{
                 icon: () => (item.meta.icon ? <Icon name={item.meta.icon} /> : null),
                 title: () => <span>{item.name}</span>,
-                content: () => createChildMenu(item.children, item.path)
+                content: () => createChildMenu(item.children)
               }}
             </Submenu>
           );
         }
         return createMenuItem(item);
       });
+    });
+
+    // 二级导航展开
+    const expanded = computed(() => {
+      if (/\/[a-z]*\/\w*/i.test(route.path)) {
+        return [route.path.match(/^\/[a-z]*/i)?.[0] || ''];
+      }
+      return [''];
     });
 
     const createMenuItem = (item: EMenu) => {
@@ -39,15 +47,17 @@ const LMenu = defineComponent({
       );
     };
 
-    const createChildMenu = (children: EMenu[] = [], prefix = '') => {
-      return children.map((i) => (
-        <MenuItem key={i.path} to={i.path} value={prefix + i.path}>
-          {{
-            icon: () => (i.meta.icon ? <Icon name={i.meta.icon} /> : null),
-            default: () => i.name
-          }}
-        </MenuItem>
-      ));
+    const createChildMenu = (children: EMenu[] = []) => {
+      return children.map((i) => {
+        return (
+          <MenuItem key={i.path} to={i.path} value={i.path}>
+            {{
+              icon: () => (i.meta.icon ? <Icon name={i.meta.icon} /> : null),
+              default: () => i.name
+            }}
+          </MenuItem>
+        );
+      });
     };
 
     return () => {
@@ -55,7 +65,7 @@ const LMenu = defineComponent({
       // theme="dark"
       return (
         <Aside class={[styles.layoutMenus, styles.visible]}>
-          <Menu width={300} value={route.path} collapsed={!visible.value}>
+          <Menu width={300} value={route.path} expanded={expanded.value} collapsed={!visible.value}>
             {{
               default: () => menuItemRender.value
             }}
