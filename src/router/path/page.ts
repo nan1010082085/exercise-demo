@@ -11,13 +11,13 @@ export default <RouteRecordRaw[]>[
     component: () => import('@/home')
   },
   {
-    name: 'PersonWork',
-    path: '/person-work',
+    name: 'dashboard',
+    path: '/dashboard',
     meta: {
-      title: '工作台',
+      title: '仪表板',
       icon: 'control-platform'
     },
-    component: () => import('@/views/person-work')
+    component: () => import('@/views/dashboard')
   },
   {
     name: 'User',

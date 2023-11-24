@@ -1,4 +1,4 @@
-import cardRoute from '@/router/path/card';
+import pageRoute from '@/router/path/page';
 
 export interface MenuExtend {
   meta: {
@@ -13,7 +13,7 @@ export interface EMenu extends MenuExtend {
   children?: EMenu[];
 }
 
-export const MenuData: EMenu[] = cardRoute.map((item) => {
+export const MenuData: EMenu[] = pageRoute.map((item) => {
   const { path, meta } = item as EMenu;
   let children: EMenu[] = [];
   if (item?.children?.length) {
