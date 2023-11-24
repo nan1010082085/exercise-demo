@@ -20,6 +20,25 @@ export default <RouteRecordRaw[]>[
     component: () => import('@/views/dashboard')
   },
   {
+    name: 'assets',
+    path: '/assets',
+    meta: {
+      title: '资产',
+      icon: 'view-module'
+    },
+    children: [
+      {
+        name: 'widget',
+        path: '/assets/widget',
+        meta: {
+          title: '部件库',
+          icon: 'share'
+        },
+        component: () => import('@/widget')
+      },
+    ]
+  },
+  {
     name: 'User',
     path: '/user',
     meta: {
