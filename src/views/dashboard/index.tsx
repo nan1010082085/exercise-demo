@@ -53,11 +53,22 @@ const Dashboard = defineComponent({
           fixed: 'right',
           cell: (_h: any, { row }: BaseTableCellParams<DashboardListModels>) => {
             return (
-              <Space size={'small'} on-click={(e: MouseEvent) => e.stopPropagation()}>
-                <Button theme="primary" onClick={() => onEdit(row)}>
+              <Space size={'small'}>
+                <Button
+                  onClick={(e: MouseEvent) => {
+                    e.stopPropagation();
+                    onEdit(row);
+                  }}
+                >
                   编辑
                 </Button>
-                <Button theme="default" onClick={() => onDel(row)}>
+                <Button
+                  theme="default"
+                  onClick={(e: MouseEvent) => {
+                    e.stopPropagation();
+                    onDel(row);
+                  }}
+                >
                   删除
                 </Button>
               </Space>

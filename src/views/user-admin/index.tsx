@@ -1,5 +1,5 @@
 // 用户管理
-import { computed, defineComponent, onMounted, ref, reactive } from 'vue';
+import { computed, defineComponent, onMounted, ref, reactive, watch } from 'vue';
 import styles from './index.module.scss';
 import {
   BaseTable,
@@ -18,6 +18,7 @@ import type { UserAdminModels } from '@/constants/user.models';
 import { DebugType } from '@/constants/debug.models';
 import usePlugin from '@/composables/usePlugin';
 import { useRoute } from 'vue-router';
+import useIndexedDB from '@/composables/useIndexedDB';
 
 const columnDatas = [
   {
@@ -54,6 +55,7 @@ const columnDatas = [
 const EUserAdmin = defineComponent({
   setup() {
     const route = useRoute();
+    const { getDBDataAll } = useIndexedDB();
     const { debug } = usePlugin();
     const userData = ref<UserAdminModels[]>([]);
     const userColums = computed<TableRowData[]>(() => {
@@ -65,11 +67,22 @@ const EUserAdmin = defineComponent({
           fixed: 'right',
           cell: (_h: any, { row }: BaseTableCellParams<UserAdminModels>) => {
             return (
-              <Space size={'small'} on-click={(e: MouseEvent) => e.stopPropagation()}>
-                <Button theme="primary" onClick={() => onEdit(row)}>
+              <Space size={'small'}>
+                <Button
+                  onClick={(e: MouseEvent) => {
+                    e.stopPropagation();
+                    onEdit(row);
+                  }}
+                >
                   编辑
                 </Button>
-                <Button theme="default" onClick={() => onDel(row)}>
+                <Button
+                  theme="default"
+                  onClick={(e: MouseEvent) => {
+                    e.stopPropagation();
+                    onDel(row);
+                  }}
+                >
                   删除
                 </Button>
               </Space>
@@ -78,18 +91,17 @@ const EUserAdmin = defineComponent({
         }
       ];
     });
-
     const pagination = reactive({
       page: 1,
       limit: 10,
       total: 10
     });
 
-    const init = () => {
-      getUserAmdinList().then((res) => {
-        userData.value = res.data;
-      });
-    };
+    // const init = () => {
+    //   getUserAmdinList().then((res) => {
+    //     userData.value = res.data;
+    //   });
+    // };
 
     const onRowClick = (row: UserAdminModels) => {
       console.log(row);
@@ -107,8 +119,15 @@ const EUserAdmin = defineComponent({
       debug({ type: DebugType.USER_ADMIN, alias: '删除', path, message: row, status: 'info' });
     };
 
+    const getIndexedDBUserAdminByList = () => {
+      getDBDataAll(['userAdmin', 1], ['list'], 'readonly', 'list', (e: Event) => {
+        userData.value = (e.target as IDBRequest<UserAdminModels[]>)?.result;
+      });
+    };
+
     onMounted(() => {
-      init();
+      getIndexedDBUserAdminByList();
+      // init();
     });
 
     return () => (

@@ -16,6 +16,7 @@ import { useRoute } from 'vue-router';
 import usePlugin from '@/composables/usePlugin';
 import { DebugType } from '@/constants/debug.models';
 import { getUserRoleList } from '@/api/user.api';
+import useIndexedDB from '@/composables/useIndexedDB';
 
 const columnDatas = [
   {
@@ -36,6 +37,7 @@ const columnDatas = [
 const EUserRole = defineComponent({
   setup() {
     const route = useRoute();
+    const { getDBDataAll } = useIndexedDB();
     const { debug } = usePlugin();
     const roleData = ref<UserRoleModels[]>([]);
     const roleColums = computed<TableRowData[]>(() => {
@@ -61,9 +63,22 @@ const EUserRole = defineComponent({
           fixed: 'right',
           cell: (_h: any, { row }: BaseTableCellParams<UserRoleModels>) => {
             return (
-              <Space size={'small'} on-click={(e: MouseEvent) => e.stopPropagation()}>
-                <Button onClick={() => onEdit(row)}>编辑</Button>
-                <Button theme="default" onClick={() => onDel(row)}>
+              <Space size={'small'}>
+                <Button
+                  onClick={(e: MouseEvent) => {
+                    e.stopPropagation();
+                    onEdit(row);
+                  }}
+                >
+                  编辑
+                </Button>
+                <Button
+                  theme="default"
+                  onClick={(e: MouseEvent) => {
+                    e.stopPropagation();
+                    onDel(row);
+                  }}
+                >
                   删除
                 </Button>
               </Space>
@@ -78,12 +93,12 @@ const EUserRole = defineComponent({
       total: 10
     });
 
-    const init = () => {
-      getUserRoleList().then((res) => {
-        console.log(res.data);
-        roleData.value = res.data;
-      });
-    };
+    // const init = () => {
+    //   getUserRoleList().then((res) => {
+    //     console.log(res.data);
+    //     roleData.value = res.data;
+    //   });
+    // };
 
     const onRowClick = (row: UserRoleModels) => {
       const path = route.path + ' -> userRole.on-row-click';
@@ -94,14 +109,21 @@ const EUserRole = defineComponent({
       const path = route.path + ' -> userRole.on-edit';
       debug({ type: DebugType.USER_ROLE, alias: '编辑', path, message: row, status: 'info' });
     };
-    
+
     const onDel = (row: UserRoleModels) => {
       const path = route.path + ' -> userRole.on-del';
       debug({ type: DebugType.USER_ROLE, alias: '删除', path, message: row, status: 'info' });
     };
 
+    const getIndexedDBRoleAdminByList = () => {
+      getDBDataAll(['userRole', 1], ['list'], 'readonly', 'list', (e: Event) => {
+        roleData.value = (e.target as IDBRequest<UserRoleModels[]>)?.result;
+      });
+    };
+
     onMounted(() => {
-      init();
+      getIndexedDBRoleAdminByList();
+      // init();
     });
 
     return () => {
