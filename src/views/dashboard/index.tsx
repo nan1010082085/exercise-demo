@@ -7,7 +7,6 @@ import { Pagination, Space, Table, type BaseTableCellParams, Button, type TableR
 import { useRoute } from 'vue-router';
 import usePlugin from '@/composables/usePlugin';
 import { DebugType } from '@/constants/debug.models';
-import type { an } from 'vitest/dist/reporters-cb94c88b.js';
 
 const columns = [
   {
@@ -54,7 +53,7 @@ const Dashboard = defineComponent({
           fixed: 'right',
           cell: (_h: any, { row }: BaseTableCellParams<DashboardListModels>) => {
             return (
-              <Space>
+              <Space size={'small'} on-click={(e: MouseEvent) => e.stopPropagation()}>
                 <Button theme="primary" onClick={() => onEdit(row)}>
                   编辑
                 </Button>
@@ -107,7 +106,7 @@ const Dashboard = defineComponent({
               rowKey="id"
               data={dashboardData.value}
               columns={columnDatas.value}
-              onRowClick={({ row }) => onRowClick(row as DashboardListModels)}
+              onRowClick={({ row }: TableRowData) => onRowClick(row as DashboardListModels)}
             ></Table>
             <div class={['footer']}>
               <Pagination total={pagination.total} current={pagination.page} pageSize={pagination.limit}></Pagination>

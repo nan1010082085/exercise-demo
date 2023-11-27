@@ -61,7 +61,7 @@ const EUserRole = defineComponent({
           fixed: 'right',
           cell: (_h: any, { row }: BaseTableCellParams<UserRoleModels>) => {
             return (
-              <Space size={'small'}>
+              <Space size={'small'} on-click={(e: MouseEvent) => e.stopPropagation()}>
                 <Button onClick={() => onEdit(row)}>编辑</Button>
                 <Button theme="default" onClick={() => onDel(row)}>
                   删除

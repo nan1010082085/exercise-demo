@@ -8,6 +8,8 @@ import {
   Pagination,
   Space,
   type BaseTableCellParams,
+  type RowEventContext,
+  type BaseTableCol,
   type TableRowData
 } from 'tdesign-vue-next';
 import EPageHeader from '@/components/e-page-header';
@@ -63,7 +65,7 @@ const EUserAdmin = defineComponent({
           fixed: 'right',
           cell: (_h: any, { row }: BaseTableCellParams<UserAdminModels>) => {
             return (
-              <Space>
+              <Space size={'small'} on-click={(e: MouseEvent) => e.stopPropagation()}>
                 <Button theme="primary" onClick={() => onEdit(row)}>
                   编辑
                 </Button>
