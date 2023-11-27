@@ -17,11 +17,13 @@ import usePlugin from '@/composables/usePlugin';
 import { DebugType } from '@/constants/debug.models';
 import { getDebugMessage } from '@/utils/debug';
 import { useRoute } from 'vue-router';
+import useIndexedDB from '@/composables/useIndexedDB';
 
 const EUser = defineComponent({
   setup() {
     const route = useRoute();
     const { debug } = usePlugin();
+    const { getDBDataById } = useIndexedDB();
 
     const userInfo = ref<UserInfoModels>({
       name: '',
@@ -32,11 +34,11 @@ const EUser = defineComponent({
       isPush: false
     });
 
-    const getUser = () => {
-      getUserInfo().then((res) => {
-        userInfo.value = res.data;
-      });
-    };
+    // const getUser = () => {
+    //   getUserInfo().then((res) => {
+    //     userInfo.value = res.data;
+    //   });
+    // };
 
     const onSave = () => {
       const path = route.path + ' -> user.on-save';
@@ -44,7 +46,10 @@ const EUser = defineComponent({
     };
 
     onMounted(() => {
-      getUser();
+      getDBDataById(['userAdmin', 1], ['list'], 'readonly', 'list', 1, (e) => {
+        userInfo.value = (e.target as IDBRequest<UserInfoModels>)?.result;
+      });
+      // getUser();
     });
 
     return () => {

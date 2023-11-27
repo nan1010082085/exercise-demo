@@ -37,7 +37,7 @@ const columnDatas = [
 const EUserRole = defineComponent({
   setup() {
     const route = useRoute();
-    const { getDBDataAll } = useIndexedDB();
+    const { getDBDataAll, getDBDataById } = useIndexedDB();
     const { debug } = usePlugin();
     const roleData = ref<UserRoleModels[]>([]);
     const roleColums = computed<TableRowData[]>(() => {
@@ -100,9 +100,11 @@ const EUserRole = defineComponent({
     //   });
     // };
 
-    const onRowClick = (row: UserRoleModels) => {
+    const onRowClick = async (row: UserRoleModels) => {
       const path = route.path + ' -> userRole.on-row-click';
       debug({ type: DebugType.USER_ROLE, alias: '行点击', path, message: row.id, status: 'info' });
+      const role = await getDataById(row.id);
+      console.log(role)
     };
 
     const onEdit = (row: UserRoleModels) => {
@@ -118,6 +120,18 @@ const EUserRole = defineComponent({
     const getIndexedDBRoleAdminByList = () => {
       getDBDataAll(['userRole', 1], ['list'], 'readonly', 'list', (e: Event) => {
         roleData.value = (e.target as IDBRequest<UserRoleModels[]>)?.result;
+      });
+    };
+
+    /**
+     * 获取角色信息
+     * @param id
+     */
+    const getDataById = async (id: string) => {
+      return new Promise((resolve) => {
+        getDBDataById(['userRole', 1], ['list'], 'readonly', 'list', id, (e: Event) => {
+          resolve((e.target as IDBRequest<UserRoleModels[]>)?.result);
+        });
       });
     };
 

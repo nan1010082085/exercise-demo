@@ -55,7 +55,7 @@ const columnDatas = [
 const EUserAdmin = defineComponent({
   setup() {
     const route = useRoute();
-    const { getDBDataAll } = useIndexedDB();
+    const { getDBDataAll, getDBDataById } = useIndexedDB();
     const { debug } = usePlugin();
     const userData = ref<UserAdminModels[]>([]);
     const userColums = computed<TableRowData[]>(() => {
@@ -103,10 +103,11 @@ const EUserAdmin = defineComponent({
     //   });
     // };
 
-    const onRowClick = (row: UserAdminModels) => {
-      console.log(row);
+    const onRowClick = async (row: UserAdminModels) => {
       const path = route.path + '-> userAdmin.on-row-click';
       debug({ type: DebugType.USER_ADMIN, alias: '行点击', path, message: row.id, status: 'info' });
+      const user = await getDataById(row.id);
+      console.log(user);
     };
 
     const onEdit = (row: UserAdminModels) => {
@@ -117,11 +118,25 @@ const EUserAdmin = defineComponent({
     const onDel = (row: UserAdminModels) => {
       const path = route.path + ' -> userAdmin.on-del';
       debug({ type: DebugType.USER_ADMIN, alias: '删除', path, message: row, status: 'info' });
+
+      //...
     };
 
     const getIndexedDBUserAdminByList = () => {
       getDBDataAll(['userAdmin', 1], ['list'], 'readonly', 'list', (e: Event) => {
         userData.value = (e.target as IDBRequest<UserAdminModels[]>)?.result;
+      });
+    };
+
+    /**
+     * 获取用户信息
+     * @param id
+     */
+    const getDataById = async (id: string) => {
+      return new Promise((resolve) => {
+        getDBDataById(['userAdmin', 1], ['list'], 'readonly', 'list', id, (e: Event) => {
+          resolve((e.target as IDBRequest<UserAdminModels[]>)?.result);
+        });
       });
     };
 

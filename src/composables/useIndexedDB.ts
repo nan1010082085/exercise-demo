@@ -91,11 +91,40 @@ const useIndexedDB = () => {
     };
   };
 
+  /**
+   * 获取数据库单条数据
+   * @param openParams 打开数据库参数
+   * @param storeNames 表名
+   * @param type 事务模式
+   * @param store 表名
+   * @param success 成功回调
+   */
+  const getDBDataById = (
+    openParams: [string, number],
+    storeNames: string | string[],
+    type: IDBTransactionMode,
+    store: string,
+    id: string | number,
+    success: (e: Event) => void
+  ) => {
+    const userDB = openDB(...openParams);
+    userDB.onsuccess = (e: Event) => {
+      const db = (e.target as IDBRequest<IDBDatabase>)?.result;
+      const transaction = db.transaction(storeNames, type).objectStore(store);
+      const req = transaction.get(id);
+      req.onerror = () => {
+        console.log('获取失败');
+      };
+      req.onsuccess = success;
+    };
+  };
+
   return {
     indexedDB,
     openDB,
     createObjectStore,
-    getDBDataAll
+    getDBDataAll,
+    getDBDataById
   };
 };
 
