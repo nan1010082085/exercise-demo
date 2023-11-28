@@ -1,0 +1,15 @@
+.card-wrapper {
+  width: 400px;
+  :global(.t-card__body) {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .card-image {
+    margin: 0 auto;
+    width: 350px;
+    height: 200px;
+  }
+  :global(.t-card__footer-wrapper) {
+    text-align: right;
+  }
+}

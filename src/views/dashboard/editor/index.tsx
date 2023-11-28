@@ -1,10 +1,11 @@
 import { defineComponent } from 'vue';
-import { onBeforeRouteLeave } from 'vue-router';
+import { onBeforeRouteLeave, useRoute } from 'vue-router';
 import styles from './index.module.scss';
 import useDialog from '@/composables/useDialog';
 
 const Editor = defineComponent({
   setup() {
+    const route = useRoute();
     const { confirm } = useDialog();
     onBeforeRouteLeave((to, form, next) => {
       confirm('确定要离开吗？', '离开后不会保存已编辑的操作！').then(({ trigger }) => {

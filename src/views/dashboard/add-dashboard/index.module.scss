@@ -1,0 +1,37 @@
+$label-width: 120px;
+.add-dashboard {
+  // width: 800px;
+
+  .look-content {
+    &-item {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      border-bottom: 1px solid #acacac;
+      padding: 8px 0;
+      .label {
+        height: 40px;
+        line-height: 40px;
+        width: $label-width;
+        text-align: left;
+      }
+      .body {
+        width: calc(100% - $label-width);
+      }
+    }
+  }
+
+  .form-content {
+    .form-item-label {
+      span {
+        margin-right: 8px;
+      }
+    }
+  }
+
+  .draser-image {
+    width: 300px;
+    height: 200px;
+  }
+}

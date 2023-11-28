@@ -28,10 +28,6 @@ const columnDatas = [
     colKey: 'name',
     title: '名称'
   },
-  {
-    colKey: 'createdAt',
-    title: '创建时间'
-  }
 ];
 
 const EUserRole = defineComponent({
@@ -56,6 +52,10 @@ const EUserRole = defineComponent({
           cell: (_h: any, { row }: BaseTableCellParams<UserRoleModels>) => {
             return <Tag theme={row.status === 1 ? 'success' : 'danger'}>{row.status === 1 ? '启用' : '禁用'}</Tag>;
           }
+        },
+        {
+          colKey: 'createdAt',
+          title: '创建时间'
         },
         {
           colKey: 'operation',

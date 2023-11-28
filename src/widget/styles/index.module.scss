@@ -1,7 +1,12 @@
 .widget {
   .container {
+    .cards {
+      display: flex;
+      flex-wrap: nowrap;
+    }
   }
 
   .footer {
+    margin-top: 15px;
   }
 }

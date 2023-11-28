@@ -21,7 +21,6 @@ export interface ResolveType {
 }
 
 const useDialog = () => {
-  
   // dialog confirm
   const confirm = (title: string, message: string, option: useDialogOptionProps = {}): Promise<ResolveType> => {
     const {
@@ -60,13 +59,14 @@ const useDialog = () => {
 
   // dialog alert
   const alert = (title: string, message: string, option: useDialogOptionProps = {}): Promise<ResolveType> => {
-    const { confirmText = '确定', showClose = false } = option;
+    const { confirmText = '确定', showClose = false, placement = 'center' } = option;
     return new Promise((resolve) => {
       const dialog = DialogPlugin.alert({
         header: title,
         body: message,
         confirmBtn: confirmText,
         closeBtn: showClose,
+        placement,
         onConfirm: ({ e }) => {
           resolve({ event: e, trigger: 'confirm' });
           dialog.destroy();
