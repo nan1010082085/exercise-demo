@@ -3,8 +3,10 @@ import { defineComponent, reactive, ref } from 'vue';
 import styles from './styles/index.module.scss';
 import { Button, Pagination, Image } from 'tdesign-vue-next';
 import { useRouter } from 'vue-router';
-import WidgetCard, { type TData } from './components/widget-card';
+import ECard, { type TData } from '../components/e-card';
 import AddDashboard, { type EAddDashboardInstance } from '@/views/dashboard/add-dashboard';
+import { cloneDeep } from 'lodash-es';
+import dashboardBase from '@/assets/default-json/dashboard.base.json';
 
 const Widget = defineComponent({
   name: 'Widget',
@@ -17,14 +19,14 @@ const Widget = defineComponent({
     });
     const AddDashboardInstance = ref<EAddDashboardInstance>();
     const formData = ref({});
-
-    const widgets = ref<TData[]>([{ title: '测试', imageUrl: '' }]);
+    const widgets = ref<TData[]>([{ name: '测试', imageUrl: '' }]);
 
     const craeteDashboard = (row: any) => {
+      createdBoard(cloneDeep(dashboardBase));
+
       let query = {
         type: 'add'
       };
-
       router.push({ path: '/editor', query });
     };
 
@@ -46,9 +48,9 @@ const Widget = defineComponent({
             <div class={styles.cards}>
               {widgets.value.map((item) => {
                 return (
-                  <WidgetCard data={item}>
+                  <ECard data={item} lookBtn={false}>
                     <Image src={item.imageUrl} fit="fill" style={{ height: '100%' }} />
-                  </WidgetCard>
+                  </ECard>
                 );
               })}
             </div>
@@ -75,3 +77,7 @@ const Widget = defineComponent({
 });
 
 export default Widget;
+function createdBoard(arg0: any) {
+  throw new Error('Function not implemented.');
+}
+

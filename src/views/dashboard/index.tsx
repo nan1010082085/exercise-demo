@@ -3,93 +3,26 @@ import EPageHeader from '@/components/e-page-header';
 import styles from './index.module.scss';
 import { getDashboardList } from '@/api/dashboard.api';
 import type { DashboardListModels } from '@/constants/dashboard.models';
-import {
-  Pagination,
-  Space,
-  Table,
-  MessagePlugin,
-  type BaseTableCellParams,
-  Button,
-  type TableRowData,
-  Tag
-} from 'tdesign-vue-next';
-import { useRoute } from 'vue-router';
+import { Pagination, Space, MessagePlugin, Button, Image } from 'tdesign-vue-next';
+import { useRoute, useRouter } from 'vue-router';
 import usePlugin from '@/composables/usePlugin';
 import { DebugType } from '@/constants/debug.models';
 import AddDashboard, { type EAddDashboardInstance } from './add-dashboard';
 import useDialog, { type ResolveType } from '@/composables/useDialog';
-
-const columns = [
-  {
-    colKey: 'id',
-    title: 'ID',
-    width: 50
-  },
-  {
-    colKey: 'name',
-    title: '名称'
-  },
-  {
-    colKey: 'description',
-    title: '名称'
-  },
-  {
-    colKey: 'author',
-    title: '创建人'
-  }
-];
+import ECard from '@/components/e-card';
+import { dashboardStore } from '@/store/dashboard-store';
+import dashboardBase from '@/assets/default-json/dashboard.base.json';
+import { cloneDeep } from 'lodash-es';
 
 const Dashboard = defineComponent({
   name: 'Dashboard',
   setup() {
     const route = useRoute();
+    const router = useRouter();
     const { debug } = usePlugin();
     const { confirm } = useDialog();
+    const { createdBoard } = dashboardStore()
     const dashboardData = ref<DashboardListModels[]>([]);
-    const columnDatas = computed<TableRowData[]>(() => {
-      return [
-        ...columns,
-        {
-          colKey: 'status',
-          title: '状态',
-          cell: (_h: any, { row }: BaseTableCellParams<DashboardListModels>) => {
-            return <Tag theme={row.status === 1 ? 'success' : 'danger'}>{row.status === 1 ? '启用中' : '未启用'}</Tag>;
-          }
-        },
-        {
-          colKey: 'updatetime',
-          title: '更新时间'
-        },
-        {
-          title: '操作',
-          colKey: 'operation',
-          fixed: 'right',
-          cell: (_h: any, { row }: BaseTableCellParams<DashboardListModels>) => {
-            return (
-              <Space size={'small'}>
-                <Button
-                  onClick={(e: MouseEvent) => {
-                    e.stopPropagation();
-                    onEdit(row);
-                  }}
-                >
-                  编辑
-                </Button>
-                <Button
-                  theme="default"
-                  onClick={(e: MouseEvent) => {
-                    e.stopPropagation();
-                    onDel(row);
-                  }}
-                >
-                  删除
-                </Button>
-              </Space>
-            );
-          }
-        }
-      ];
-    });
     const pagination = reactive({
       page: 1,
       limit: 10,
@@ -97,7 +30,6 @@ const Dashboard = defineComponent({
     });
     const AddDashboardInstance = ref<EAddDashboardInstance>();
     const drawerType = ref<'add' | 'edit' | 'look'>('add');
-
     const formData = ref<Partial<DashboardListModels>>();
 
     const onAdd = () => {
@@ -140,6 +72,15 @@ const Dashboard = defineComponent({
       AddDashboardInstance.value?.close();
     };
 
+    const editDashboard = () => {
+      createdBoard(cloneDeep(dashboardBase));
+
+      let query = {
+        type: 'add'
+      };
+      router.push({ path: '/editor', query });
+    };
+
     const init = () => {
       getDashboardList().then((res) => {
         dashboardData.value = res.data;
@@ -156,17 +97,21 @@ const Dashboard = defineComponent({
           <EPageHeader title="仪表板">
             <Button onClick={onAdd}>创建仪表板</Button>
           </EPageHeader>
-          <Space class={['table-container']} direction="vertical">
-            <Table
-              rowKey="id"
-              data={dashboardData.value}
-              columns={columnDatas.value}
-              onRowClick={({ row }: TableRowData) => onRowClick(row as DashboardListModels)}
-            ></Table>
-            <div class={['footer']}>
+          <div class={styles.container}>
+            <div class={styles.content}>
+              {dashboardData.value.map((item) => {
+                return (
+                  <ECard data={item} onImageClick={editDashboard} onLook={onRowClick} onEdit={onEdit} onDel={onDel}>
+                    <Image class="image" src={item.prevewImage} fit="fill" style={{ height: '100%' }} />
+                  </ECard>
+                );
+              })}
+            </div>
+
+            <div class={styles.footer}>
               <Pagination total={pagination.total} current={pagination.page} pageSize={pagination.limit}></Pagination>
             </div>
-          </Space>
+          </div>
 
           <AddDashboard
             ref={AddDashboardInstance}

@@ -52,13 +52,11 @@ const EWidgetRender = defineComponent({
         h: _.h
       };
     });
-
     const stylesheet = ref({
       width: `${size.value.w}px`,
       height: `${size.value.h}px`,
       transform: `translate3d(${size.value.x}px, ${size.value.y}px, 0)`
     });
-
     const widget = computed(() => _.widget);
 
     const onMousedown = (e: MouseEvent) => {

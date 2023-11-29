@@ -10,22 +10,19 @@ const EditorView = defineComponent({
   name: 'EditorView',
   setup() {
     const { board } = dashboardStore();
-
     const drawer = inject(DrawerTypeKey);
-
     const widgets = ref<WidgetModels[]>([]);
 
     const onDrop = (e: DragEvent) => {
       e.preventDefault();
       console.log('drop view', e);
       const data = e.dataTransfer?.getData('widget') as string;
-      console.log(data);
       const widget = JSON.parse(data) as WidgetModels;
       const [x, y] = [e.offsetX, e.offsetY];
       widget.id = _uuid('w');
       widget.general.position.x = x;
       widget.general.position.y = y;
-      console.log(widget);
+      
       widgets.value.push(widget);
     };
 

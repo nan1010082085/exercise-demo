@@ -7,7 +7,7 @@ import dashboardBase from '@/assets/default-json/dashboard.base.json';
 export const dashboardStore = defineStore('dashboard', () => {
   const board = ref<DashboardModels>(dashboardBase);
 
-  const created = (data: DashboardModels) => {
+  const createdBoard = (data: DashboardModels) => {
     board.value = data;
   };
 
@@ -22,7 +22,7 @@ export const dashboardStore = defineStore('dashboard', () => {
 
   return {
     board,
-    created,
+    createdBoard,
     addWidget,
     delWidget
   };

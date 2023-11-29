@@ -1,13 +1,16 @@
 .widget {
+  height: 100%;
   .container {
+    height: calc(100% - 60px);
+    display: flex;
+    flex-direction: column;
     .cards {
-      display: flex;
-      flex-wrap: wrap;
-      ;
+      height: calc(100% - 60px);
     }
   }
 
   .footer {
-    margin-top: 15px;
+    height: 60px;
+    line-height: 60px;
   }
 }

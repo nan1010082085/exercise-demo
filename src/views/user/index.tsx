@@ -25,7 +25,6 @@ const EUser = defineComponent({
     const route = useRoute();
     const { debug } = usePlugin();
     const { getDBDataById } = useIndexedDB();
-
     const userInfo = ref<UserInfoModels>({
       name: '',
       wechat: '',

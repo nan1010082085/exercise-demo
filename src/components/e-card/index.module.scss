@@ -1,4 +1,5 @@
 .card-wrapper {
+  display: inline-block;
   width: 400px;
   :global(.t-card__body) {
     padding-top: 0;
@@ -8,6 +9,7 @@
     margin: 0 auto;
     width: 350px;
     height: 200px;
+    cursor: pointer;
   }
   :global(.t-card__footer-wrapper) {
     text-align: right;
