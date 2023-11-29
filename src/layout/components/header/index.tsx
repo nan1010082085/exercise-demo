@@ -11,6 +11,7 @@ import EBreadcrumb from '@/components/e-breadcrumb';
 type DropdownOption = Pick<TdDropdownItemProps, 'content'> & { value: LanguageT };
 
 const LHeader = defineComponent({
+  name: 'LHeader',
   setup() {
     const router = useRouter();
 

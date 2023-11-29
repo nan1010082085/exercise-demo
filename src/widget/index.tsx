@@ -4,8 +4,10 @@ import styles from './styles/index.module.scss';
 import { Button, Pagination, Image } from 'tdesign-vue-next';
 import { useRouter } from 'vue-router';
 import WidgetCard, { type TData } from './components/widget-card';
+import AddDashboard, { type EAddDashboardInstance } from '@/views/dashboard/add-dashboard';
 
 const Widget = defineComponent({
+  name: 'Widget',
   setup() {
     const router = useRouter();
     const pagination = reactive({
@@ -13,11 +15,12 @@ const Widget = defineComponent({
       page: 1,
       pageSize: 10
     });
+    const AddDashboardInstance = ref<EAddDashboardInstance>();
+    const formData = ref({});
 
     const widgets = ref<TData[]>([{ title: '测试', imageUrl: '' }]);
 
     const craeteDashboard = (row: any) => {
-      console.log('create dashboard');
       let query = {
         type: 'add'
       };
@@ -25,11 +28,19 @@ const Widget = defineComponent({
       router.push({ path: '/editor', query });
     };
 
+    const onAddDashboard = () => {
+      AddDashboardInstance.value?.open();
+    };
+
+    const onAddDashboardConfirm = () => {
+      craeteDashboard(formData.value);
+    };
+
     return () => {
       return (
         <div class={styles.widget}>
           <EPageHeader title="部件列表">
-            <Button onClick={craeteDashboard}>创建仪表板</Button>
+            <Button onClick={onAddDashboard}>创建仪表板</Button>
           </EPageHeader>
           <div class={styles.container}>
             <div class={styles.cards}>
@@ -50,6 +61,13 @@ const Widget = defineComponent({
               ></Pagination>
             </div>
           </div>
+
+          <AddDashboard
+            ref={AddDashboardInstance}
+            type={'add'}
+            formData={formData.value}
+            onConfirm={onAddDashboardConfirm}
+          />
         </div>
       );
     };

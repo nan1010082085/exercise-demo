@@ -20,6 +20,7 @@ import { useRoute } from 'vue-router';
 import useIndexedDB from '@/composables/useIndexedDB';
 
 const EUser = defineComponent({
+  name: 'EUser',
   setup() {
     const route = useRoute();
     const { debug } = usePlugin();

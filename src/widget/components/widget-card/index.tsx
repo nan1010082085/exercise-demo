@@ -9,6 +9,7 @@ export interface TData {
 }
 
 const widgetCard = defineComponent({
+  name: 'WidgetCard',
   props: {
     data: {
       type: Object as PropType<TData>,

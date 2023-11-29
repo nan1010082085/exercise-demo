@@ -4,6 +4,7 @@ import { useGlobalStore } from '@/store/global-store';
 import { Breadcrumb, BreadcrumbItem } from 'tdesign-vue-next';
 
 const EBreadcrumb = defineComponent({
+  name: 'EBreadcrumb',
   setup() {
     const { breadcrumbHistory } = useGlobalStore();
 

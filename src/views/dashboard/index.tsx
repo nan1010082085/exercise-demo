@@ -40,6 +40,7 @@ const columns = [
 ];
 
 const Dashboard = defineComponent({
+  name: 'Dashboard',
   setup() {
     const route = useRoute();
     const { debug } = usePlugin();

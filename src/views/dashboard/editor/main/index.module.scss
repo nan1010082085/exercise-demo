@@ -1,0 +1,12 @@
+.main-wrapper {
+  position: absolute;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: calc(100% - 50px);
+}
+
+.visible {
+  width: calc(100% - 300px);
+  left: 300px;
+}

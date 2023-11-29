@@ -53,6 +53,7 @@ const columnDatas = [
 ];
 
 const EUserAdmin = defineComponent({
+  name: 'EUserAdmin',
   setup() {
     const route = useRoute();
     const { getDBDataAll, getDBDataById } = useIndexedDB();

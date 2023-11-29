@@ -19,6 +19,7 @@ import styles from './index.module.scss';
 import { cloneDeep } from 'lodash-es';
 
 const AddDashboard = defineComponent({
+  name: 'AddDashboard',
   props: {
     type: {
       type: String as PropType<'add' | 'edit' | 'look'>

@@ -13,6 +13,7 @@ import { ConfigProvider } from 'tdesign-vue-next';
 import { initUserAdmin, initRoleAdmin } from './utils/iniIndexedDB';
 
 export default defineComponent({
+  name: 'App',
   setup() {
     const { globalConfig } = useGlobalStore();
     const layoutStore = useLayoutStore();

@@ -2,7 +2,8 @@
   .container {
     .cards {
       display: flex;
-      flex-wrap: nowrap;
+      flex-wrap: wrap;
+      ;
     }
   }
 

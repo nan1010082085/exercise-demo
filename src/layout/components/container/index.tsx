@@ -5,6 +5,7 @@ import { Content } from 'tdesign-vue-next';
 import { useLayoutStore } from '@/store/layout-store';
 
 const LContainer = defineComponent({
+  name: 'LContainer',
   setup() {
     const route = useRoute();
     const layoutStore = useLayoutStore();

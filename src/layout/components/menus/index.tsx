@@ -1,11 +1,12 @@
 import { computed, defineComponent, ref } from 'vue';
 import styles from './index.module.scss';
-import { Aside, Header, Icon, Layout, Menu, MenuItem, Submenu } from 'tdesign-vue-next';
+import { Aside, Header, Icon, Layout, Menu, MenuItem, Submenu, type MenuRoute } from 'tdesign-vue-next';
 import { useLayoutStore } from '@/store/layout-store';
 import { MenuData, type EMenu } from '@/constants/menus-view';
 import { useRoute } from 'vue-router';
 
 const LMenu = defineComponent({
+  name: 'LMenu',
   setup() {
     const route = useRoute();
     const layoutStore = useLayoutStore();
@@ -33,7 +34,7 @@ const LMenu = defineComponent({
 
     const createMenuItem = (item: EMenu) => {
       return (
-        <MenuItem key={item.path} to={item.path} value={item.path}>
+        <MenuItem key={item.path} to={item.path as MenuRoute} value={item.path}>
           {{
             icon: () => (item.meta.icon ? <Icon name={item.meta.icon} /> : null),
             default: () => item.name
@@ -45,7 +46,7 @@ const LMenu = defineComponent({
     const createChildMenu = (children: EMenu[] = []) => {
       return children.map((i) => {
         return (
-          <MenuItem key={i.path} to={i.path} value={i.path}>
+          <MenuItem key={i.path} to={i.path as MenuRoute} value={i.path}>
             {{
               icon: () => (i.meta.icon ? <Icon name={i.meta.icon} /> : null),
               default: () => i.name

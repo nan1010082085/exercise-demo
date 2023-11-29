@@ -5,6 +5,7 @@ import { LockOnIcon, User1Icon } from 'tdesign-icons-vue-next';
 import { useRouter } from 'vue-router';
 
 const Login = defineComponent({
+  name: 'Login',
   setup() {
     const router = useRouter();
 

@@ -31,6 +31,7 @@ const columnDatas = [
 ];
 
 const EUserRole = defineComponent({
+  name: 'EUserRole',
   setup() {
     const route = useRoute();
     const { getDBDataAll, getDBDataById } = useIndexedDB();

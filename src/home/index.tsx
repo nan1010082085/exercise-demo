@@ -3,6 +3,7 @@ import styles from './index.module.scss';
 import EPageHeader from '@/components/e-page-header';
 
 const HomeComponent = defineComponent({
+  name: 'HomeComponent',
   setup() {
     return () => {
       return (

@@ -6,6 +6,10 @@
  * @Description 仪表盘
  */
 
+import type { BaseGeneralModels, MetadataModels } from './base.models';
+import type { WidgetModels } from './widget.models';
+
+// 仪表板列表
 export interface DashboardListModels {
   id: string | number;
   name: string;
@@ -16,4 +20,13 @@ export interface DashboardListModels {
   status: number;
   createtime: string;
   updatetime: string;
+}
+
+// 仪表板数据
+export interface DashboardModels {
+  id: string | number;
+  name: string;
+  general: BaseGeneralModels;
+  metadata: MetadataModels;
+  widgets: WidgetModels[];
 }
