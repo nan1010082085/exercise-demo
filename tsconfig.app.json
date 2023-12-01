@@ -7,9 +7,10 @@
     "paths": {
       "@/*": ["src/*"],
       "@composables/*": ["src/composables/*"],
-      "@public/*": ["src/public/*"],
+      "@public/*": ["public/*"],
       "@assets/*": ["src/assets/*"],
-      "@workers/*": ["src/workers/*"]
+      "@workers/*": ["src/workers/*"],
+      "@widget/*": ["src/widget/*"]
     }
   }
 }
