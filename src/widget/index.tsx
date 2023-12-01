@@ -7,11 +7,14 @@ import ECard, { type TData } from '../components/e-card';
 import AddDashboard, { type EAddDashboardInstance } from '@/views/dashboard/add-dashboard';
 import { cloneDeep } from 'lodash-es';
 import dashboardBase from '@/assets/default-json/dashboard.base.json';
+import { dashboardStore } from '@/store/dashboard-store';
+import './lib/manifest'
 
 const Widget = defineComponent({
   name: 'Widget',
   setup() {
     const router = useRouter();
+    const { createdBoard } = dashboardStore();
     const pagination = reactive({
       total: 10,
       page: 1,
@@ -77,7 +80,3 @@ const Widget = defineComponent({
 });
 
 export default Widget;
-function createdBoard(arg0: any) {
-  throw new Error('Function not implemented.');
-}
-
