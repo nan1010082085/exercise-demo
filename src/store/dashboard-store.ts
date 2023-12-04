@@ -11,6 +11,10 @@ export const dashboardStore = defineStore('dashboard', () => {
     board.value = data;
   };
 
+  const getWidget = (id: string) => {
+    return board.value.widgets.find((item) => item.id === id);
+  };
+
   // 添加部件
   const addWidget = (widget: WidgetModels) => {
     board.value.widgets.push(widget);
@@ -23,6 +27,7 @@ export const dashboardStore = defineStore('dashboard', () => {
   return {
     board,
     createdBoard,
+    getWidget,
     addWidget,
     delWidget
   };

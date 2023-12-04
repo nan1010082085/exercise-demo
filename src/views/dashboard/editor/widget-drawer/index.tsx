@@ -1,32 +1,36 @@
 import { computed, defineComponent, inject, onMounted, ref, watch } from 'vue';
 import styles from './index.module.scss';
 import { DrawerTypeKey } from '../inject.key';
-import { type ManifestModels } from '@/constants/widget.models';
+import { widgetDefualt, type ManifestModels, type WidgetModels } from '@/constants/widget.models';
 import { Collapse, CollapsePanel, Image as TImage } from 'tdesign-vue-next';
 import widgetConfig from '@widget/lib/config';
 import { mainfestInstall } from '@/widget/lib/manifest';
-const dargSrc = new URL('@public/vite.svg', import.meta.url).href;
+import { dashboardStore } from '@/store/dashboard-store';
+import { cloneDeep } from 'lodash-es';
+import { _uuid } from '@/utils';
 
 const WidgetDrawer = defineComponent({
   name: 'WidgetDrawer',
   setup() {
+    const { addWidget } = dashboardStore();
     const widgetsConfig = computed<string[]>(() => Object.keys(widgetConfig));
     const drawer = inject(DrawerTypeKey);
     const defaultValue = ref([0]);
     const img = ref();
 
+
     const reserveCreateImage = () => {
       img.value = document.createElement('img');
-      let canvas = document.createElement('canvas');
+      const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
-      let linearGradient = ctx.createLinearGradient(0, 0, 50, 50);
+      const linearGradient = ctx.createLinearGradient(0, 0, 50, 50);
       linearGradient.addColorStop(0, '#fff');
       linearGradient.addColorStop(0.5, '#fff');
       linearGradient.addColorStop(1, '#eee');
       ctx['fillStyle'] = linearGradient;
+      ctx?.fillRect(0, 0, 50, 50);
       ctx['lineJoin'] = 'round';
       ctx['strokeStyle'] = linearGradient;
-      ctx?.fillRect(0, 0, 50, 50);
       ctx?.beginPath();
       ctx?.lineTo(0, 0);
       ctx?.lineTo(50, 0);
@@ -36,6 +40,13 @@ const WidgetDrawer = defineComponent({
       ctx?.stroke();
       img.value.src = canvas.toDataURL('image/jpg');
     };
+
+    const widgetClick = (e: MouseEvent, manifest: ManifestModels) => {
+      const widget = cloneDeep(widgetDefualt) as WidgetModels;
+      widget.id = _uuid('w');
+      widget.manifest = manifest;
+      addWidget(widget)
+    }
 
     const onDragStart = (e: DragEvent, manifest: ManifestModels) => {
       console.log('drag start', manifest);
@@ -65,6 +76,7 @@ const WidgetDrawer = defineComponent({
                         onDragstart={(e: DragEvent) => onDragStart(e, manifest)}
                         onDragover={(e) => e.preventDefault()}
                         class={styles['widget-card']}
+                        onClick={(e: MouseEvent) => widgetClick(e, manifest)}
                       >
                         <div class={styles['widget-card-icon']}>
                           <TImage fit={'cover'} src={manifest.icon} />

@@ -74,7 +74,7 @@ export default defineComponent({
       // }
 
       // -------------------------
-      // const url = new URL('@workers/test-worker.js', import.meta.url).href;
+      // const url = new URL('@workers/test-worker.js', import.meta.url);
       // const worker = new Worker(url);
       // // 监听worker消息
       // worker.onmessage = workerMessage;

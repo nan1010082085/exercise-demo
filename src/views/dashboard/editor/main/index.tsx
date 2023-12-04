@@ -1,34 +1,77 @@
-import { defineComponent, inject, onMounted, ref } from 'vue';
+import { computed, defineComponent, inject, onMounted, ref } from 'vue';
 import styles from './index.module.scss';
 import { DrawerTypeKey } from '../inject.key';
-import type { WidgetModels } from '@/constants/widget.models';
+import { widgetDefualt, type ManifestModels, type WidgetModels } from '@/constants/widget.models';
 import { _uuid } from '@/utils';
-import EWidgetRender from '@/components/e-widget-render';
+import EWidgetRender, { type LayerSize } from '@/components/e-widget-render';
 import { dashboardStore } from '@/store/dashboard-store';
+import * as Widgets from '@/widget';
+import { cloneDeep, debounce } from 'lodash-es';
+import useElement from '@/composables/useElement';
 
 const EditorView = defineComponent({
   name: 'EditorView',
+  components: {
+    ...Widgets
+  },
   setup() {
-    const { board } = dashboardStore();
+    const { getElementSize } = useElement();
+    const { board, getWidget, addWidget } = dashboardStore();
     const drawer = inject(DrawerTypeKey);
-    const widgets = ref<WidgetModels[]>([]);
+    const viewRef = ref();
+    const widgets = computed(() => {
+      return board?.widgets as WidgetModels[];
+    });
+    const canvasStyle = computed(() => {
+      return {
+        width: `${board?.general.position.width}px`,
+        height: `${board?.general.position.height}px`
+      };
+    });
+
+    // 选中
+    const activeWdiget = ref<WidgetModels | null>(null);
+    const activeOffset = ref({
+      l: 0,
+      t: 0
+    });
 
     const onDrop = (e: DragEvent) => {
       e.preventDefault();
-      console.log('drop view', e);
       const data = e.dataTransfer?.getData('widget') as string;
-      const widget = JSON.parse(data) as WidgetModels;
-      const [x, y] = [e.offsetX, e.offsetY];
+      const manifest = JSON.parse(data) as ManifestModels;
+      const widget = cloneDeep(widgetDefualt) as WidgetModels;
+      const ev = e as DragEvent & LayerSize;
+      const [x, y] = [ev.layerX, ev.layerY];
       widget.id = _uuid('w');
       widget.general.position.x = x;
       widget.general.position.y = y;
-      
-      widgets.value.push(widget);
+      widget.manifest = manifest;
+
+      addWidget(widget);
     };
 
-    onMounted(() => {
-      widgets.value = (board?.widgets as WidgetModels[]) ?? [];
-    });
+    const onMousemove = (e: MouseEvent) => {
+      e.preventDefault();
+      const size = getElementSize(document.getElementById(activeWdiget.value?.id as string));
+      const parentSize = getElementSize(viewRef.value);
+      if (size && activeWdiget.value && parentSize) {
+        const ev = e as DragEvent & LayerSize;
+        // 移动坐标
+        const [x, y] = [ev.layerX - activeOffset.value.l, ev.layerY - activeOffset.value.t];
+        // 父级限制坐标
+        const [maxW, maxY] = [parentSize.width - size.width, parentSize.height - size.height];
+        activeWdiget.value.general.position.x = x <= 0 ? 0 : x >= maxW ? maxW : x;
+        activeWdiget.value.general.position.y = y <= 0 ? 0 : y >= maxY ? maxY : y;
+      }
+    };
+
+    const activeWidget = (widget: WidgetModels | null, offset: { l: number; t: number } = { l: 0, t: 0 }) => {
+      activeOffset.value = offset;
+      activeWdiget.value = widget ? getWidget(widget.id as string) || null : null;
+    };
+
+    onMounted(() => {});
 
     return () => {
       return (
@@ -37,15 +80,34 @@ const EditorView = defineComponent({
           onDrop={onDrop}
           class={[styles['main-wrapper'], drawer?.value.widget ? styles.visible : '']}
         >
-          {widgets.value.map((widget) => {
-            const { x, y, width: w, height: h } = widget.general.position;
+          <div class={styles.container}>
+            <div
+              ref={viewRef}
+              class={styles.canvas}
+              style={canvasStyle.value}
+              onMousemove={onMousemove}
+              onMouseup={() => activeWidget(null)}
+            >
+              {widgets.value.map((widget) => {
+                const { x, y, width: w, height: h } = widget.general.position;
 
-            return (
-              <EWidgetRender key={widget.id} widget={widget} x={x} y={y} w={w} h={h}>
-                {widget.name}
-              </EWidgetRender>
-            );
-          })}
+                return (
+                  <EWidgetRender
+                    key={widget.id}
+                    widget={widget}
+                    x={x}
+                    y={y}
+                    w={w}
+                    h={h}
+                    onDown={activeWidget}
+                    onUp={activeWidget}
+                  >
+                    {widget.name}
+                  </EWidgetRender>
+                );
+              })}
+            </div>
+          </div>
         </div>
       );
     };
