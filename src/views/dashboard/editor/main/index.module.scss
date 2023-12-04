@@ -19,6 +19,31 @@
       top: 0;
     }
   }
+
+  .lt {
+    cursor: nwse-resize;
+  }
+  .lc {
+    cursor: ew-resize;
+  }
+  .lb {
+    cursor: nesw-resize;
+  }
+  .ltc {
+    cursor: ns-resize;
+  }
+  .rt {
+    cursor: nesw-resize;
+  }
+  .rc {
+    cursor: ew-resize;
+  }
+  .rb {
+    cursor: nwse-resize;
+  }
+  .rbc {
+    cursor: ns-resize;
+  }
 }
 
 .visible {

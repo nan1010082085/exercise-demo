@@ -6,3 +6,7 @@ import { v4 as uuidV4 } from 'uuid';
 export const _uuid = (prefix: string) => {
   return `${prefix}_`.concat(uuidV4().slice(0, 8));
 };
+
+export const isUndefinedOrNull = (value: any) => {
+  return value === undefined || value === null;
+};

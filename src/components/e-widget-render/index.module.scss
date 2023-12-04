@@ -1,4 +1,63 @@
 .eWidgetContainer {
   position: absolute;
-  background-color: rgba($color: #fff, $alpha: 1);
+  // background-color: rgba($color: #fff, $alpha: 1);
+  border: 1px dotted rgba(0, 0, 0, 0.4);
+
+  .round {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1px dotted #fff;
+    background-color: #777;
+
+    &.lt {
+      left: -4px;
+      top: -4px;
+      cursor: nwse-resize;
+    }
+    &.lc {
+      left: -4px;
+      top: 50%;
+      cursor: ew-resize;
+    }
+    &.lb {
+      left: -4px;
+      bottom: -4px;
+      cursor: nesw-resize;
+    }
+    &.ltc {
+      left: 50%;
+      top: -4px;
+      cursor: ns-resize;
+    }
+    &.rt {
+      right: -4px;
+      top: -4px;
+      cursor: nesw-resize;
+    }
+    &.rc {
+      right: -4px;
+      top: 50%;
+      cursor: ew-resize;
+    }
+    &.rb {
+      right: -4px;
+      bottom: -4px;
+      cursor: nwse-resize;
+    }
+    &.rbc {
+      left: 50%;
+      bottom: -4px;
+      cursor: ns-resize;
+    }
+  }
+}
+
+.grab {
+  cursor: grab;
+}
+
+.grabbing {
+  cursor: grabbing;
 }

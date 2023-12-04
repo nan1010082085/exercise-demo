@@ -10,5 +10,33 @@
     }
   },
   "metadata": {},
-  "widgets": []
+  "widgets": [
+    {
+      "id": "w_99cb3739",
+      "name": "测试",
+      "type": "base-line",
+      "general": {
+        "position": {
+          "x": 397,
+          "y": 194,
+          "width": 300,
+          "height": 200
+        }
+      },
+      "metadata": {},
+      "manifest": {
+        "id": "base-line",
+        "name": "基础折线图",
+        "type": "base-line",
+        "icon": "https://tdesign.gtimg.com/demo/demo-image-1.png",
+        "fields": [
+          {
+            "label": "",
+            "value": "",
+            "description": ""
+          }
+        ]
+      }
+    }
+  ]
 }
