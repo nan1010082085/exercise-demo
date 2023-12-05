@@ -108,6 +108,7 @@ const EditorView = defineComponent({
       isTouchStart.value = false;
     };
 
+    // 拖拽改变部件大小
     const activeTouch = (type: TouchType) => {
       isTouchStart.value = true;
       isTouchCursor.value = true;

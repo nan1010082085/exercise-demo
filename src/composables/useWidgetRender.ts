@@ -11,9 +11,13 @@ import type { WidgetModels } from './../constants/widget.models';
 import { isUndefinedOrNull } from '@/utils';
 
 export interface ChangeTouchOption {
+  // 鼠标在元素上位置 由 layer 计算得出
   offset: OffsetType;
+  // 拖拽类型
   type: TouchType;
+  // 
   layer: { x: number; y: number };
+  // 部件的 size 
   size: { x: number; y: number; width: number; height: number };
 }
 

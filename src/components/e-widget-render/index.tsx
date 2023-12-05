@@ -52,6 +52,7 @@ const EWidgetRender = defineComponent({
       type: String as PropType<GrabType>,
       default: 'grab'
     },
+    // 是否选中，选中显示拖拽点
     isActive: {
       type: Boolean as PropType<boolean>,
       default: false

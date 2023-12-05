@@ -98,7 +98,7 @@ const Dashboard = defineComponent({
             <Button onClick={onAdd}>创建仪表板</Button>
           </EPageHeader>
           <div class={styles.container}>
-            <div class={styles.content}>
+            <div class={styles.cards}>
               {dashboardData.value.map((item) => {
                 return (
                   <ECard data={item} onImageClick={editDashboard} onLook={onRowClick} onEdit={onEdit} onDel={onDel}>

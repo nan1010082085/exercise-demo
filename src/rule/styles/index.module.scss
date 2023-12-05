@@ -1,16 +1,14 @@
-.dashboard-wrapper {
-  width: 100%;
+.rule-list {
   height: 100%;
   .container {
-    width: 100%;
     height: calc(100% - 60px);
     display: flex;
     flex-direction: column;
-
     .cards {
       height: calc(100% - 60px);
     }
   }
+
   .footer {
     height: 60px;
     line-height: 60px;

@@ -8,7 +8,7 @@ export default <RouteRecordRaw[]>[
       title: '首页',
       icon: 'dashboard'
     },
-    component: () => import('@/home')
+    component: () => import('@/views/home')
   },
   {
     name: 'dashboard',
@@ -18,6 +18,15 @@ export default <RouteRecordRaw[]>[
       icon: 'control-platform'
     },
     component: () => import('@/views/dashboard')
+  },
+  {
+    name: 'rulelink',
+    path: '/rulelink',
+    meta: {
+      title: '规则链',
+      icon: 'link-1'
+    },
+    component: () => import('@/views/rulelink')
   },
   {
     name: 'assets',
@@ -35,6 +44,15 @@ export default <RouteRecordRaw[]>[
           icon: 'share'
         },
         component: () => import('@/widget')
+      },
+      {
+        name: 'rule',
+        path: '/assets/rule',
+        meta: {
+          title: '规则库',
+          icon: 'link'
+        },
+        component: () => import('@/rule')
       },
     ]
   },
