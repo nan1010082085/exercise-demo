@@ -1,24 +1,21 @@
 // 用户管理
-import { computed, defineComponent, onMounted, ref, reactive, watch } from 'vue';
+import { computed, defineComponent, onMounted, ref, reactive } from 'vue';
 import styles from './index.module.scss';
 import {
   BaseTable,
   Button,
-  Layout,
   Pagination,
   Space,
   type BaseTableCellParams,
-  type RowEventContext,
-  type BaseTableCol,
   type TableRowData
 } from 'tdesign-vue-next';
-import EPageHeader from '@/components/e-page-header';
 import { getUserAmdinList } from '@/api/user.api';
 import type { UserAdminModels } from '@/constants/user.models';
 import { DebugType } from '@/constants/debug.models';
 import usePlugin from '@/composables/usePlugin';
 import { useRoute } from 'vue-router';
 import useIndexedDB from '@/composables/useIndexedDB';
+import EContainer from '@/components/e-container';
 
 const columnDatas = [
   {
@@ -148,18 +145,21 @@ const EUserAdmin = defineComponent({
 
     return () => (
       <div class={styles['page-user-admin']}>
-        <EPageHeader title="用户管理"></EPageHeader>
-        <Space class={'table-container'} direction="vertical">
-          <BaseTable
-            rowKey="id"
-            data={userData.value}
-            columns={userColums.value}
-            onRowClick={({ row }) => onRowClick(row as UserAdminModels)}
-          ></BaseTable>
-          <div class={'footer'}>
-            <Pagination total={pagination.total} pageSize={pagination.limit} current={pagination.page}></Pagination>
-          </div>
-        </Space>
+        <EContainer title="用户管理">
+          {{
+            default: () => (
+              <BaseTable
+                rowKey="id"
+                data={userData.value}
+                columns={userColums.value}
+                onRowClick={({ row }) => onRowClick(row as UserAdminModels)}
+              ></BaseTable>
+            ),
+            footer: () => (
+              <Pagination total={pagination.total} pageSize={pagination.limit} current={pagination.page}></Pagination>
+            )
+          }}
+        </EContainer>
       </div>
     );
   }

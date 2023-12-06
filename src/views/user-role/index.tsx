@@ -3,20 +3,18 @@ import styles from './index.module.scss';
 import {
   BaseTable,
   Button,
-  Layout,
   Pagination,
   Space,
   type BaseTableCellParams,
   type TableRowData,
   Tag
 } from 'tdesign-vue-next';
-import EPageHeader from '@/components/e-page-header';
 import type { UserRoleModels } from '@/constants/user.models';
 import { useRoute } from 'vue-router';
 import usePlugin from '@/composables/usePlugin';
 import { DebugType } from '@/constants/debug.models';
-import { getUserRoleList } from '@/api/user.api';
 import useIndexedDB from '@/composables/useIndexedDB';
+import EContainer from '@/components/e-container';
 
 const columnDatas = [
   {
@@ -27,7 +25,7 @@ const columnDatas = [
   {
     colKey: 'name',
     title: '名称'
-  },
+  }
 ];
 
 const EUserRole = defineComponent({
@@ -89,7 +87,7 @@ const EUserRole = defineComponent({
       ];
     });
     const pagination = reactive({
-      paga: 1,
+      page: 1,
       limit: 10,
       total: 10
     });
@@ -105,7 +103,7 @@ const EUserRole = defineComponent({
       const path = route.path + ' -> userRole.on-row-click';
       debug({ type: DebugType.USER_ROLE, alias: '行点击', path, message: row.id, status: 'info' });
       const role = await getDataById(row.id);
-      console.log(role)
+      console.log(role);
     };
 
     const onEdit = (row: UserRoleModels) => {
@@ -144,18 +142,21 @@ const EUserRole = defineComponent({
     return () => {
       return (
         <div class={styles['page-user-role']}>
-          <EPageHeader title="角色管理"></EPageHeader>
-          <Space class={'table-container'} direction="vertical">
-            <BaseTable
-              rowKey="id"
-              data={roleData.value}
-              columns={roleColums.value}
-              onRowClick={({ row }) => onRowClick(row as UserRoleModels)}
-            ></BaseTable>
-            <div class={'footer'}>
-              <Pagination total={pagination.total} current={pagination.paga} pageSize={pagination.limit}></Pagination>
-            </div>
-          </Space>
+          <EContainer title="角色管理">
+            {{
+              default: () => (
+                <BaseTable
+                  rowKey="id"
+                  data={roleData.value}
+                  columns={roleColums.value}
+                  onRowClick={({ row }) => onRowClick(row as UserRoleModels)}
+                ></BaseTable>
+              ),
+              footer: () => (
+                <Pagination total={pagination.total} current={pagination.page} pageSize={pagination.limit}></Pagination>
+              )
+            }}
+          </EContainer>
         </div>
       );
     };

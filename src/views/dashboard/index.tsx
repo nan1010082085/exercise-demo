@@ -13,6 +13,7 @@ import ECard from '@/components/e-card';
 import { dashboardStore } from '@/store/dashboard-store';
 import dashboardBase from '@/assets/default-json/dashboard.base.json';
 import { cloneDeep } from 'lodash-es';
+import EContainer from '@/components/e-container';
 
 const Dashboard = defineComponent({
   name: 'Dashboard',
@@ -21,7 +22,7 @@ const Dashboard = defineComponent({
     const router = useRouter();
     const { debug } = usePlugin();
     const { confirm } = useDialog();
-    const { createdBoard } = dashboardStore()
+    const { createdBoard } = dashboardStore();
     const dashboardData = ref<DashboardListModels[]>([]);
     const pagination = reactive({
       page: 1,
@@ -94,31 +95,36 @@ const Dashboard = defineComponent({
     return () => {
       return (
         <div class={styles['dashboard-wrapper']}>
-          <EPageHeader title="仪表板">
-            <Button onClick={onAdd}>创建仪表板</Button>
-          </EPageHeader>
-          <div class={styles.container}>
-            <div class={styles.cards}>
-              {dashboardData.value.map((item) => {
-                return (
-                  <ECard data={item} onImageClick={editDashboard} onLook={onRowClick} onEdit={onEdit} onDel={onDel}>
-                    <Image class="image" src={item.prevewImage} fit="fill" style={{ height: '100%' }} />
-                  </ECard>
-                );
-              })}
-            </div>
-
-            <div class={styles.footer}>
-              <Pagination total={pagination.total} current={pagination.page} pageSize={pagination.limit}></Pagination>
-            </div>
-          </div>
-
-          <AddDashboard
-            ref={AddDashboardInstance}
-            type={drawerType.value}
-            formData={formData.value}
-            onConfirm={onConfirm}
-          />
+          <EContainer title="仪表板">
+            {{
+              header: () => (
+                <div>
+                  <Button onClick={onAdd}>创建仪表板</Button>
+                </div>
+              ),
+              default: () =>
+                dashboardData.value.map((item) => {
+                  return (
+                    <ECard data={item} onImageClick={editDashboard} onLook={onRowClick} onEdit={onEdit} onDel={onDel}>
+                      <Image class="image" src={item.prevewImage} fit="fill" style={{ height: '100%' }} />
+                    </ECard>
+                  );
+                }),
+              footer: () => (
+                <Pagination total={pagination.total} current={pagination.page} pageSize={pagination.limit}></Pagination>
+              ),
+              plugin: () => (
+                <div>
+                  <AddDashboard
+                    ref={AddDashboardInstance}
+                    type={drawerType.value}
+                    formData={formData.value}
+                    onConfirm={onConfirm}
+                  />
+                </div>
+              )
+            }}
+          </EContainer>
         </div>
       );
     };

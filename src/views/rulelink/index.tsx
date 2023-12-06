@@ -2,6 +2,7 @@ import { defineComponent, reactive } from 'vue';
 import styles from './index.module.scss';
 import EPageHeader from '@/components/e-page-header';
 import { Button, Pagination } from 'tdesign-vue-next';
+import EContainer from '@/components/e-container';
 
 const RuleLink = defineComponent({
   name: 'RuleLink',
@@ -19,16 +20,19 @@ const RuleLink = defineComponent({
     return () => {
       return (
         <div class={styles.rulelink}>
-          <EPageHeader title="规则链">
-            <Button onClick={onAdd}>创建规则链</Button>
-          </EPageHeader>
-          <div class={styles.container}>
-            <div class={styles.cards}></div>
-
-            <div class={styles.footer}>
-              <Pagination total={pagination.total} current={pagination.page} pageSize={pagination.limit}></Pagination>
-            </div>
-          </div>
+          <EContainer title="规则链">
+            {{
+              header: () => (
+                <div>
+                  <Button onClick={onAdd}>创建规则链</Button>
+                </div>
+              ),
+              default: () => <div></div>,
+              footer: () => (
+                <Pagination total={pagination.total} current={pagination.page} pageSize={pagination.limit}></Pagination>
+              )
+            }}
+          </EContainer>
         </div>
       );
     };
