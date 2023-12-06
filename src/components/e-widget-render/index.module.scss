@@ -1,3 +1,4 @@
+$roundX: calc(-9px / 2);
 .eWidgetContainer {
   position: absolute;
   // background-color: rgba($color: #fff, $alpha: 1);
@@ -12,43 +13,43 @@
     background-color: #777;
 
     &.lt {
-      left: -4px;
-      top: -4px;
+      left: $roundX;
+      top: $roundX;
       cursor: nwse-resize;
     }
     &.lc {
-      left: -4px;
-      top: 50%;
+      left: $roundX;
+      top: calc(50% - 3px);
       cursor: ew-resize;
     }
     &.lb {
-      left: -4px;
-      bottom: -4px;
+      left: $roundX;
+      bottom: $roundX;
       cursor: nesw-resize;
     }
     &.ltc {
-      left: 50%;
-      top: -4px;
+      left: calc(50% - 3px);
+      top: $roundX;
       cursor: ns-resize;
     }
     &.rt {
-      right: -4px;
-      top: -4px;
+      right: $roundX;
+      top: $roundX;
       cursor: nesw-resize;
     }
     &.rc {
-      right: -4px;
-      top: 50%;
+      right: $roundX;
+      top: calc(50% - 3px);
       cursor: ew-resize;
     }
     &.rb {
-      right: -4px;
-      bottom: -4px;
+      right: $roundX;
+      bottom: $roundX;
       cursor: nwse-resize;
     }
     &.rbc {
-      left: 50%;
-      bottom: -4px;
+      left: calc(50% - 3px);
+      bottom: $roundX;
       cursor: ns-resize;
     }
   }
