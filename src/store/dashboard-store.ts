@@ -11,6 +11,10 @@ export const dashboardStore = defineStore('dashboard', () => {
     board.value = data;
   };
 
+  const getWidgets = () => {
+    return board.value.widgets;
+  };
+
   const getWidget = (id: string) => {
     return board.value.widgets.find((item) => item.id === id);
   };
@@ -27,6 +31,7 @@ export const dashboardStore = defineStore('dashboard', () => {
   return {
     board,
     createdBoard,
+    getWidgets,
     getWidget,
     addWidget,
     delWidget

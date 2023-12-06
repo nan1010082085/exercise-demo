@@ -44,6 +44,26 @@
   .rbc {
     cursor: ns-resize;
   }
+
+  .h,
+  .v {
+    position: absolute;
+    left: 0;
+    top: 0;
+    span {
+      position: absolute;
+      display: inline-block;
+    }
+  }
+  .h span {
+    height: 1px;
+  }
+  .v span {
+    width: 1px;
+  }
+  .line {
+    background-color: #003cab;
+  }
 }
 
 .visible {

@@ -13,7 +13,7 @@ import { dashboardStore } from '@/store/dashboard-store';
 import * as Widgets from '@/widget';
 import { cloneDeep } from 'lodash-es';
 import useElement from '@/composables/useElement';
-import useWidgetRenderFunc from '@/composables/useWidgetRender';
+import useWidgetRenderFunc, { type AuxiliaryResult } from '@/composables/useWidgetRender';
 
 const EditorView = defineComponent({
   name: 'EditorView',
@@ -23,7 +23,7 @@ const EditorView = defineComponent({
   setup() {
     const { board, getWidget, addWidget } = dashboardStore();
     const { getElementSize } = useElement();
-    const { changeTouchWidget } = useWidgetRenderFunc();
+    const { changeTouchWidget, getAuxiliary } = useWidgetRenderFunc();
     const drawer = inject(DrawerTypeKey);
     const viewRef = ref();
     const widgets = computed(() => {
@@ -35,7 +35,8 @@ const EditorView = defineComponent({
         height: `${board?.general.position.height}px`
       };
     });
-
+    // 辅助线
+    const auxiliarys = ref<AuxiliaryResult>();
     // 部件选中
     const activeWidget = ref<WidgetModels | null>(null);
     const activeOffset = ref<OffsetType>({
@@ -80,6 +81,8 @@ const EditorView = defineComponent({
           grabType.value = 'grabbing';
           activeWidget.value.general.position.x = x <= 0 ? 0 : x >= maxW ? maxW : x;
           activeWidget.value.general.position.y = y <= 0 ? 0 : y >= maxY ? maxY : y;
+
+          showAuxiliary();
         }
         // 拖拽点
         if (isTouchStart.value) {
@@ -99,6 +102,7 @@ const EditorView = defineComponent({
     // 点击
     const active = (widget: WidgetModels | null) => {
       activeWidget.value = widget ? getWidget(widget.id as string) || null : null;
+      showAuxiliary();
     };
 
     // 按下
@@ -121,10 +125,34 @@ const EditorView = defineComponent({
       isTouchStart.value = false;
       isTouchCursor.value = false;
       activeOffset.value = { l: 0, t: 0 };
+      auxiliaryAlgin();
     };
 
+    // 清除选中和辅助线
     const clearActiveWidget = () => {
       activeWidget.value = null;
+      auxiliarys.value = { h: [], v: [] };
+    };
+
+    // 辅助线
+    const showAuxiliary = () => {
+      if (drawer?.value.auxiliary && activeWidget.value) {
+        auxiliarys.value = getAuxiliary(activeWidget.value, widgets.value);
+      }
+    };
+
+    // 辅助线对齐
+    const auxiliaryAlgin = () => {
+      if (auxiliarys.value && activeWidget.value) {
+        const { h, v } = auxiliarys.value;
+        console.log(auxiliarys.value)
+        if (h.length) {
+          activeWidget.value.general.position.y = h[0].algin;
+        }
+        if (v.length) {
+          activeWidget.value.general.position.x = v[0].algin;
+        }
+      }
     };
 
     onMounted(() => {});
@@ -142,6 +170,7 @@ const EditorView = defineComponent({
               ref={viewRef}
               class={[styles.canvas, isTouchCursor.value ? styles[activeTouchType.value] : '']}
               style={canvasStyle.value}
+              onMousedown={clearActiveWidget}
               onMousemove={onMousemove}
               onMouseup={clearWidget}
             >
@@ -166,6 +195,27 @@ const EditorView = defineComponent({
                     {widget.name}
                   </EWidgetRender>
                 );
+              })}
+            </div>
+
+            <div class={styles.h}>
+              {auxiliarys.value?.h.map((h) => {
+                const stylesheet = {
+                  left: `${h.x}px`,
+                  top: `${h.y}px`,
+                  width: `${h.len}px`
+                };
+                return <span style={stylesheet} class={[styles.line]}></span>;
+              })}
+            </div>
+            <div class={styles.v}>
+              {auxiliarys.value?.v.map((v) => {
+                const stylesheet = {
+                  left: `${v.x}px`,
+                  top: `${v.y}px`,
+                  height: `${v.len}px`
+                };
+                return <span style={stylesheet} class={[styles.line]}></span>;
               })}
             </div>
           </div>

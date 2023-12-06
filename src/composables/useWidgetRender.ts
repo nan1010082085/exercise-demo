@@ -9,19 +9,33 @@
 import type { OffsetType, TouchType } from '@/components/e-widget-render';
 import type { WidgetModels } from './../constants/widget.models';
 import { isUndefinedOrNull } from '@/utils';
+import { dashboardStore } from '@/store/dashboard-store';
+import useElement from './useElement';
 
 export interface ChangeTouchOption {
   // 鼠标在元素上位置 由 layer 计算得出
   offset: OffsetType;
   // 拖拽类型
   type: TouchType;
-  // 
+  //
   layer: { x: number; y: number };
-  // 部件的 size 
+  // 部件的 size
   size: { x: number; y: number; width: number; height: number };
 }
 
+export interface AuxiliaryResultType {
+  x: number;
+  y: number;
+  len: number;
+  algin: number;
+}
+export interface AuxiliaryResult {
+  h: AuxiliaryResultType[];
+  v: AuxiliaryResultType[];
+}
+
 const useWidgetRenderFunc = () => {
+  const { getElementSize } = useElement();
   const changeTouch = (option: ChangeTouchOption) => {
     const { offset, type, layer, size } = option;
     const [x, y] = [layer.x - offset.l, layer.y - offset.t];
@@ -79,9 +93,91 @@ const useWidgetRenderFunc = () => {
     if (!isUndefinedOrNull(h)) widget.general.position.height = h;
   };
 
+  // 获取辅助线坐标
+  const getAuxiliary = (active: WidgetModels, widgets: WidgetModels[]): AuxiliaryResult => {
+    const aSize = getElementSize(document.getElementById(active.id));
+    const h: AuxiliaryResultType[] = [];
+    const v: AuxiliaryResultType[] = [];
+    if (!aSize) return { h, v };
+    widgets
+      .filter((w) => w.id !== active.id)
+      .forEach((w) => {
+        const wSize = getElementSize(document.getElementById(w.id));
+        if (wSize) {
+          const { x, y, width, height } = wSize;
+          // 竖线(垂直)
+          // 中心
+          if (x + width / 2 === aSize.x + aSize.width / 2) {
+            const top = y > aSize.y ? aSize.y : y;
+            const len = y > aSize.y ? y - aSize.y + height : aSize.y - y + aSize.height;
+            const left = x + width / 2;
+            v.push({ algin: x, x: left, y: top, len });
+          } else {
+            // 左左对齐
+            if (x === aSize.x) {
+              const top = y > aSize.y ? aSize.y : y;
+              const len = y > aSize.y ? y - aSize.y + height : aSize.y - y + aSize.height;
+              const algin = x > aSize.x ? x : aSize.x;
+              v.push({ algin, x, y: top, len });
+            }
+            // 左右对齐 右左对齐
+            if (x + width === aSize.x || x === aSize.x + aSize.width) {
+              const top = y > aSize.y ? aSize.y : y;
+              const len = y > aSize.y ? y - aSize.y + height : aSize.y - y + aSize.height;
+              const left = x > aSize.x ? x : aSize.x;
+              const algin = x > aSize.x ? aSize.x : x + width;
+              v.push({ algin, x: left, y: top, len });
+            }
+            // 左中 右中
+            if (x === aSize.x + aSize.width / 2 || x + width / 2 === aSize.x) {
+              const top = y > aSize.y ? aSize.y : y;
+              const len = y > aSize.y ? y - aSize.y + height : aSize.y - y + aSize.height;
+              const left = x > aSize.x ? x : aSize.x;
+              const algin = x > aSize.x ? aSize.x : x + width / 2;
+              v.push({ algin, x: left, y: top, len });
+            }
+          }
+
+          // 横线(水平)
+          // 中心
+          if (y + height / 2 === aSize.y + aSize.height / 2) {
+            const left = x > aSize.x ? aSize.x : x;
+            const len = x > aSize.x ? x - aSize.x + width : aSize.x - x + aSize.width;
+            const top = y + height / 2;
+            h.push({ algin: y, x: left, y: top, len: len });
+          } else {
+            // 上上对齐
+            if (y === aSize.y) {
+              const left = x > aSize.x ? aSize.x : x;
+              const len = x > aSize.x ? x - aSize.x + width : aSize.x - x + aSize.width;
+              h.push({ algin: y, x: left, y: y, len: len });
+            }
+            // 上底对齐 底上对齐
+            if (y + height === aSize.y || y === aSize.y + aSize.height) {
+              const left = x > aSize.x ? aSize.x : x;
+              const len = x > aSize.x ? x - aSize.x + width : aSize.x - x + aSize.width;
+              const top = y > aSize.y ? aSize.y + aSize.height : y + height;
+              const algin = y > aSize.y ? aSize.y : y + height;
+              h.push({ algin, x: left, y: top, len: len });
+            }
+            // 中上，中底
+            if (y === aSize.y + aSize.height / 2 || y + height / 2 === aSize.y) {
+              const left = x > aSize.x ? aSize.x : x;
+              const len = x > aSize.x ? x - aSize.x + width : aSize.x - x + aSize.width;
+              const top = y > aSize.y ? aSize.y + height / 2 : y + height / 2;
+              const algin = y > aSize.y ? aSize.y : y + height / 2;
+              h.push({ algin, x: left, y: top, len });
+            }
+          }
+        }
+      });
+    return { h, v };
+  };
+
   return {
     changeTouch,
-    changeTouchWidget
+    changeTouchWidget,
+    getAuxiliary
   };
 };
 

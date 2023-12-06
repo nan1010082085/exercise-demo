@@ -37,6 +37,60 @@
           }
         ]
       }
+    },
+    {
+      "id": "w_992439",
+      "name": "测试2",
+      "type": "base-line",
+      "general": {
+        "position": {
+          "x": 197,
+          "y": 294,
+          "width": 300,
+          "height": 200
+        }
+      },
+      "metadata": {},
+      "manifest": {
+        "id": "base-line",
+        "name": "基础折线图",
+        "type": "base-line",
+        "icon": "https://tdesign.gtimg.com/demo/demo-image-1.png",
+        "fields": [
+          {
+            "label": "",
+            "value": "",
+            "description": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "w_99c5139",
+      "name": "测试3",
+      "type": "base-line",
+      "general": {
+        "position": {
+          "x": 97,
+          "y": 14,
+          "width": 300,
+          "height": 200
+        }
+      },
+      "metadata": {},
+      "manifest": {
+        "id": "base-line",
+        "name": "基础折线图",
+        "type": "base-line",
+        "icon": "https://tdesign.gtimg.com/demo/demo-image-1.png",
+        "fields": [
+          {
+            "label": "",
+            "value": "",
+            "description": ""
+          }
+        ]
+      }
     }
   ]
 }

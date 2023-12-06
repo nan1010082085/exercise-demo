@@ -17,7 +17,8 @@ const Editor = defineComponent({
     const editorRef = ref<HTMLElement>();
 
     const drawer = ref<DrawerPropertyType>({
-      widget: true
+      widget: true,
+      auxiliary: true
     });
     provide(DrawerTypeKey, drawer);
 
