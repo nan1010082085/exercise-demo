@@ -91,7 +91,7 @@ const EWidgetRender = defineComponent({
 
     const onMouseup = (e: MouseEvent) => {
       e.stopPropagation();
-      if (isDown.value) {
+      if (isDown.value) {                                                                          
         isGrab.value = false;
         emit('up');
       }

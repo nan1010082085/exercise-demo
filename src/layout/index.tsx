@@ -12,7 +12,7 @@ export default defineComponent({
       return (
         <Layout class={styles.wrapper}>
           <LHeader />
-          <Layout>
+          <Layout class={styles['wrapper_layout']}>
             <LMenu />
             <LContainer />
           </Layout>

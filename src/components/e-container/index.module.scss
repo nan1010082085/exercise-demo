@@ -1,16 +1,21 @@
 .widget {
   height: 100%;
   .container {
-    height: calc(100% - 60px);
-    display: flex;
-    flex-direction: column;
+    height: calc(100% - 40px);
+    // display: flex;
+    // flex-direction: column;
     .cards {
-      height: calc(100% - 60px);
+      height: calc(100% - 50px);
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      overflow: scroll;
     }
-  }
 
-  .footer {
-    height: 60px;
-    line-height: 60px;
+    .footer {
+      margin-top: 10px;
+      height: 40px;
+      line-height: 40px;
+    }
   }
 }
