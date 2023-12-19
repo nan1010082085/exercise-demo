@@ -59,7 +59,7 @@ const LHeader = defineComponent({
                   onClick={() => routerPush('Home')}
                 />
               </Tooltip>
-              <Tooltip content={'Vue 测试题'}>
+              <Tooltip content={'测试验证'}>
                 <Button
                   theme="primary"
                   shape="circle"

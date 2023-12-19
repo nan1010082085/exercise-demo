@@ -1,10 +1,22 @@
 import { computed, defineComponent, onMounted, ref } from 'vue';
 import { useRoute, useRouter, RouterView } from 'vue-router';
 import styles from './index.module.scss';
-import { Aside, Button, Content, Header, Layout, Menu, Submenu, MenuItem, Space } from 'tdesign-vue-next';
+import {
+  Aside,
+  Button,
+  Content,
+  Header,
+  Layout,
+  Menu,
+  Submenu,
+  MenuItem,
+  Space,
+  type MenuRoute
+} from 'tdesign-vue-next';
 import { creategoryRoutes, textViewRoutes } from '@/router/path/text-view';
 import { RollbackIcon } from 'tdesign-icons-vue-next';
 import { useGlobalStore } from '@/store/global-store';
+import { TestV } from '@/constants/test-v.models';
 
 const TextViews = defineComponent({
   setup() {
@@ -23,15 +35,24 @@ const TextViews = defineComponent({
       }
     });
 
+    const subTitle = (key: string) => {
+      const sub = key.split('-')[0];
+      return TestV[sub];
+    };
+
     const subMenus = computed(() => {
       return creategoryRoutes.map((sub) => {
         return (
-          <Submenu value={sub} title={sub}>
+          <Submenu key={sub} value={sub} title={subTitle(sub)}>
             {textViewRoutes
               .filter((text) => text.creategory === sub)
               .map((text) => {
                 const { name, path } = text;
-                return <MenuItem to={`${path}`}>{name}</MenuItem>;
+                return (
+                  <MenuItem key={path} to={`${path}` as MenuRoute}>
+                    {name}
+                  </MenuItem>
+                );
               })}
           </Submenu>
         );
@@ -49,7 +70,7 @@ const TextViews = defineComponent({
           <Header class={styles.header}>
             <Space direction="horizontal" align="center">
               <Button theme="default" icon={() => <RollbackIcon />} onClick={back}></Button>
-              <span>Vue 基础验证</span>
+              <span>测试验证</span>
             </Space>
           </Header>
           <Layout>

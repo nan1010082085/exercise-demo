@@ -11,6 +11,10 @@ import { TDesignResolver } from 'unplugin-vue-components/resolvers';
 const target = 'http://localhost:6606/';
 
 const proxy = {
+  // '/sys': {
+  //   target: 'http://192.168.200.46:8083/avatar',
+  //   changeOrigin: true,
+  // },
   '/public': {
     target,
     changeOrigin: true,

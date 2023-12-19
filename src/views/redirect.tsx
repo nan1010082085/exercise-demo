@@ -4,7 +4,7 @@ export default () => {
   const route = useRoute();
   const router = useRouter();
 
-  console.log('redirect: =', route);
+  console.log('redirect =', route);
 
   const { query, params } = route;
 

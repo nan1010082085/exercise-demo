@@ -1,11 +1,15 @@
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 import styles from './index.module.scss';
 
 const HomeComponent = defineComponent({
   name: 'HomeComponent',
   setup() {
+
     return () => {
-      return <div class={styles.wrapper}></div>;
+      return (
+        <div class={styles.wrapper}>
+        </div>
+      );
     };
   }
 });
