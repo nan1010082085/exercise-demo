@@ -3,8 +3,6 @@ import type { RouteRecordRaw } from 'vue-router';
 const creategory = import.meta.glob('@/test-v/**');
 const routes = import.meta.glob('@/test-v/*-components/**');
 
-console.log(Object.keys(creategory));
-
 const creategoryKey = Object.keys(creategory)
   .map((key) => key.match(/[\w]*-components+/)?.[0])
   .filter((f) => f);

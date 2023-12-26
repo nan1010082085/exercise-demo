@@ -40,6 +40,7 @@ const useWidgetRenderFunc = () => {
     const { offset, type, layer, size } = option;
     const [x, y] = [layer.x - offset.l, layer.y - offset.t];
     let result = {};
+    console.log(type)
     if (type.includes('l')) {
       const w = size.width - (x - size.x);
       const h = size.height - (y - size.y);
@@ -157,14 +158,14 @@ const useWidgetRenderFunc = () => {
               const left = x > aSize.x ? aSize.x : x;
               const len = x > aSize.x ? x - aSize.x + width : aSize.x - x + aSize.width;
               const top = y > aSize.y ? aSize.y + aSize.height : y + height;
-              const algin = y > aSize.y ? aSize.y : y + height;
+              const algin = y > aSize.y ? aSize.y : y + height / 2;
               h.push({ algin, x: left, y: top, len: len });
             }
             // 中上，中底
             if (y === aSize.y + aSize.height / 2 || y + height / 2 === aSize.y) {
               const left = x > aSize.x ? aSize.x : x;
               const len = x > aSize.x ? x - aSize.x + width : aSize.x - x + aSize.width;
-              const top = y > aSize.y ? aSize.y + height / 2 : y + height / 2;
+              const top = y > aSize.y ? y : y + height / 2;
               const algin = y > aSize.y ? aSize.y : y + height / 2;
               h.push({ algin, x: left, y: top, len });
             }

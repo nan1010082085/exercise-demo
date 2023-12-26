@@ -81,7 +81,7 @@ const HomeComponent = defineComponent({
 
     return () => {
       return (
-        <div class={styles.wrapper}>
+        <div> 
           <Button onClick={() => login()}>登陆</Button>
           <Button onClick={() => send()}>加密</Button>
           <Button onClick={() => decryptByRSA(rsa.value)}>解密</Button>

@@ -1,4 +1,25 @@
 .wrapper {
   width: 100%;
   height: 100%;
+
+  .testGrid {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: 1fr 1fr;
+
+    .testGridItem {
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+      border: 1px solid #000;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .wrapper {
+    .testGrid {
+      grid-template-columns: 1fr;
+    }
+  }
 }
