@@ -5,7 +5,6 @@ import type { WidgetModels } from '@/constants/widget.models';
 export type LayerSize = { layerX: number; layerY: number };
 export type OffsetType = { l: number; t: number };
 export type TouchType = 'lt' | 'lc' | 'lb' | 'ltc' | 'rt' | 'rc' | 'rb' | 'rbc';
-export type GrabType = 'grab' | 'grabbing';
 const touchKeys: TouchType[] = ['lt', 'lc', 'lb', 'ltc', 'rt', 'rc', 'rb', 'rbc'];
 
 const EWidgetRender = defineComponent({
@@ -47,11 +46,6 @@ const EWidgetRender = defineComponent({
       },
       default: 0
     },
-    // 选中拖拽鼠标样式
-    grabType: {
-      type: String as PropType<GrabType>,
-      default: 'grab'
-    },
     // 是否选中，选中显示拖拽点
     isActive: {
       type: Boolean as PropType<boolean>,
@@ -71,15 +65,12 @@ const EWidgetRender = defineComponent({
     });
     const widget = computed(() => _.widget);
     const isDown = ref(false);
-    const isGrab = ref(false);
     const timer = ref<NodeJS.Timeout>();
-
     const onMousedown = (e: MouseEvent & LayerSize) => {
       if (_.static) return;
       e.stopPropagation();
       timer.value && clearTimeout(timer.value);
       timer.value = setTimeout(() => {
-        isGrab.value = true;
         isDown.value = true;
         const [l, t] = [e.layerX - _.x, e.layerY - _.y];
         emit('offset', { l, t });
@@ -88,11 +79,9 @@ const EWidgetRender = defineComponent({
       emit('active', widget.value);
     };
 
-
     const onMouseup = (e: MouseEvent) => {
       e.stopPropagation();
-      if (isDown.value) {                                                                          
-        isGrab.value = false;
+      if (isDown.value) {
         emit('up');
       }
     };
@@ -118,11 +107,10 @@ const EWidgetRender = defineComponent({
             );
           })
         : null;
-
       return (
         <div
           id={widget.value.id}
-          class={[styles.eWidgetContainer, isGrab.value ? styles[_.grabType] : '']}
+          class={[styles.eWidgetContainer]}
           style={stylesheet.value}
           onMousedown={(e) => onMousedown(e as MouseEvent & LayerSize)}
           onMouseup={onMouseup}

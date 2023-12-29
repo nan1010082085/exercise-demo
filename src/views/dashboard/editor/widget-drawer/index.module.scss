@@ -47,16 +47,6 @@ $width: 300px;
   padding: 0;
 }
 
-.drag-image {
-  width: 30px;
-  height: 30px;
-  background-color: #000;
-  border-top: 1px solid #000;
-  border-left: 1px solid #000;
-  border-right: 1px solid transparent;
-  border-bottom: 1px solid transparent;
-}
-
 .visible {
   transform: translate3d(0, 0, 0);
   animation: visibleFrames 0.2s linear;
@@ -69,8 +59,4 @@ $width: 300px;
   100% {
     transform: translate3d(0, 0, 0);
   }
-}
-
-.drag-image {
-  border: #e5e5e5 1px dashed;
 }

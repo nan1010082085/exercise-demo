@@ -44,7 +44,6 @@ const EditorView = defineComponent({
       t: 0
     });
     const activeTouchType = ref<TouchType>('lt');
-    const grabType = ref<GrabType>('grab');
     const isWidgetDwn = ref(false);
     const isTouchStart = ref(false);
     const isTouchCursor = ref(false);
@@ -70,6 +69,8 @@ const EditorView = defineComponent({
       e.preventDefault();
       const size = getElementSize(document.getElementById(activeWidget.value?.id as string));
       const parentSize = getElementSize(viewRef.value);
+      if (isWidgetDwn.value && !isTouchStart.value) {
+      }
       if (size && activeWidget.value && parentSize) {
         const ev = e as DragEvent & LayerSize;
         // 按下移动
@@ -78,7 +79,6 @@ const EditorView = defineComponent({
           const [x, y] = [ev.layerX - activeOffset.value.l, ev.layerY - activeOffset.value.t];
           // 父级限制坐标
           const [maxW, maxY] = [parentSize.width - size.width, parentSize.height - size.height];
-          grabType.value = 'grabbing';
           activeWidget.value.general.position.x = x <= 0 ? 0 : x >= maxW ? maxW : x;
           activeWidget.value.general.position.y = y <= 0 ? 0 : y >= maxY ? maxY : y;
 
@@ -107,7 +107,6 @@ const EditorView = defineComponent({
 
     // 按下
     const activeWidgetDown = () => {
-      grabType.value = 'grab';
       isWidgetDwn.value = true;
       isTouchStart.value = false;
     };
@@ -120,7 +119,6 @@ const EditorView = defineComponent({
     };
 
     const clearWidget = () => {
-      grabType.value = 'grab';
       isWidgetDwn.value = false;
       isTouchStart.value = false;
       isTouchCursor.value = false;
@@ -145,7 +143,6 @@ const EditorView = defineComponent({
     const auxiliaryAlgin = () => {
       if (auxiliarys.value && activeWidget.value) {
         const { h, v } = auxiliarys.value;
-        console.log(auxiliarys.value)
         if (h.length) {
           activeWidget.value.general.position.y = h[0].algin;
         }
@@ -185,7 +182,6 @@ const EditorView = defineComponent({
                     w={w}
                     h={h}
                     isActive={widget.id === activeWidget.value?.id}
-                    grabType={grabType.value}
                     onActive={active}
                     onDown={activeWidgetDown}
                     onOffset={(offset) => (activeOffset.value = offset)}
@@ -200,22 +196,19 @@ const EditorView = defineComponent({
 
             <div class={styles.h}>
               {auxiliarys.value?.h.map((h) => {
-                const stylesheet = {
-                  left: `${h.x}px`,
-                  top: `${h.y}px`,
-                  width: `${h.len}px`
-                };
-                return <span style={stylesheet} class={[styles.line]}></span>;
+                return (
+                  <span style={{ left: `${h.x}px`, top: `${h.y}px`, width: `${h.len}px` }} class={[styles.line]}></span>
+                );
               })}
             </div>
             <div class={styles.v}>
               {auxiliarys.value?.v.map((v) => {
-                const stylesheet = {
-                  left: `${v.x}px`,
-                  top: `${v.y}px`,
-                  height: `${v.len}px`
-                };
-                return <span style={stylesheet} class={[styles.line]}></span>;
+                return (
+                  <span
+                    style={{ left: `${v.x}px`, top: `${v.y}px`, height: `${v.len}px` }}
+                    class={[styles.line]}
+                  ></span>
+                );
               })}
             </div>
           </div>

@@ -158,7 +158,7 @@ const useWidgetRenderFunc = () => {
               const left = x > aSize.x ? aSize.x : x;
               const len = x > aSize.x ? x - aSize.x + width : aSize.x - x + aSize.width;
               const top = y > aSize.y ? aSize.y + aSize.height : y + height;
-              const algin = y > aSize.y ? aSize.y : y + height / 2;
+              const algin = y > aSize.y ? aSize.y : y + height;
               h.push({ algin, x: left, y: top, len: len });
             }
             // 中上，中底
