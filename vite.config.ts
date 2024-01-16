@@ -8,6 +8,9 @@ import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import { TDesignResolver } from 'unplugin-vue-components/resolvers';
 
+// --- env ---
+// console.log(process.env.NODE_ENV)
+
 const target = 'http://localhost:6606/';
 
 const proxy = {
@@ -19,14 +22,14 @@ const proxy = {
     target,
     changeOrigin: true,
     rewrite: (path: string) => {
-      return path.replace(/^\/public/, '')
+      return path.replace(/^\/public/, '');
     }
   },
   '/workers': {
     target,
     changeOrigin: true,
     rewrite: (path: string) => {
-      return path.replace(/^\/workers/, '')
+      return path.replace(/^\/workers/, '');
     }
   }
 };
@@ -56,10 +59,10 @@ export default defineConfig(({ command, mode }) => {
       Components({ resolvers: [TDesignResolver({ library: 'vue-next' })] })
     ],
     define: {
-      'import.meta.vitest': false
+      'import.meta.vitest': process.env.NODE_ENV ? true : false
     },
     test: {
-      includeSource: ['src/**/*.(t|j)s']
+      includeSource: ['src/**/*.{js,ts,tsx}']
     }
   };
 });

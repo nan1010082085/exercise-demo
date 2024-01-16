@@ -1,0 +1,5 @@
+@import url('@vue-flow/core/dist/style.css');
+@import url('@vue-flow/core/dist/theme-default.css');
+@import url('@vue-flow/controls/dist/style.css');
+@import url('@vue-flow/minimap/dist/style.css');
+@import url('@vue-flow/node-resizer/dist/style.css');

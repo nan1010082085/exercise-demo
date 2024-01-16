@@ -1,12 +1,14 @@
-import { defineComponent, reactive } from 'vue';
+import { defineComponent, onMounted, reactive } from 'vue';
 import styles from './index.module.scss';
 import EPageHeader from '@/components/e-page-header';
 import { Button, Pagination } from 'tdesign-vue-next';
 import EContainer from '@/components/e-container';
+import { useRouter } from 'vue-router';
 
 const RuleLink = defineComponent({
   name: 'RuleLink',
   setup() {
+    const router = useRouter();
     const pagination = reactive({
       total: 10,
       page: 1,
@@ -15,7 +17,13 @@ const RuleLink = defineComponent({
 
     const onAdd = () => {
       console.log('onAdd');
+      router.push({ name: 'RuleEditor' });
     };
+
+    onMounted(() => {
+      // #TODO 直接跳转规则编辑界面（测试）（开发）
+      router.push({ name: 'RuleEditor' });
+    });
 
     return () => {
       return (

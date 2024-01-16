@@ -1,13 +1,25 @@
-import { defineComponent } from 'vue';
+import { defineComponent, provide, ref } from 'vue';
 import styles from './index.module.scss';
+import type { DrawerRulePropertyType } from './types';
+import { DrawerRuleTypeKey } from './inject.key';
+import RuleEditorView from './main';
 
-const EditorRule = defineComponent({
-  name: 'EditorRule',
+const RuleEditor = defineComponent({
+  name: 'RuleEditor',
   setup() {
+    const drawer = ref<DrawerRulePropertyType>({
+      widget: true
+    });
+    provide(DrawerRuleTypeKey, drawer);
+
     return () => {
-      return <div class={styles['editor-rule']}></div>;
+      return (
+        <div class={styles['editor-rule']}>
+          <RuleEditorView />
+        </div>
+      );
     };
   }
 });
 
-export default EditorRule;
+export default RuleEditor;

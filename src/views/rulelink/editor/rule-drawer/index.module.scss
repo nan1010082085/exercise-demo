@@ -1,0 +1,26 @@
+$width: 300px;
+.rule-drawer {
+  position: absolute;
+  left: 0;
+  top: 50px;
+  width: $width;
+  height: calc(100% - 50px);
+  border-right: 1px solid #e5e5e5;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  transform: translate3d(-310px, 0, 0);
+}
+
+.visible {
+  transform: translate3d(0, 0, 0);
+  animation: visibleFrames 0.2s linear;
+}
+
+@keyframes visibleFrames {
+  0% {
+    transform: translate3d(-300px, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}

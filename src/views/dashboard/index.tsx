@@ -1,5 +1,5 @@
+/// <reference types="vitest" />
 import { computed, defineComponent, onMounted, reactive, ref } from 'vue';
-import EPageHeader from '@/components/e-page-header';
 import styles from './index.module.scss';
 import { getDashboardList } from '@/api/dashboard.api';
 import type { DashboardListModels } from '@/constants/dashboard.models';
@@ -132,3 +132,14 @@ const Dashboard = defineComponent({
 });
 
 export default Dashboard;
+
+if (import.meta.vitest) {
+  const { it, expect } = import.meta.vitest;
+  it('dashboard', () => {
+    const test = true;
+    expect(test).toBeTruthy();
+    // const wrapper = mount(Dashboard)
+    // expect(wrapper.find('.dashboard-wrapper').exists()).toBeTruthy();
+  });
+  console.log('vitest');
+}

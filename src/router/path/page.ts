@@ -26,7 +26,7 @@ export default <RouteRecordRaw[]>[
       title: '规则链',
       icon: 'link-1'
     },
-    component: () => import('@/views/rulelink')
+    component: () => import('@/views/rulelink'),
   },
   {
     name: 'assets',
@@ -53,7 +53,7 @@ export default <RouteRecordRaw[]>[
           icon: 'link'
         },
         component: () => import('@/rule')
-      },
+      }
     ]
   },
   {
@@ -92,5 +92,5 @@ export default <RouteRecordRaw[]>[
         component: () => import('@/views/user-role')
       }
     ]
-  },
+  }
 ];

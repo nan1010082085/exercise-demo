@@ -5,7 +5,7 @@ function init() {
 }
 
 function send() {
-  this.postMessage('test worker');
+  this.postMessage('send test worker of 3s message');
 }
 
 this.onmessage = (e) => {
