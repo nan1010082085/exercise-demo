@@ -1,5 +1,5 @@
 import { defineComponent, ref, provide } from 'vue';
-import { onBeforeRouteLeave, useRoute } from 'vue-router';
+import { onBeforeRouteLeave, useRouter } from 'vue-router';
 import styles from './index.module.scss';
 import useDialog from '@/composables/useDialog';
 import WidgetDrawer from './widget-drawer';
@@ -12,9 +12,10 @@ import EditorView from './main';
 const Editor = defineComponent({
   name: 'Editor',
   setup() {
-    const route = useRoute();
+    const router = useRouter();
     const { confirm } = useDialog();
     const editorRef = ref<HTMLElement>();
+    const buttonType = ref<'' | 'save'>('');
 
     const drawer = ref<DrawerPropertyType>({
       widget: true,
@@ -22,13 +23,18 @@ const Editor = defineComponent({
     });
     provide(DrawerTypeKey, drawer);
 
+    // 路由守卫
     onBeforeRouteLeave((to, form, next) => {
-      confirm('确定要离开吗？', '离开后不会保存已编辑的操作！').then(({ trigger }) => {
-        if (trigger === 'confirm') {
-          next();
-        }
-        next(false);
-      });
+      if (buttonType.value === 'save') {
+        next();
+      } else {
+        confirm('确定要离开吗？', '离开后不会保存已编辑的操作！', { theme: 'warning' }).then(({ trigger }) => {
+          if (trigger === 'confirm') {
+            next();
+          }
+          next(false);
+        });
+      }
     });
 
     const drwerPropertyChange = (type: keyof DrawerPropertyType) => {
@@ -36,7 +42,14 @@ const Editor = defineComponent({
     };
 
     const saveChange = () => {
-      console.log('widget save');
+      buttonType.value = 'save';
+      confirm('确认', '确认保存当前仪表板吗？', { theme: 'info' }).then(({ trigger }) => {
+        if (trigger === 'confirm') {
+          router.push('/dashboard');
+        } else {
+          buttonType.value = '';
+        }
+      });
     };
 
     const screenChange = (value: boolean) => {

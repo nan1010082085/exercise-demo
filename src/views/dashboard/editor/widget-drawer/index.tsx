@@ -8,6 +8,7 @@ import { mainfestInstall } from '@/widget/lib/manifest';
 import { dashboardStore } from '@/store/dashboard-store';
 import { cloneDeep } from 'lodash-es';
 import { _uuid } from '@/utils';
+import usePlugin from '@/composables/usePlugin';
 
 const WidgetDrawer = defineComponent({
   name: 'WidgetDrawer',
@@ -16,42 +17,18 @@ const WidgetDrawer = defineComponent({
     const widgetsConfig = computed<string[]>(() => Object.keys(widgetConfig));
     const drawer = inject(DrawerTypeKey);
     const defaultValue = ref([0]);
-    const img = ref();
-
-
-    const reserveCreateImage = () => {
-      img.value = document.createElement('img');
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
-      const linearGradient = ctx.createLinearGradient(0, 0, 50, 50);
-      linearGradient.addColorStop(0, '#fff');
-      linearGradient.addColorStop(0.5, '#fff');
-      linearGradient.addColorStop(1, '#eee');
-      ctx['fillStyle'] = linearGradient;
-      ctx?.fillRect(0, 0, 50, 50);
-      ctx['lineJoin'] = 'round';
-      ctx['strokeStyle'] = linearGradient;
-      ctx?.beginPath();
-      ctx?.lineTo(0, 0);
-      ctx?.lineTo(50, 0);
-      ctx?.lineTo(0, 0);
-      ctx?.lineTo(0, 50);
-      ctx?.closePath();
-      ctx?.stroke();
-      img.value.src = canvas.toDataURL('image/jpg');
-    };
+    const { reserveCreateImage, dragImage } = usePlugin();
 
     const widgetClick = (e: MouseEvent, manifest: ManifestModels) => {
       const widget = cloneDeep(widgetDefualt) as WidgetModels;
       widget.id = _uuid('w');
       widget.manifest = manifest;
-      addWidget(widget)
-    }
+      addWidget(widget);
+    };
 
     const onDragStart = (e: DragEvent, manifest: ManifestModels) => {
-      console.log('drag start', manifest);
       e.dataTransfer?.setData('widget', JSON.stringify(manifest));
-      e.dataTransfer?.setDragImage(img.value, 1, 1);
+      e.dataTransfer?.setDragImage(dragImage.value, 1, 1);
     };
 
     onMounted(() => {
@@ -66,7 +43,7 @@ const WidgetDrawer = defineComponent({
               const widgetKey = widgetConfig[widgetConfigKey];
               const widgtKeys = widgetKey.children;
               return (
-                <CollapsePanel class={styles['widget-panel']} header={widgetKey.title}>
+                <CollapsePanel key={widgetKey.title} class={styles['widget-panel']} header={widgetKey.title}>
                   {widgtKeys.map((type: string) => {
                     const manifest = mainfestInstall(type);
                     return (

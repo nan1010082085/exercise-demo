@@ -13,6 +13,7 @@ export interface useDialogOptionProps {
   closeOnEscKeydown?: boolean;
   closeOnOverlayClick?: boolean;
   placement?: 'top' | 'center';
+  theme?: 'info' | 'success' | 'warning' | 'default' | 'danger' | undefined;
 }
 
 export interface ResolveType {
@@ -29,12 +30,14 @@ const useDialog = () => {
       showClose = false,
       closeOnEscKeydown = false,
       closeOnOverlayClick = false,
-      placement = 'center'
+      placement = 'center',
+      theme = 'info'
     } = option;
     return new Promise((resolve) => {
       const dialog = DialogPlugin({
         header: title,
         body: message,
+        theme,
         confirmBtn: confirmText,
         cancelBtn: cancelText,
         closeBtn: showClose,
@@ -59,11 +62,12 @@ const useDialog = () => {
 
   // dialog alert
   const alert = (title: string, message: string, option: useDialogOptionProps = {}): Promise<ResolveType> => {
-    const { confirmText = '确定', showClose = false, placement = 'center' } = option;
+    const { confirmText = '确定', showClose = false, placement = 'center', theme = 'info' } = option;
     return new Promise((resolve) => {
       const dialog = DialogPlugin.alert({
         header: title,
         body: message,
+        theme,
         confirmBtn: confirmText,
         closeBtn: showClose,
         placement,
