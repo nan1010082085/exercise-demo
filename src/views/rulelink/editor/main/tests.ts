@@ -1,4 +1,4 @@
-// 测试文件
+// 测试文件 elementNdoe
 import { MarkerType } from '@vue-flow/core'
 
 export const initialElements = [

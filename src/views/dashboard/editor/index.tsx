@@ -41,6 +41,14 @@ const Editor = defineComponent({
       drawer.value[type] = !drawer.value[type];
     };
 
+    const screenChange = (value: boolean) => {
+      if (document.fullscreenEnabled) {
+        value ? editorRef.value?.requestFullscreen() : document?.exitFullscreen();
+      } else {
+        MessagePlugin.warning('当前浏览器不支持全屏');
+      }
+    };
+
     const saveChange = () => {
       buttonType.value = 'save';
       confirm('确认', '确认保存当前仪表板吗？', { theme: 'info' }).then(({ trigger }) => {
@@ -50,14 +58,6 @@ const Editor = defineComponent({
           buttonType.value = '';
         }
       });
-    };
-
-    const screenChange = (value: boolean) => {
-      if (document.fullscreenEnabled) {
-        value ? editorRef.value?.requestFullscreen() : document?.exitFullscreen();
-      } else {
-        MessagePlugin.warning('当前浏览器不支持全屏');
-      }
     };
 
     return () => {

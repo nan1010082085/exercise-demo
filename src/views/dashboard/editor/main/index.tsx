@@ -3,12 +3,7 @@ import styles from './index.module.scss';
 import { DrawerTypeKey } from '../inject.key';
 import { widgetDefualt, type ManifestModels, type WidgetModels } from '@/constants/widget.models';
 import { _uuid, isUndefinedOrNull } from '@/utils';
-import EWidgetRender, {
-  type LayerSize,
-  type TouchType,
-  type OffsetType,
-  type GrabType
-} from '@/components/e-widget-render';
+import EWidgetRender, { type LayerSize, type TouchType, type OffsetType } from '@/components/e-widget-render';
 import { dashboardStore } from '@/store/dashboard-store';
 import * as Widgets from '@/widget';
 import { cloneDeep } from 'lodash-es';
@@ -219,3 +214,5 @@ const EditorView = defineComponent({
 });
 
 export default EditorView;
+
+export interface EditorViewInstance extends InstanceType<typeof EditorView> {}

@@ -1,20 +1,20 @@
 import { defineComponent, inject, ref } from 'vue';
 import styles from './index.module.scss';
 import { Button, Space, Tooltip } from 'tdesign-vue-next';
-import { DrawerTypeKey } from '../inject.key';
-import type { DrawerPropertyType } from '../types';
+import { DrawerRuleTypeKey } from '../inject.key';
+import type { DrawerRulePropertyType } from '../types';
 import { Fullscreen2Icon, FullscreenExit1Icon } from 'tdesign-icons-vue-next';
 
-const Toolbar = defineComponent({
-  name: 'Toolbar',
-  emits: ['save', 'propertyChange', 'screen'],
+const RuleToobar = defineComponent({
+  name: 'RuleToobar',
+  emits: ['propertyChange', 'screen', 'save'],
   setup(_, { emit }) {
-    const drawer = inject(DrawerTypeKey);
+    const drawer = inject(DrawerRuleTypeKey);
     const screen = ref(false);
 
-    const themeChange = (type: keyof DrawerPropertyType) => (drawer?.value[type] ? 'primary' : 'default');
+    const themeChange = (type: keyof DrawerRulePropertyType) => (drawer?.value[type] ? 'primary' : 'default');
 
-    const onDrawer = (type: keyof DrawerPropertyType) => {
+    const onDrawer = (type: keyof DrawerRulePropertyType) => {
       emit('propertyChange', type);
     };
 
@@ -25,14 +25,13 @@ const Toolbar = defineComponent({
     const onSave = () => {
       emit('save');
     };
-
     return () => {
       return (
         <div class={styles.toolbar}>
-          <Space size={'small'} class={styles.btns}>
+          <Space size={'small'}>
             <Button onClick={onSave}>保存</Button>
           </Space>
-          <div class={styles.content}></div>
+          <div></div>
           <Space size={'small'} class={styles.btns}>
             <Tooltip content={screen.value ? '退出全屏' : '全屏'}>
               <Button onClick={onScreen} icon={() => (screen.value ? <FullscreenExit1Icon /> : <Fullscreen2Icon />)} />
@@ -47,6 +46,6 @@ const Toolbar = defineComponent({
   }
 });
 
-export default Toolbar;
+export default RuleToobar;
 
-export interface ToolbarInstance extends InstanceType<typeof Toolbar> {}
+export interface RuleToobarInstance extends InstanceType<typeof RuleToobar> {}

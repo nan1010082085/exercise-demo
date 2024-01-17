@@ -1,4 +1,4 @@
-import { computed, defineComponent, inject, onMounted, ref, watch } from 'vue';
+import { computed, defineComponent, inject, onMounted, ref } from 'vue';
 import styles from './index.module.scss';
 import { DrawerTypeKey } from '../inject.key';
 import { widgetDefualt, type ManifestModels, type WidgetModels } from '@/constants/widget.models';
@@ -73,3 +73,5 @@ const WidgetDrawer = defineComponent({
 });
 
 export default WidgetDrawer;
+
+export interface WidgetDrawerInstance extends InstanceType<typeof WidgetDrawer> {}
