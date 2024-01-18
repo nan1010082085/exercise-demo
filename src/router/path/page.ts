@@ -26,7 +26,16 @@ export default <RouteRecordRaw[]>[
       title: '规则链',
       icon: 'link-1'
     },
-    component: () => import('@/views/rulelink'),
+    component: () => import('@/views/rulelink')
+  },
+  {
+    name: 'termianl',
+    path: '/termianl',
+    meta: {
+      title: '终端',
+      icon: 'link-1'
+    },
+    component: () => import('@/views/terminal')
   },
   {
     name: 'assets',
