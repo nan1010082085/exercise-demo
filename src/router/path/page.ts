@@ -33,7 +33,7 @@ export default <RouteRecordRaw[]>[
     path: '/termianl',
     meta: {
       title: '终端',
-      icon: 'link-1'
+      icon: 'code'
     },
     component: () => import('@/views/terminal')
   },

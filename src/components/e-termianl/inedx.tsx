@@ -21,11 +21,11 @@ const ETermianl = defineComponent({
         cursor: '#ffffff'
       }
     });
-    const openln = ref('connect \x1B[1;3;31mxterm.js\x1B[0m $');
+    const openln = ref('connect \x1B[1;3;31mTermianl\x1B[0m $');
     // const socket = new WebSocket('');
     const fitAddon = new FitAddon();
     // const attachAddon = new AttachAddon(socket);
-    const text = ref<string>('');
+    const text = ref<string[]>([]);
     const code = ref<string | null>(null);
 
     const onClear = () => {
@@ -33,37 +33,40 @@ const ETermianl = defineComponent({
       term.writeln(openln.value);
     };
 
-    const onSpace = () => {
-      term.write(' \x1B');
-    };
-
-    const onBreak = () => {
-      term.writeln('');
+    const onEnter = () => {
+      // 换行 2 rows
+      term.writeln('\x1B[B');
+      // term.writeln('\x1B[C');
       term.writeln(openln.value);
     };
 
     const onBackspace = () => {
-      text.value = text.value.substring(0, text.value.length - 1);
+      const last = text.value.length - 1;
+      text.value = text.value.splice(last, -1);
       term.write('\x1B[D');
       term.write('\x1B[K');
     };
 
     const onData = (data: string) => {
+      // 回车
       if (code.value === 'Enter') return;
-      text.value += data;
-      data.trim() && term.write(data);
+      // 退格
+      if (code.value === 'Backspace') return;
+      // 上下
+      if (code.value === 'ArrowDown') return;
+      if (code.value === 'ArrowUp') return;
+      // console.log('data', text.value);
+      term.write(data);
+      text.value.push(data);
     };
 
     const onKey = (data: { key: string; domEvent: KeyboardEvent }) => {
       const { key, domEvent } = data;
-      console.log('on key >', key, domEvent);
+      // console.log('on key >', key, domEvent);
       code.value = domEvent.code;
       switch (domEvent.code) {
         case 'Enter':
-          onBreak();
-          break;
-        case 'Space':
-          onSpace();
+          onEnter();
           break;
         case 'Backspace':
           onBackspace();
@@ -73,12 +76,13 @@ const ETermianl = defineComponent({
 
     // 换行符结束后
     const onLineFeed = () => {
-      console.log('term write ln');
+      console.log('term write ln', text.value.join(''));
+      text.value = [];
     };
 
-    const onWriteParsed = () => {
-      console.log('term write parsed');
-    };
+    // const onWriteParsed = () => {
+    //   console.log('term write parsed');
+    // };
 
     const initTerm = () => {
       term.loadAddon(fitAddon);
