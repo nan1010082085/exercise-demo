@@ -4,6 +4,7 @@ import { Terminal } from 'xterm';
 import 'xterm/css/xterm.css';
 import { AttachAddon } from 'xterm-addon-attach';
 import { FitAddon } from 'xterm-addon-fit';
+import { debounce } from 'lodash-es';
 
 const ETermianl = defineComponent({
   name: 'eTerminal',
@@ -24,45 +25,74 @@ const ETermianl = defineComponent({
     // const socket = new WebSocket('');
     const fitAddon = new FitAddon();
     // const attachAddon = new AttachAddon(socket);
-    const keyCodeResult = ref<string | null>(null);
+    const text = ref<string>('');
+    const code = ref<string | null>(null);
 
     const onClear = () => {
       term.clear();
       term.writeln(openln.value);
     };
 
+    const onSpace = () => {
+      term.write(' \x1B');
+    };
+
+    const onBreak = () => {
+      term.writeln('');
+      term.writeln(openln.value);
+    };
+
+    const onBackspace = () => {
+      text.value = text.value.substring(0, text.value.length - 1);
+      term.write('\x1B[D');
+      term.write('\x1B[K');
+    };
+
     const onData = (data: string) => {
-      if (keyCodeResult.value) {
-        term.write(keyCodeResult.value);
-        term.writeln(openln.value);
-        return;
-      }
+      if (code.value === 'Enter') return;
+      text.value += data;
       data.trim() && term.write(data);
     };
 
     const onKey = (data: { key: string; domEvent: KeyboardEvent }) => {
       const { key, domEvent } = data;
       console.log('on key >', key, domEvent);
+      code.value = domEvent.code;
       switch (domEvent.code) {
         case 'Enter':
-          keyCodeResult.value = `\r\n`;
+          onBreak();
           break;
-        default:
-          keyCodeResult.value = null;
+        case 'Space':
+          onSpace();
+          break;
+        case 'Backspace':
+          onBackspace();
+          break;
       }
     };
 
-    const initContent = () => {
+    // 换行符结束后
+    const onLineFeed = () => {
+      console.log('term write ln');
+    };
+
+    const onWriteParsed = () => {
+      console.log('term write parsed');
+    };
+
+    const initTerm = () => {
       term.loadAddon(fitAddon);
       terminalRef.value && term.open(terminalRef.value);
       term.writeln(openln.value);
       term.onData(onData);
       term.onKey(onKey);
+      term.onLineFeed(debounce(onLineFeed, 100));
+      // term.onWriteParsed(debounce(onWriteParsed, 100));
     };
 
     onMounted(() => {
       // term.loadAddon(attachAddon);
-      initContent();
+      initTerm();
     });
 
     return () => {
