@@ -47,7 +47,7 @@ const LHeader = defineComponent({
               onClick={visibleMenu}
             />
           </div>
-          <div class={styles['h-center']}><EBreadcrumb /></div>
+          <div class={[styles['h-center'], 'scrollbar']}><EBreadcrumb /></div>
           <div class={styles['h-right']}>
             <Space direction={'horizontal'}>
               <Tooltip content={'返回 Home'}>
