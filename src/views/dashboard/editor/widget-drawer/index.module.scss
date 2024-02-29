@@ -13,9 +13,7 @@ $width: 300px;
 
   .widget-card {
     width: calc(($width - 22px) / 2);
-    display: inline-block;
     padding: 15px 0;
-    margin: 5px;
     cursor: pointer;
 
     .widget-card-icon {
@@ -46,6 +44,9 @@ $width: 300px;
 
 :global(.t-collapse-panel__wrapper .t-collapse-panel__content) {
   padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .visible {

@@ -18,14 +18,15 @@ interface Common {
  * 节点
  */
 export interface ElementsNode extends Common {
-  id: string;
+  id?: string;
   label: string;
   type?: 'input' | 'otput' | string;
-  position: {
+  icon: string,
+  position?: {
     x: number;
     y: number;
   };
-  class: string;
+  class?: string;
 }
 
 /**
@@ -46,4 +47,4 @@ export interface ElementsEdge extends Common {
 /**
  * 集合
  */
-export type RuleWidgetModels = ElementsNode | ElementsNode;
+export type RuleWidgetModels = ElementsNode;

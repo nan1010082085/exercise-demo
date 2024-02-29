@@ -10,12 +10,11 @@ $width: 300px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
   overflow-y: auto;
   transform: translate3d(-310px, 0, 0);
-
+  
   .rule-card {
     width: calc(($width - 22px) / 2);
     display: inline-block;
     padding: 15px 0;
-    margin: 5px;
     cursor: pointer;
 
     .rule-card-icon {
@@ -46,6 +45,9 @@ $width: 300px;
 
 :global(.t-collapse-panel__wrapper .t-collapse-panel__content) {
   padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .visible {
