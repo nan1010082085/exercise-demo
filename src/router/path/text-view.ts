@@ -1,13 +1,13 @@
 import type { RouteRecordRaw } from 'vue-router';
 
 const creategory = import.meta.glob('@/test-v/**');
-const routes = import.meta.glob('@/test-v/*-components/**');
+const routes = import.meta.glob('@/test-v/*-components/**/*.(tsx|vue)');
 
 const creategoryKey = Object.keys(creategory)
   .map((key) => key.match(/[\w]*-components+/)?.[0])
   .filter((f) => f);
-
 const creategoryRoutes = Array.from(new Set(creategoryKey)) as string[];
+
 
 const textViewRoutes = Object.keys(routes).map((key) => {
   const KeyArrs = key.split('/');
