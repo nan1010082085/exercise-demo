@@ -1,0 +1,59 @@
+@keyframes rotateX {
+  0% {
+    left: 5%;
+  }
+
+  100% {
+    left: 85%;
+  }
+}
+@keyframes rotateY {
+  0% {
+    top: 35%;
+  }
+
+  100% {
+    top: 85%;
+  }
+}
+
+@keyframes rotateScale {
+  0% {
+    transform: scale(0.8);
+    color: #000;
+  }
+  50% {
+    transform: scale(1.6);
+    color: #f00;
+  }
+  100% {
+    transform: scale(0.8);
+    color: #000;
+  }
+}
+
+.container {
+  width: 800px;
+  height: 800px;
+  background-color: #000;
+  position: relative;
+
+  .list-item {
+    position: absolute;
+    top: 35%;
+    left: 5%;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    color: #000;
+    text-align: center;
+    line-height: 80px;
+    font-size: 24px;
+    font-weight: bold;
+    background-color: #fff;
+    animation: 
+     rotateX 10s cubic-bezier(0.46, 0, 0.54, 1) var(--dx) infinite alternate,
+     rotateY 10s cubic-bezier(0.46, 0, 0.54, 1) var(--dy) infinite alternate,
+     rotateScale 20s cubic-bezier(0.46, 0, 0.54, 1) var(--dy) infinite alternate;
+  }
+}
