@@ -1,0 +1,25 @@
+$width: 300px;
+.lateText {
+  width: $width;
+  height: 60px;
+  background: #000;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+
+  .text {
+    color: #fff;
+    font-size: 16px;
+    animation: lateX 5s linear infinite;
+  }
+}                         
+
+
+@keyframes lateX {
+  to {
+    transform: translate(-100%, 0);
+  }
+  from {
+    transform: translate($width, 0);
+  }
+}
