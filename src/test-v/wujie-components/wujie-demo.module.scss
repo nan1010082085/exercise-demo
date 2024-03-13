@@ -1,0 +1,17 @@
+.wujie {
+  position: relative;
+  width: 100%;
+  .wujieConent {
+    height: calc(100% - 100px);
+  }
+
+  .wujieCustomElement {
+    height: 800px;
+    overflow: scroll;
+  }
+}
+
+.wujie p {
+  margin: 0 !important;
+  font-size: 16px;
+}

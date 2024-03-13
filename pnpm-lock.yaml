@@ -65,6 +65,12 @@ dependencies:
   vue-router:
     specifier: ^4.2.4
     version: 4.2.4(vue@3.3.7)
+  wujie:
+    specifier: ^1.0.22
+    version: 1.0.22
+  wujie-vue3:
+    specifier: ^1.0.22
+    version: 1.0.22(vue@3.3.7)
   xterm:
     specifier: ^5.3.0
     version: 5.3.0
@@ -3454,7 +3460,7 @@ packages:
       ts-dedent: 2.2.0
       type-fest: 2.19.0
       vue: 3.3.7(typescript@5.2.2)
-      vue-component-type-helpers: 1.8.27
+      vue-component-type-helpers: 2.0.6
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -9088,8 +9094,8 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /vue-component-type-helpers@1.8.27:
-    resolution: {integrity: sha512-0vOfAtI67UjeO1G6UiX5Kd76CqaQ67wrRZiOe7UAb9Jm6GzlUr/fC7CV90XfwapJRjpCMaZFhv1V0ajWRmE9Dg==}
+  /vue-component-type-helpers@2.0.6:
+    resolution: {integrity: sha512-qdGXCtoBrwqk1BT6r2+1Wcvl583ZVkuSZ3or7Y1O2w5AvWtlvvxwjGhmz5DdPJS9xqRdDlgTJ/38ehWnEi0tFA==}
     dev: true
 
   /vue-demi@0.14.6(vue@3.3.7):
@@ -9353,6 +9359,21 @@ packages:
       utf-8-validate:
         optional: true
     dev: true
+
+  /wujie-vue3@1.0.22(vue@3.3.7):
+    resolution: {integrity: sha512-/FD52+3rEg4vQb6EhSq+V9WMhaHYyVliUsVDBIzePcX0yUsep+4oC8r3EmyeS2dfEl3DCmMwLz5MnBGL3c4Msw==}
+    peerDependencies:
+      vue: ^3.0.0
+    dependencies:
+      vue: 3.3.7(typescript@5.2.2)
+      wujie: 1.0.22
+    dev: false
+
+  /wujie@1.0.22:
+    resolution: {integrity: sha512-gzx13fp9hgTHdV9XetkVmp794uDSR93Zs9jLr891RaWRuMiLFoxh3Pe4qbmW604SxI8nMTHeIRydbgC7YxQ50Q==}
+    dependencies:
+      '@babel/runtime': 7.22.15
+    dev: false
 
   /xtend@4.0.2:
     resolution: {integrity: sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==}

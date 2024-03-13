@@ -39,6 +39,7 @@ export default defineConfig(({ command, mode }) => {
   return {
     base: '/',
     server: {
+      cors: true,
       port: 6606,
       proxy
     },

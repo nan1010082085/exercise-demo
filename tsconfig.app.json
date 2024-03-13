@@ -1,11 +1,10 @@
 {
   "extends": "@vue/tsconfig/tsconfig.dom.json",
-  "include": ["src/**/*", "**/*.{spec,test}.(j|t)s"],
-  "exclude": [],
   "compilerOptions": {
     "composite": true,
+    "noEmit": true,
     "baseUrl": ".",
-    "types": ["tdesign-vue-next/global.d.ts", "node", "vitest/importMeta"],
+    "types": ["tdesign-vue-next/global.d.ts", "vitest/importMeta"],
     "paths": {
       "@/*": ["src/*"],
       "@composables/*": ["src/composables/*"],
@@ -14,5 +13,7 @@
       "@workers/*": ["src/workers/*"],
       "@widget/*": ["src/widget/*"]
     }
-  }
+  },
+  "include": ["src/**/*", "src/**/*.d.ts"],
+  "exclude": ["src/workers/*"]
 }

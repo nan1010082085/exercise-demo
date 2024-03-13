@@ -1,9 +1,7 @@
 {
   "files": [],
-  "compilerOptions": {
-    "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
-    "noEmit": true
-  },
-  "references": [{ "path": "./tsconfig.node.json" }, { "path": "./tsconfig.app.json" }]
+  "references": [
+    { "path": "./tsconfig.node.json" },
+    { "path": "./tsconfig.app.json" }
+  ]
 }

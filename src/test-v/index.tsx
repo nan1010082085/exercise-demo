@@ -37,7 +37,7 @@ const TextViews = defineComponent({
 
     const subTitle = (key: string) => {
       const sub = key.split('-')[0];
-      return TestV[sub];
+      return TestV[sub] || sub;
     };
 
     const subMenus = computed(() => {
