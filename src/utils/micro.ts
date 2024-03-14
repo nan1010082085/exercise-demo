@@ -1,21 +1,7 @@
-/// <reference types="../@types/index.d.ts" />
 import type { Pinia } from "pinia";
 import type { App } from "vue";
 import type { Router } from "vue-router";
 import WujieVue from 'wujie-vue3';
-
-// declare global {
-//   interface Window {
-//     // 是否存在无界
-//     __POWERED_BY_WUJIE__?: boolean;
-//     // 子应用mount函数
-//     __WUJIE_MOUNT: () => void;
-//     // 子应用unmount函数
-//     __WUJIE_UNMOUNT: () => void;
-//     // 子应用无界实例
-//     __WUJIE: { mount: () => void };
-//   }
-// }
 
 // initWujie params 可以使用扩展运算符动态循环use
 export const initWujie = (app: App<Element>, router: Router, pinpa?: Pinia) => {

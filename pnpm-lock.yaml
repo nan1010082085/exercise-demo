@@ -8,6 +8,9 @@ dependencies:
   '@ant-design/icons-vue':
     specifier: ^7.0.1
     version: 7.0.1(vue@3.3.7)
+  '@micro-zoe/micro-app':
+    specifier: 1.0.0-rc.4
+    version: 1.0.0-rc.4
   '@vue-flow/background':
     specifier: ^1.2.0
     version: 1.2.0(@vue-flow/core@1.28.0)
@@ -2002,6 +2005,10 @@ packages:
       '@types/react': 18.2.33
       react: 18.2.0
     dev: true
+
+  /@micro-zoe/micro-app@1.0.0-rc.4:
+    resolution: {integrity: sha512-8ZDCwV0w3m11xlECFCA9VJYInNIPqt6kfiH1+/ODoupPSSrKNPzUnmhqYRAKZQP1MrXa0w9O60DT2/mPFctwdw==}
+    dev: false
 
   /@ndelangen/get-tarball@3.0.9:
     resolution: {integrity: sha512-9JKTEik4vq+yGosHYhZ1tiH/3WpUS0Nh0kej4Agndhox8pAdWhEx5knFVRcb/ya9knCRCs1rPxNrSXTDdfVqpA==}
