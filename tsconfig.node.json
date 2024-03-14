@@ -5,7 +5,7 @@
     "composite": true,
     "noEmit": true,
     "module": "ESNext",
-    "moduleResolution": "Classic",
+    "moduleResolution": "Bundler",
     "types": ["node"]
   }
 }

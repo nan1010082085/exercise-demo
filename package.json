@@ -1,7 +1,6 @@
 {
   "name": "exercise-demo",
   "private": true,
-  "module": "",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",

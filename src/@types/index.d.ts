@@ -1,5 +1,7 @@
-
-
+/**
+ * @description: 全局增加window对象属性
+ */
+export {};
 
 declare global {
   interface Window {
