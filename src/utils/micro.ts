@@ -1,16 +1,26 @@
-import type { Pinia } from "pinia";
-import type { App } from "vue";
-import type { Router } from "vue-router";
+import type { Pinia } from 'pinia';
+import type { App } from 'vue';
+import type { Router } from 'vue-router';
+
+// wujie
 import WujieVue from 'wujie-vue3';
+
+// jd micro-app
+import microApp from '@micro-zoe/micro-app';
 
 // initWujie params 可以使用扩展运算符动态循环use
 export const initWujie = (app: App<Element>, router: Router, pinpa?: Pinia) => {
+  const mount = () => {
+    app.use(router);
+    if (pinpa) app.use(pinpa);
+    // vue use WujieVue Component
+    app.use(WujieVue);
+    app.mount('#app');
+  };
+
   if (window.__POWERED_BY_WUJIE__) {
     window.__WUJIE_MOUNT = () => {
-      app.use(router);
-      if(pinpa) app.use(pinpa)
-      app.use(WujieVue);
-      app.mount('#app');
+      mount();
     };
     window.__WUJIE_UNMOUNT = () => {
       app.unmount();
@@ -23,10 +33,6 @@ export const initWujie = (app: App<Element>, router: Router, pinpa?: Pinia) => {
     */
     window.__WUJIE.mount();
   } else {
-    app.use(router);
-    if(pinpa) app.use(pinpa)
-    app.use(WujieVue);
-    app.mount('#app');
+    mount();
   }
-  
-} 
+};

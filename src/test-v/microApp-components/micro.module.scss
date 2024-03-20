@@ -1,0 +1,9 @@
+.micro-container {
+  height: 100%;
+
+  .micro-content {
+    width: 700px;
+    height: 600px;
+    overflow-y: scroll;
+  }
+}

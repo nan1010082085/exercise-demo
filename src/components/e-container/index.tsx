@@ -17,7 +17,7 @@ const EContainer = defineComponent({
         <div class={styles.widget}>
           <EPageHeader title={_.title}>{slots.header?.()}</EPageHeader>
           <div class={styles.container}>
-            <div class={[styles.cards, 'scrollbar']}>{slots.default?.()}</div>
+            <div class={[styles.cards, 'scrollbar', 'scrollbar-y']}>{slots.default?.()}</div>
             <div class={styles.footer}>{slots.footer?.()}</div>
           </div>
           {slots.plugin?.()}

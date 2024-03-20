@@ -10,6 +10,10 @@ import { createPinia } from 'pinia';
 // import { createRouter, createWebHistory } from 'vue-router';
 // wujie-vue3封装组件
 import { initWujie } from './utils/micro';
+// jd micro
+import microApp from '@micro-zoe/micro-app';
+// jd micro
+microApp.start();
 
 dayjs.locale('zh-cn');
 
@@ -22,4 +26,14 @@ const app = createApp(App);
 
 /// wujie
 initWujie(app, router, pinpa);
+
+console.log(window)
+
+if (window.window.__POWERED_BY_WUJIE__) {
+  console.log('wujie')
+}
+
+if (window.__MICRO_APP_BASE_APPLICATION__) {
+  console.log('JD MicroApp 我是主应用')
+}
 

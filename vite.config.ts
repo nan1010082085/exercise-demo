@@ -11,6 +11,8 @@ import { TDesignResolver } from 'unplugin-vue-components/resolvers';
 // --- env ---
 // console.log(process.env.NODE_ENV)
 
+const isCustomElementArrys = ['micro-app'];
+
 const target = 'http://localhost:6606/';
 
 const proxy = {
@@ -54,8 +56,16 @@ export default defineConfig(({ command, mode }) => {
       }
     },
     plugins: [
-      vue(),
-      JSX(),
+      vue({
+        template: {
+          compilerOptions: {
+            isCustomElement: (tag) => isCustomElementArrys.includes(tag),
+          }
+        }
+      }),
+      JSX({
+        isCustomElement: (tag) => isCustomElementArrys.includes(tag),
+      }),
       AutoImport({ resolvers: [TDesignResolver({ library: 'vue-next' })] }),
       Components({ resolvers: [TDesignResolver({ library: 'vue-next' })] })
     ],

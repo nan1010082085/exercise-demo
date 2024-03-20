@@ -1,7 +1,7 @@
 /**
  * @description: 全局增加window对象属性
  */
-export {};
+export { };
 
 declare global {
   interface Window {
@@ -13,5 +13,9 @@ declare global {
     __WUJIE_UNMOUNT: () => void;
     // 子应用无界实例
     __WUJIE: { mount: () => void };
+
+    // JD
+    __MICRO_APP_BASE_APPLICATION__: any;
+    unmount: () => void;
   }
 }

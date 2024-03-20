@@ -1,7 +1,7 @@
 import { computed, defineComponent, onMounted } from 'vue';
 import { RouterView } from 'vue-router';
-import { useGlobalStore } from './store/global-store';
-import { merge } from 'lodash-es';
+// import { useGlobalStore } from './store/global-store';
+// import { merge } from 'lodash-es';
 import { useLayoutStore } from './store/layout-store';
 import zhCn from 'tdesign-vue-next/es/locale/zh_CN';
 import enUs from 'tdesign-vue-next/es/locale/en_US';
@@ -15,7 +15,7 @@ import { initUserAdmin, initRoleAdmin } from './utils/iniIndexedDB';
 export default defineComponent({
   name: 'App',
   setup() {
-    const { globalConfig } = useGlobalStore();
+    // const { globalConfig } = useGlobalStore();
     const layoutStore = useLayoutStore();
 
     const config = computed(() => {
@@ -42,7 +42,8 @@ export default defineComponent({
         default:
           languageDef = zhCn;
       }
-      return merge(languageDef, globalConfig);
+      // return merge(languageDef, globalConfig);
+      return languageDef;
     });
 
     const workerMessage = (e: MessageEvent) => {

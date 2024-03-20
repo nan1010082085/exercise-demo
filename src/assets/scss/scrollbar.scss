@@ -11,21 +11,20 @@
 }
 
 .scrollbar {
-  overflow: scroll;
+  overflow: hidden;
   scroll-behavior: smooth;
-
   scrollbar-width: thin;
   scrollbar-color: #337ecc transparent;
-  transition: all 0.5s ease-in-out '';
-Z  
+  transition: all 1s ease;
+
   &::-webkit-scrollbar {
-    display: none;
     width: 8px;
     height: 8px;
+    // width: 0;
   }
 
   &::-webkit-scrollbar-button {
-    width: 0 !important;
+    width: 0;
     height: 0;
   }
 
@@ -44,8 +43,19 @@ Z
   }
 }
 
-.scrollbar:hover {
+.scrollbar-auto:hover,
+.scrollbar-x:hover,
+.scrollbar-y:hover {
   &::-webkit-scrollbar {
     display: block;
   }
+}
+.scrollbar.scrollbar-auto:hover {
+  overflow: auto;
+}
+.scrollbar.scrollbar-x:hover {
+  overflow-x: scroll;
+}
+.scrollbar.scrollbar-y:hover {
+  overflow-y: scroll;
 }
