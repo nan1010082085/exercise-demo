@@ -1,3 +1,8 @@
+:root {
+  --dx: 5;
+  --dy: 5;
+}
+
 @keyframes rotateX {
   0% {
     left: 5%;
@@ -19,16 +24,24 @@
 
 @keyframes rotateScale {
   0% {
-    transform: scale(0.8);
-    color: #000;
+    transform: scale(0.6);
+    color: #00f;
+  }
+  25% {
+    transform: scale(1.2);
+    color: #ff0;
   }
   50% {
     transform: scale(1.6);
     color: #f00;
   }
+  75% {
+    transform: scale(1.2);
+    color: #ff0;
+  }
   100% {
-    transform: scale(0.8);
-    color: #000;
+    transform: scale(0.6);
+    color: #00f;
   }
 }
 
