@@ -51,7 +51,7 @@ const RuleEditor = defineComponent({
       buttonType.value = 'save';
       confirm('确认', '确认保存当前规则链吗？', { theme: 'info' }).then(({ trigger }) => {
         if (trigger === 'confirm') {
-          router.push('/dashboard');
+          router.push('/rulelink');
         } else {
           buttonType.value = '';
         }

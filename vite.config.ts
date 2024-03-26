@@ -20,12 +20,12 @@ const proxy = {
   //   target: 'http://192.168.200.46:8083/avatar',
   //   changeOrigin: true,
   // },
-  '/public': {
-    target,
+  '/assets': {
+    target: 'http://localhost:6606/public',
     changeOrigin: true,
-    rewrite: (path: string) => {
-      return path.replace(/^\/public/, '');
-    }
+    // rewrite: (path: string) => {
+    //   return path.replace(/^\/public/, '');
+    // }
   },
   '/workers': {
     target,
@@ -70,7 +70,7 @@ export default defineConfig(({ command, mode }) => {
       Components({ resolvers: [TDesignResolver({ library: 'vue-next' })] })
     ],
     define: {
-      'import.meta.vitest': process.env.NODE_ENV ? true : false
+      'import.meta.vitest': process.env.NODE_ENV=== 'development' ? true : false
     },
     test: {
       includeSource: ['src/**/*.{js,ts,tsx}']

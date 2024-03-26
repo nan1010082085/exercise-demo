@@ -1,4 +1,4 @@
-import { computed, defineComponent, inject, onMounted, ref } from 'vue';
+import { computed, defineComponent, inject, onMounted, ref, watchEffect } from 'vue';
 import styles from './index.module.scss';
 import { DrawerTypeKey } from '../inject.key';
 import { widgetDefualt, type ManifestModels, type WidgetModels } from '@/constants/widget.models';
@@ -9,6 +9,7 @@ import * as Widgets from '@/widget';
 import { cloneDeep } from 'lodash-es';
 import useElement from '@/composables/useElement';
 import useWidgetRenderFunc, { type AuxiliaryResult } from '@/composables/useWidgetRender';
+import { useMouseInElement } from '@vueuse/core';
 
 const EditorView = defineComponent({
   name: 'EditorView',
@@ -20,7 +21,8 @@ const EditorView = defineComponent({
     const { getElementSize } = useElement();
     const { changeTouchWidget, getAuxiliary } = useWidgetRenderFunc();
     const drawer = inject(DrawerTypeKey);
-    const viewRef = ref();
+    const viewRef = ref(null);
+    // const { x, y, elementX, elementY, isOutside } = useMouseInElement(viewRef);
     const widgets = computed(() => {
       return board?.widgets as WidgetModels[];
     });
@@ -42,6 +44,13 @@ const EditorView = defineComponent({
     const isWidgetDwn = ref(false);
     const isTouchStart = ref(false);
     const isTouchCursor = ref(false);
+
+    // watchEffect(() => {
+    //   console.log(viewRef.value)
+    //   console.log(x.value, y.value);
+    //   console.log('element', elementX.value, elementY.value);
+    //   console.log(isOutside.value)
+    // }, { flush: 'post' })
 
     const onDrop = (e: DragEvent) => {
       e.preventDefault();
@@ -81,6 +90,7 @@ const EditorView = defineComponent({
         }
         // 拖拽点
         if (isTouchStart.value) {
+          console.log(ev.layerX, ev.layerY);
           changeTouchWidget(activeWidget.value, {
             type: activeTouchType.value,
             offset: activeOffset.value,
@@ -147,8 +157,6 @@ const EditorView = defineComponent({
       }
     };
 
-    onMounted(() => {});
-
     return () => {
       return (
         <div
@@ -190,16 +198,21 @@ const EditorView = defineComponent({
             </div>
 
             <div class={styles.h}>
-              {auxiliarys.value?.h.map((h) => {
+              {auxiliarys.value?.h.map((h, i) => {
                 return (
-                  <span style={{ left: `${h.x}px`, top: `${h.y}px`, width: `${h.len}px` }} class={[styles.line]}></span>
+                  <span
+                    key={i}
+                    style={{ left: `${h.x}px`, top: `${h.y}px`, width: `${h.len}px` }}
+                    class={[styles.line]}
+                  ></span>
                 );
               })}
             </div>
             <div class={styles.v}>
-              {auxiliarys.value?.v.map((v) => {
+              {auxiliarys.value?.v.map((v, i) => {
                 return (
                   <span
+                    key={i}
                     style={{ left: `${v.x}px`, top: `${v.y}px`, height: `${v.len}px` }}
                     class={[styles.line]}
                   ></span>

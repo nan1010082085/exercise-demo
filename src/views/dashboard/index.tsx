@@ -103,9 +103,16 @@ const Dashboard = defineComponent({
                 </div>
               ),
               default: () =>
-                dashboardData.value.map((item) => {
+                dashboardData.value.map((item, i) => {
                   return (
-                    <ECard data={item} onImageClick={editDashboard} onLook={onRowClick} onEdit={onEdit} onDel={onDel}>
+                    <ECard
+                      key={i}
+                      data={item}
+                      onImageClick={editDashboard}
+                      onLook={onRowClick}
+                      onEdit={onEdit}
+                      onDel={onDel}
+                    >
                       <Image class="image" src={item.prevewImage} fit="fill" style={{ height: '100%' }} />
                     </ECard>
                   );

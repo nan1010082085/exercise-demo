@@ -54,9 +54,8 @@ const EWidgetRender = defineComponent({
   },
   emits: ['active', 'offset', 'down', 'up', 'touch'],
   setup(_, { emit, slots }) {
-    const size = computed(() => [_.x, _.y, _.w, _.h]);
     const stylesheet = computed(() => {
-      const [x, y, w, h] = size.value;
+      const {x, y, w, h} = _;
       return {
         width: `${w}px`,
         height: `${h}px`,
@@ -97,9 +96,10 @@ const EWidgetRender = defineComponent({
 
     return () => {
       const touchDom = _.isActive
-        ? touchKeys.map((key) => {
+        ? touchKeys.map((key, i) => {
             return (
               <div
+                key={i}
                 class={[styles.round, styles[key]]}
                 onMousedown={(e) => onTouch(e as MouseEvent & LayerSize, key)}
                 onMouseup={onMouseup}

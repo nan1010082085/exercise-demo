@@ -4,20 +4,20 @@ import apiHttp, { Method } from '@/plugins/axios-http';
 export const getUserInfo = () => {
   return apiHttp.requset<UserInfoModels>({
     method: Method.GET,
-    url: '/public/assets/json/user.json'
+    url: '/assets/json/user.json'
   });
 };
 
 export const getUserAmdinList = () => {
   return apiHttp.requset<UserAdminModels[]>({
     method: Method.GET,
-    url: '/public/assets/json/user-admin.json'
+    url: '/assets/json/user-admin.json'
   });
 };
 
 export const getUserRoleList = () => {
   return apiHttp.requset<UserRoleModels[]>({
     method: Method.GET,
-    url: '/public/assets/json/user-role.json'
+    url: '/assets/json/user-role.json'
   });
 };
