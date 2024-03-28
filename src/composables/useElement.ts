@@ -33,7 +33,8 @@ const useElement = () => {
 
   return {
     getElementSize,
-    getParentSize
+    getParentSize,
+    getElRect
   };
 };
 

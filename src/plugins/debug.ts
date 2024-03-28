@@ -32,8 +32,15 @@ class DebugGlobal {
   init(type: string, alias: string, message: any) {
     alias = alias ? ` (${alias})` : '';
     message = typeof message === 'string' ? message : JSON.stringify(message);
-    const bgStatus = `background: linear-gradient(${this.statusBgColor});border-radius:2px;padding:2px 2px;font-weight:bold;color:#000`;
-    const bgType = 'background: linear-gradient(#00f, #00f);border-radius:2px;padding:2px 2px;color:#fff';
+    const bgStatus = `background: linear-gradient(${this.statusBgColor});
+                      border-radius:2px;
+                      padding:2px 2px;
+                      font-weight:bold;
+                      color:#000;`;
+    const bgType = `background: linear-gradient(#00f, #00f);
+                    border-radius:2px;
+                    padding:2px 2px;
+                    color:#fff;`;
     this.env &&
       console.log(
         `%c${this.status}%c: %c[${type}]${alias}%c ${message} ${this.path}`,
