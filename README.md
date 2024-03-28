@@ -4,16 +4,26 @@
 
 > vue3 + tsdesgin
 
+## 主UI库
+
+```text
+> tdesign-icons-vue-next;
+> tdesign-vue-next;
+```
+
 ## 规则链
 
 ```text
-> 引用 vueFlow
+> @andv/x6 
+> @andv/x6-vue-shape
 ```
 
 ## 终端
 
 ```text
-> 引用 xTerm.js
+> xTerm.js 
+> xterm-addon-attach
+> xterm-addon-fit
 ```
 
 ## 练习的界面
@@ -28,5 +38,32 @@
 
 ```text
 > 引用 storybook
-> 目录 src/stories
+
+目录
+src/stories
+```
+
+## mock 数据
+
+```text
+> graphql
+```
+
+## 微前端
+
+```text
+无界
+> wujie 
+> wujie-vue3
+
+子应用
+wujie/*
+```
+
+```text
+京东开源框架
+> micro-app 
+
+子引用
+js-micro-app/*
 ```
