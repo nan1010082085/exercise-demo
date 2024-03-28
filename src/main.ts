@@ -29,7 +29,7 @@ initWujie(app, router, pinpa);
 
 console.log(window)
 
-if (window.window.__POWERED_BY_WUJIE__) {
+if (window.__POWERED_BY_WUJIE__) {
   console.log('wujie')
 }
 

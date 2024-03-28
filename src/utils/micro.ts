@@ -6,7 +6,7 @@ import type { Router } from 'vue-router';
 import WujieVue from 'wujie-vue3';
 
 // jd micro-app
-import microApp from '@micro-zoe/micro-app';
+// import microApp from '@micro-zoe/micro-app';
 
 // initWujie params 可以使用扩展运算符动态循环use
 export const initWujie = (app: App<Element>, router: Router, pinpa?: Pinia) => {

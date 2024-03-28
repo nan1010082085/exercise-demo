@@ -1,6 +1,5 @@
 import { defineComponent, onMounted, reactive } from 'vue';
 import styles from './index.module.scss';
-import EPageHeader from '@/components/e-page-header';
 import { Button, Pagination } from 'tdesign-vue-next';
 import EContainer from '@/components/e-container';
 import { useRouter } from 'vue-router';
@@ -21,7 +20,7 @@ const RuleLink = defineComponent({
     };
 
     onMounted(() => {
-      // #TODO 直接跳转规则编辑界面（测试）（开发）
+      // #TODO 直接跳转规则编辑界面（测试）
       router.push({ name: 'RuleEditor' });
     });
 
@@ -35,7 +34,7 @@ const RuleLink = defineComponent({
                   <Button onClick={onAdd}>创建规则链</Button>
                 </div>
               ),
-              default: () => <div></div>,
+              default: () => <div>container</div>,
               footer: () => (
                 <Pagination total={pagination.total} current={pagination.page} pageSize={pagination.limit}></Pagination>
               )
