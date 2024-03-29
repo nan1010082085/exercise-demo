@@ -1,17 +1,44 @@
+/**
+ * @Author Yang (yang dong nan)
+ * @Date 2024年3月29日 16:36:45
+ * @LastEditorAuthors yangdongnan
+ * @LastDate 2024年3月29日 16:36:45
+ * @Description X6 Graph Option
+ */
+
+
+// 网格
+const Grid = {
+  size: 10,
+  visible: true
+};
+
+const Panning = {
+  enabled: true,
+  modifiers: 'space' // 空格按下触发平移
+}
 
 // 定义连接选项
-export const Connecting = {
+const Connecting = {
   snap: true,
   allowBlank: false,
   allowLoop: false,
   allowNode: false,
   allowEdge: false,
   allowPort: true,
-  allowMulti: false
+  allowMulti: false,
+  router: 'orth',
+  connector: {
+    name: 'smooth',
+    args: {
+      radius: 10
+    }
+  },
+  highlight: false
 };
 
 // 定义连接桩
-export const Ports = {
+const Ports = {
   groups: {
     top: {
       position: 'top',
@@ -22,7 +49,8 @@ export const Ports = {
           stroke: '#31d0c6',
           fill: '#fff',
           strokeWidth: 1,
-        },
+          opacity: 0
+        }
       }
     },
     left: {
@@ -34,7 +62,8 @@ export const Ports = {
           stroke: '#31d0c6',
           fill: '#fff',
           strokeWidth: 1,
-        },
+          opacity: 0
+        }
       }
     },
     right: {
@@ -46,7 +75,8 @@ export const Ports = {
           stroke: '#31d0c6',
           fill: '#fff',
           strokeWidth: 1,
-        },
+          opacity: 0
+        }
       }
     },
     bottom: {
@@ -58,26 +88,60 @@ export const Ports = {
           stroke: '#31d0c6',
           fill: '#fff',
           strokeWidth: 1,
-        },
+          opacity: 0
+        }
       }
     }
   },
   items: [
     {
       id: '1',
-      group: 'left',
+      group: 'left'
     },
     {
       id: '2',
-      group: 'top',
+      group: 'top'
     },
     {
       id: '3',
-      group: 'right',
+      group: 'right'
     },
     {
       id: '4',
-      group: 'bottom',
+      group: 'bottom'
     }
   ]
+};
+
+// 高亮器
+const Highlighting = {
+  magnetAvailable: {
+    name: 'stroke',
+    args: {
+      padding: 2,
+      attrs: {
+        'stroke-width': 2,
+        stroke: '#0052d9'
+      }
+    }
+  },
+  // 连接桩吸附时
+  magnetAdsorbed: {
+    name: 'stroke',
+    args: {
+      padding: 2,
+      attrs: {
+        'stroke-width': 2,
+        stroke: '#0052d9'
+      }
+    }
+  }
+};
+
+export {
+  Grid,
+  Panning,
+  Connecting,
+  Ports,
+  Highlighting
 }

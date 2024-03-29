@@ -24,3 +24,9 @@
     align-items: center;
   }
 }
+
+.x6-widget-snapline-vertical,
+.x6-widget-snapline-horizontal {
+  stroke: var(--td-brand-color-7);
+  stroke-width: 1;
+}

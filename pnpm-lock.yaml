@@ -73,6 +73,9 @@ dependencies:
     version: 0.8.0(xterm@5.3.0)
 
 devDependencies:
+  '@antv/x6-plugin-snapline':
+    specifier: ^2.1.7
+    version: 2.1.7(@antv/x6@2.18.1)
   '@antv/x6-vue-shape':
     specifier: ^2.1.2
     version: 2.1.2(@antv/x6@2.18.1)(vue@3.3.7)
@@ -212,6 +215,14 @@ packages:
 
   /@antv/x6-geometry@2.0.5:
     resolution: {integrity: sha512-MId6riEQkxphBpVeTcL4ZNXL4lScyvDEPLyIafvWMcWNTGK0jgkK7N20XSzqt8ltJb0mGUso5s56mrk8ysHu2A==}
+
+  /@antv/x6-plugin-snapline@2.1.7(@antv/x6@2.18.1):
+    resolution: {integrity: sha512-AsysoCb9vES0U2USNhEpYuO/W8I0aYfkhlbee5Kt4NYiMfQfZKQyqW/YjDVaS2pm38C1NKu1LdPVk/BBr4CasA==}
+    peerDependencies:
+      '@antv/x6': ^2.x
+    dependencies:
+      '@antv/x6': 2.18.1
+    dev: true
 
   /@antv/x6-vue-shape@2.1.2(@antv/x6@2.18.1)(vue@3.3.7):
     resolution: {integrity: sha512-lfLNJ2ztK8NP2JBAWTD6m5Wol0u6tOqj2KdOhWZoT8EtEw9rMmAdxsr8uTi9MRJO9pDMM0nbsR3cidnMh7VeDQ==}
@@ -4093,7 +4104,7 @@ packages:
   /@vueuse/shared@10.4.1(vue@3.3.7):
     resolution: {integrity: sha512-vz5hbAM4qA0lDKmcr2y3pPdU+2EVw/yzfRsBdu+6+USGa4PxqSQRYIUC9/NcT06y+ZgaTsyURw2I9qOFaaXHAg==}
     dependencies:
-      vue-demi: 0.14.6(vue@3.3.7)
+      vue-demi: 0.14.7(vue@3.3.7)
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
@@ -9009,7 +9020,6 @@ packages:
         optional: true
     dependencies:
       vue: 3.3.7(typescript@5.2.2)
-    dev: true
 
   /vue-docgen-api@4.75.0(vue@3.3.7):
     resolution: {integrity: sha512-vvUzO3ew3rkp3BkptOW0/FzM6t4AKBht1BLCYROYZB5anCMl8+sQ4v3xFVqJnI3/6hKwHuChA2gSZrziK+NbXA==}

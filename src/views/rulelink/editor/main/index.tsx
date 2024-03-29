@@ -5,9 +5,11 @@ import { _uuid } from '@/utils';
 import type { RuleWidgetModels } from '@/constants/rule-widget.models';
 import { Graph, Shape } from '@antv/x6';
 import { register, getTeleport } from '@antv/x6-vue-shape'
+import { Snapline } from '@antv/x6-plugin-snapline'
 import RuleText from '@/rule/lib/text';
 import useElement from '@/composables/useElement';
-import { Connecting, Ports } from './x6-config';
+import { Connecting, Grid, Highlighting, Panning, Ports } from './x6-config';
+import { usePortsInteractive } from './useInteractive';
 
 const TeleportComponent = getTeleport();
 
@@ -21,6 +23,7 @@ const RuleEditorView = defineComponent({
     const drawer = inject(DrawerRuleTypeKey);
     const mainRef = ref();
     const { getElRect } = useElement();
+    const { visiblePorts } = usePortsInteractive();
 
     const size = computed(() => getElRect(mainRef.value as HTMLDivElement))
     const container = ref<{ left: number, top: number }>();
@@ -88,32 +91,51 @@ const RuleEditorView = defineComponent({
         y,
         width: w,
         height: h,
+        attrs: {
+          body: {
+            fill: '#fff',
+            stroke: '#000',
+            strokeWidth: 1,
+          }
+        },
         data,
         ports: Ports
       })
     }
 
     onMounted(() => {
-      registerHtml();
-      registerVueNode();
       graph.value = new Graph({
         container: graphRef.value as HTMLDivElement,
-        panning: {
-          enabled: true,
-          modifiers: 'space' // 空格按下触发平移
-        },
-        grid: {
-          size: 10,
-          visible: true
-        },
+        grid: Grid,
+        panning: Panning,
         autoResize: true,
-        connecting: Connecting
+        connecting: Connecting,
+        highlighting: Highlighting
       })
+      // graph use plugin
+      graph.value.use(new Snapline({ enabled: true, tolerance: 10 }))
+      // register node
+      registerHtml();
+      registerVueNode();
 
-      addNode('circle', { x: 20, y: 20, w: 60, h:60 });
-      addNode('rect', { x: 100, y: 100 });
+      // graph add nodes
+      addNode('circle', { x: 20, y: 20, w: 60, h: 60 });
+      addNode('rect', { x: 100, y: 100, w: 100, h: 100 });
       addNode('html-text', { x: 120, y: 120 });
       addNode(RuleText.name, { x: 200, y: 200, w: 240, h: 40 });
+
+      // graph addEventListener;
+      graph.value.on('node:mouseenter', ({ node }: any) => {
+        // console.log('node:mouseenter', node);
+        visiblePorts(node, node.getPorts(), 1)
+      })
+      graph.value.on('node:mouseleave', ({ node }: any) => {
+        // console.log('node:mouseleave', node);
+        visiblePorts(node, node.getPorts(), 0)
+      })
+
+      let json = graph.value.toJSON();
+      console.log(json)
     });
 
     return () => {

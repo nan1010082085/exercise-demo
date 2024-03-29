@@ -54,6 +54,7 @@
     "xterm-addon-fit": "^0.8.0"
   },
   "devDependencies": {
+    "@antv/x6-plugin-snapline": "^2.1.7",
     "@antv/x6-vue-shape": "^2.1.2",
     "@storybook/addon-essentials": "7.5.2",
     "@storybook/addon-interactions": "7.5.2",
