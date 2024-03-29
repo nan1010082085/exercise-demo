@@ -8,7 +8,6 @@ export default defineComponent({
     const node: (() => Node<Node.Properties> | undefined) | undefined = inject('getNode');
     const text = ref('');
 
-
     watchPostEffect(() => {
       if (node) {
         const { data } = node()!;
