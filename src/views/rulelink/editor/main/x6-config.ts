@@ -6,7 +6,6 @@
  * @Description X6 Graph Option
  */
 
-
 // 网格
 const Grid = {
   size: 10,
@@ -16,7 +15,7 @@ const Grid = {
 const Panning = {
   enabled: true,
   modifiers: 'space' // 空格按下触发平移
-}
+};
 
 // 定义连接选项
 const Connecting = {
@@ -29,9 +28,9 @@ const Connecting = {
   allowEdge: false,
   allowPort: true,
   allowMulti: false,
-  router: 'orth',
+  router: 'normal',
   connector: {
-    name: 'rounded', // normal smooth rounded jumpover
+    name: 'smooth', // normal smooth rounded jumpover
     args: {
       radius: 10
     }
@@ -140,10 +139,11 @@ const Highlighting = {
   }
 };
 
-export {
-  Grid,
-  Panning,
-  Connecting,
-  Ports,
-  Highlighting
-}
+// 选中边时样式
+const ActiveEdge = {
+  line: {
+    stroke: '#0052d9'
+  }
+};
+
+export { Grid, Panning, Connecting, Ports, Highlighting, ActiveEdge };

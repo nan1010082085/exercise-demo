@@ -27,13 +27,11 @@ const app = createApp(App);
 /// wujie
 initWujie(app, router, pinpa);
 
-console.log(window)
+// if (window.__POWERED_BY_WUJIE__) {
+//   console.log('wujie')
+// }
 
-if (window.__POWERED_BY_WUJIE__) {
-  console.log('wujie')
-}
-
-if (window.__MICRO_APP_BASE_APPLICATION__) {
-  console.log('JD MicroApp 我是主应用')
-}
+// if (window.__MICRO_APP_BASE_APPLICATION__) {
+//   console.log('JD MicroApp 我是主应用')
+// }
 

@@ -1,4 +1,4 @@
-import { defineComponent, provide, reactive, ref, watchEffect, watchPostEffect } from 'vue';
+import { defineComponent, provide, reactive, ref } from 'vue';
 import styles from './index.module.scss';
 import type { DrawerRulePropertyType } from './types';
 import { DrawerRuleTypeKey, RuleGraphHistoryKey, RuleGraphKey } from './inject.key';
@@ -8,6 +8,7 @@ import RuleEditorView from './main';
 import { MessagePlugin } from 'tdesign-vue-next';
 import { onBeforeRouteLeave, useRouter } from 'vue-router';
 import useDialog from '@/composables/useDialog';
+import defaultRuleBaseJson from '@assets/default-json/rule.base.json';
 
 const RuleEditor = defineComponent({
   name: 'RuleEditor',
@@ -27,6 +28,7 @@ const RuleEditor = defineComponent({
       undo: false
     })
     provide(RuleGraphHistoryKey, history)
+    const data = ref(defaultRuleBaseJson)
 
     const historyChange = (data: { redo: boolean; undo: boolean; }) => {
       history.redo = data.redo;
@@ -56,14 +58,16 @@ const RuleEditor = defineComponent({
     };
 
     const saveChange = () => {
-      buttonType.value = 'save';
-      confirm('确认', '确认保存当前规则链吗？', { theme: 'info' }).then(({ trigger }) => {
-        if (trigger === 'confirm') {
-          router.push('/rulelink');
-        } else {
-          buttonType.value = '';
-        }
-      });
+      // buttonType.value = 'save';
+      // confirm('确认', '确认保存当前规则链吗？', { theme: 'info' }).then(({ trigger }) => {
+      //   if (trigger === 'confirm') {
+      //     router.push('/rulelink');
+      //   } else {
+      //     buttonType.value = '';
+      //   }
+      // });
+      let json = Graph.value.toJSON();
+      console.log(json)
     };
 
     return () => {
@@ -71,7 +75,7 @@ const RuleEditor = defineComponent({
         <div ref={ruleEditorRef} class={styles['editor-rule']}>
           <RuleToobar onScreen={screenChange} onSave={saveChange} />
           <RuleDrawer />
-          <RuleEditorView v-model={Graph.value} onHistory={historyChange} />
+          <RuleEditorView v-model={Graph.value} data={data.value} onHistory={historyChange} />
         </div>
       );
     };

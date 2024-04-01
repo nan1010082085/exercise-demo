@@ -3,14 +3,15 @@ import styles from './index.module.scss';
 import { DrawerRuleTypeKey } from '../inject.key';
 import { _uuid } from '@/utils';
 import type { RuleWidgetModels } from '@/constants/rule-widget.models';
-import { Graph, Shape } from '@antv/x6';
-import { register, getTeleport } from '@antv/x6-vue-shape';
+import { Graph } from '@antv/x6';
+import { getTeleport } from '@antv/x6-vue-shape';
 import RuleText from '@/rule/lib/text';
 import useElement from '@/composables/useElement';
-import { Connecting, Grid, Highlighting, Panning, Ports } from './x6-config';
+import { ActiveEdge, Connecting, Grid, Highlighting, Panning, Ports } from './x6-config';
 import { usePortsInteractive } from './useInteractive';
 import { usePlugin } from './x6-use';
-import { useEdget } from './x6-edge-function';
+import { useEdgetFuntion, useNodeFunction } from './x6-function';
+import { CustomRegister } from './x6-custom-register';
 
 const TeleportComponent = getTeleport();
 
@@ -26,7 +27,7 @@ const RuleEditorView = defineComponent({
     const drawer = inject(DrawerRuleTypeKey);
     const mainRef = ref();
     const { getElRect } = useElement();
-    const { visiblePorts } = usePortsInteractive();
+    // const { visiblePorts } = usePortsInteractive();
 
     const size = computed(() => getElRect(mainRef.value as HTMLDivElement))
     const container = ref<{ left: number, top: number }>();
@@ -40,6 +41,9 @@ const RuleEditorView = defineComponent({
       undo: false
     })
 
+    // reset styles
+    const resetEdget = ref()
+
     // watch mounted el.size
     watch(() => size.value, (val) => {
       if (val) {
@@ -49,7 +53,6 @@ const RuleEditorView = defineComponent({
         }
       }
     }, { flush: 'post' })
-
 
 
     const onDrop = (e: DragEvent) => {
@@ -66,33 +69,6 @@ const RuleEditorView = defineComponent({
       console.log('rule end drop', widget);
       addNode(RuleText.name, { x, y, w: 240, h: 40 }, widget);
     };
-
-    // html 节点
-    const registerHtml = () => {
-      return Shape.HTML.register({
-        shape: 'html-text',
-        // width: 100,
-        // height: 100,
-        html() {
-          const div = document.createElement('div');
-          div.className = styles['html-text'];
-          div.innerHTML = `Shape = Html <br/> HTML-DIV-TEXT`
-          return div;
-        }
-      });
-    }
-
-    const registerVueNode = () => {
-      return register({
-        shape: RuleText.name,
-        width: 240,
-        height: 40,
-        component: RuleText,
-        data: {
-          text: 'test rule x6 Custom Vue Component',
-        },
-      })
-    }
 
     const addNode = (shape: string, option: { x: number, y: number, w?: number, h?: number }, data?: any) => {
       const { x, y, w = 200, h = 100 } = option;
@@ -126,14 +102,8 @@ const RuleEditorView = defineComponent({
       // graph use plugin
       usePlugin(graph.value)
       // register node
-      registerHtml();
-      registerVueNode();
-
-      // graph add nodes
-      addNode('circle', { x: 20, y: 20, w: 60, h: 60 });
-      addNode('rect', { x: 100, y: 100, w: 100, h: 100 });
-      addNode('html-text', { x: 120, y: 120 });
-      addNode(RuleText.name, { x: 200, y: 200, w: 240, h: 40 });
+      CustomRegister().htmlNode(styles['html-text']);
+      CustomRegister().vueNode(RuleText);
 
       // 选中的节点
       graph.value.on('node:click', ({ node }: any) => {
@@ -144,29 +114,37 @@ const RuleEditorView = defineComponent({
       // 选中的连接线（边）
       graph.value.on('edge:click', ({ edge }: any) => {
         // console.log('edge:click', edge);
+        resetEdget.value = edge.getAttrs();
+        edge.setAttrs(ActiveEdge)
         activeEdge.value = edge;
       })
 
+      // 添加边
       graph.value.on('edge:added', ({ edge }: any) => {
-        activeEdge.value = edge;
+        if (activeEdge.value) {
+          resetEdget.value && activeEdge.value.setAttrs(resetEdget.value)
+        }
+        edge.setAttrs({
+          line: {
+            stroke: '#000',
+            strokeDasharray: 5,
+            targetMarker: 'classic',
+            style: {
+              animation: `${styles['ant-line']} 30s infinite linear`,
+            },
+          }
+        })
+        // activeEdge.value = edge;
       })
 
-
-      // graph addEventListener;
-      graph.value.on('node:mouseenter', ({ node }: any) => {
-        // console.log('node:mouseenter', node);
-        visiblePorts(node, node.getPorts(), 1)
-      })
-      graph.value.on('node:mouseleave', ({ node }: any) => {
-        // console.log('node:mouseleave', node);
-        visiblePorts(node, node.getPorts(), 0)
-      })
-
-      useEdget(graph.value, activeEdge)
+      useNodeFunction(graph.value, activeNode);
+      useEdgetFuntion(graph.value, activeEdge)
 
       graph.value.on('blank:click', () => {
-        activeEdge.value = null;
         activeNode.value = null;
+        resetEdget.value && activeEdge.value.setAttrs(resetEdget.value)
+        activeEdge.value = null;
+        resetEdget.value = null;
       })
 
       graph.value.on('history:change', () => {
@@ -177,8 +155,9 @@ const RuleEditorView = defineComponent({
 
       emit('update:modelValue', graph.value)
 
-      let json = graph.value.toJSON();
-      console.log(json)
+      // console.log(_.data)
+      // 渲染导入数据
+      graph.value.fromJSON(_.data)
     });
 
     return () => {

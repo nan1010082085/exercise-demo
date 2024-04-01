@@ -26,3 +26,20 @@
     stroke-width: 1px;
   }
 }
+
+.selction {
+  :global(.x6-widget-selection-box) {
+    margin-top: -4px;
+    margin-left: -4px;
+    padding-right: 4px;
+    padding-bottom: 4px;
+    border: 2px dashed var(--td-brand-color-7);
+    background-color: rgba($color: #0052d9, $alpha: 0.2);
+  }
+}
+
+@keyframes ant-line {
+  to {
+    stroke-dashoffset: -1000;
+  }
+}

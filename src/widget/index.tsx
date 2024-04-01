@@ -55,9 +55,9 @@ const Widget = defineComponent({
                 </div>
               ),
               default: () =>
-                widgets.value.map((item) => {
+                widgets.value.map((item, i) => {
                   return (
-                    <ECard data={item} lookBtn={false}>
+                    <ECard key={i} data={item} lookBtn={false}>
                       <Image src={item.imageUrl} fit="fill" style={{ height: '100%' }} />
                     </ECard>
                   );
