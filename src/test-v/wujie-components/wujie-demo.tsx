@@ -10,7 +10,7 @@ const WujieDemo = defineComponent({
         <div class={styles.wujie}>
           <p> wujie demo - brfore build </p>
           <p> 运行时子应用 </p>
-          <p> WujieVue 组件</p>
+          <p> WujieVue 组件 地址 localhost:6700/</p>
 
           <div class={styles.wujieConent}>
             <wujie-vue name={'wujie-demo2'} url={'http://localhost:6700/'} />

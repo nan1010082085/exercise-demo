@@ -11,13 +11,15 @@ const WujieDemo3 = defineComponent({
 
     onMounted(() => {
       startApp({ el: wujieEl.value, name: 'wujie-demo3', url: 'http://localhost:4173/' });
+      // startApp({ el: wujieEl.value, name: 'wujie-demo3', url: 'http://localhost:6700/' });
     });
 
     return () => {
       return (
         <div class={styles.wujie}>
           <p> 加载自定义子应用 </p>
-          <p> 给定加载 dom </p>
+          <p> 给定加载 dom  build后预览项目</p>
+          <p> 当前地址 http://localhost:4173/</p>
 
           <div class={styles.wujieConent}>
             <div class={styles.wujieCustomElement} ref={wujieEl}></div>
