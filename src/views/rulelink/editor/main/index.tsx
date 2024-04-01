@@ -1,25 +1,28 @@
-import { defineComponent, ref, type PropType, onMounted, inject, computed, watch, watchPostEffect } from 'vue';
+import { defineComponent, ref, type PropType, onMounted, inject, computed, watch, watchPostEffect, reactive } from 'vue';
 import styles from './index.module.scss';
 import { DrawerRuleTypeKey } from '../inject.key';
 import { _uuid } from '@/utils';
 import type { RuleWidgetModels } from '@/constants/rule-widget.models';
 import { Graph, Shape } from '@antv/x6';
-import { register, getTeleport } from '@antv/x6-vue-shape'
-import { Snapline } from '@antv/x6-plugin-snapline'
+import { register, getTeleport } from '@antv/x6-vue-shape';
 import RuleText from '@/rule/lib/text';
 import useElement from '@/composables/useElement';
 import { Connecting, Grid, Highlighting, Panning, Ports } from './x6-config';
 import { usePortsInteractive } from './useInteractive';
+import { usePlugin } from './x6-use';
+import { useEdget } from './x6-edge-function';
 
 const TeleportComponent = getTeleport();
 
 const RuleEditorView = defineComponent({
   name: 'RuleEditorView',
   components: { TeleportComponent },
+  emits: ['update:modelValue', 'history'],
   props: {
+    modelValue: [Object, Array] as PropType<any>,
     data: [Object, Array] as PropType<any>
   },
-  setup() {
+  setup(_, { emit }) {
     const drawer = inject(DrawerRuleTypeKey);
     const mainRef = ref();
     const { getElRect } = useElement();
@@ -27,6 +30,15 @@ const RuleEditorView = defineComponent({
 
     const size = computed(() => getElRect(mainRef.value as HTMLDivElement))
     const container = ref<{ left: number, top: number }>();
+
+    const graph = ref();
+    const graphRef = ref()
+    const activeNode = ref();
+    const activeEdge = ref();
+    const history = reactive({
+      redo: false,
+      undo: false
+    })
 
     // watch mounted el.size
     watch(() => size.value, (val) => {
@@ -37,6 +49,8 @@ const RuleEditorView = defineComponent({
         }
       }
     }, { flush: 'post' })
+
+
 
     const onDrop = (e: DragEvent) => {
       e.preventDefault();
@@ -52,9 +66,6 @@ const RuleEditorView = defineComponent({
       console.log('rule end drop', widget);
       addNode(RuleText.name, { x, y, w: 240, h: 40 }, widget);
     };
-
-    const graph = ref();
-    const graphRef = ref()
 
     // html 节点
     const registerHtml = () => {
@@ -113,7 +124,7 @@ const RuleEditorView = defineComponent({
         highlighting: Highlighting
       })
       // graph use plugin
-      graph.value.use(new Snapline({ enabled: true, tolerance: 10 }))
+      usePlugin(graph.value)
       // register node
       registerHtml();
       registerVueNode();
@@ -124,6 +135,23 @@ const RuleEditorView = defineComponent({
       addNode('html-text', { x: 120, y: 120 });
       addNode(RuleText.name, { x: 200, y: 200, w: 240, h: 40 });
 
+      // 选中的节点
+      graph.value.on('node:click', ({ node }: any) => {
+        // console.log('node:click', node);
+        activeNode.value = node;
+      })
+
+      // 选中的连接线（边）
+      graph.value.on('edge:click', ({ edge }: any) => {
+        // console.log('edge:click', edge);
+        activeEdge.value = edge;
+      })
+
+      graph.value.on('edge:added', ({ edge }: any) => {
+        activeEdge.value = edge;
+      })
+
+
       // graph addEventListener;
       graph.value.on('node:mouseenter', ({ node }: any) => {
         // console.log('node:mouseenter', node);
@@ -133,6 +161,21 @@ const RuleEditorView = defineComponent({
         // console.log('node:mouseleave', node);
         visiblePorts(node, node.getPorts(), 0)
       })
+
+      useEdget(graph.value, activeEdge)
+
+      graph.value.on('blank:click', () => {
+        activeEdge.value = null;
+        activeNode.value = null;
+      })
+
+      graph.value.on('history:change', () => {
+        history.redo = graph.value.canRedo();
+        history.undo = graph.value.canUndo();
+        emit('history', history)
+      })
+
+      emit('update:modelValue', graph.value)
 
       let json = graph.value.toJSON();
       console.log(json)

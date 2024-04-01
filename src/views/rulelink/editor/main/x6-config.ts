@@ -20,7 +20,9 @@ const Panning = {
 
 // 定义连接选项
 const Connecting = {
-  snap: true,
+  snap: {
+    radius: 20
+  },
   allowBlank: false,
   allowLoop: false,
   allowNode: false,
@@ -29,7 +31,7 @@ const Connecting = {
   allowMulti: false,
   router: 'orth',
   connector: {
-    name: 'smooth',
+    name: 'rounded', // normal smooth rounded jumpover
     args: {
       radius: 10
     }

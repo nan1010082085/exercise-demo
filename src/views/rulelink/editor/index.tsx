@@ -1,7 +1,7 @@
-import { defineComponent, provide, ref } from 'vue';
+import { defineComponent, provide, reactive, ref, watchEffect, watchPostEffect } from 'vue';
 import styles from './index.module.scss';
 import type { DrawerRulePropertyType } from './types';
-import { DrawerRuleTypeKey } from './inject.key';
+import { DrawerRuleTypeKey, RuleGraphHistoryKey, RuleGraphKey } from './inject.key';
 import RuleToobar from './toolbar';
 import RuleDrawer from './rule-drawer';
 import RuleEditorView from './main';
@@ -15,11 +15,23 @@ const RuleEditor = defineComponent({
     const router = useRouter();
     const ruleEditorRef = ref();
     const { confirm } = useDialog();
+    const buttonType = ref('');
     const drawer = ref<DrawerRulePropertyType>({
       widget: true
     });
     provide(DrawerRuleTypeKey, drawer);
-    const buttonType = ref('');
+    const Graph = ref();
+    provide(RuleGraphKey, Graph)
+    const history = reactive({
+      redo: false,
+      undo: false
+    })
+    provide(RuleGraphHistoryKey, history)
+
+    const historyChange = (data: { redo: boolean; undo: boolean; }) => {
+      history.redo = data.redo;
+      history.undo = data.undo;
+    }
 
     // 路由守卫
     onBeforeRouteLeave((to, form, next) => {
@@ -34,10 +46,6 @@ const RuleEditor = defineComponent({
         });
       }
     });
-
-    const drwerPropertyChange = (type: keyof DrawerRulePropertyType) => {
-      drawer.value[type] = !drawer.value[type];
-    };
 
     const screenChange = (value: boolean) => {
       if (document.fullscreenEnabled) {
@@ -61,9 +69,9 @@ const RuleEditor = defineComponent({
     return () => {
       return (
         <div ref={ruleEditorRef} class={styles['editor-rule']}>
-          <RuleToobar onPropertyChange={drwerPropertyChange} onScreen={screenChange} onSave={saveChange} />
+          <RuleToobar onScreen={screenChange} onSave={saveChange} />
           <RuleDrawer />
-          <RuleEditorView />
+          <RuleEditorView v-model={Graph.value} onHistory={historyChange} />
         </div>
       );
     };

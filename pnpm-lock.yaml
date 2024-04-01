@@ -73,6 +73,12 @@ dependencies:
     version: 0.8.0(xterm@5.3.0)
 
 devDependencies:
+  '@antv/x6-plugin-history':
+    specifier: ^2.2.4
+    version: 2.2.4(@antv/x6@2.18.1)
+  '@antv/x6-plugin-selection':
+    specifier: ^2.2.2
+    version: 2.2.2(@antv/x6@2.18.1)
   '@antv/x6-plugin-snapline':
     specifier: ^2.1.7
     version: 2.1.7(@antv/x6@2.18.1)
@@ -215,6 +221,22 @@ packages:
 
   /@antv/x6-geometry@2.0.5:
     resolution: {integrity: sha512-MId6riEQkxphBpVeTcL4ZNXL4lScyvDEPLyIafvWMcWNTGK0jgkK7N20XSzqt8ltJb0mGUso5s56mrk8ysHu2A==}
+
+  /@antv/x6-plugin-history@2.2.4(@antv/x6@2.18.1):
+    resolution: {integrity: sha512-9gHHvEW4Fla+1hxUV49zNgJyIMoV9CjVM52MrFgAJcvyRn1Kvxz4MfxiKlG+DEZUs+/zvfjl9pS6gJOd8laRkg==}
+    peerDependencies:
+      '@antv/x6': ^2.x
+    dependencies:
+      '@antv/x6': 2.18.1
+    dev: true
+
+  /@antv/x6-plugin-selection@2.2.2(@antv/x6@2.18.1):
+    resolution: {integrity: sha512-s2gtR9Onlhr7HOHqyqg0d+4sG76JCcQEbvrZZ64XmSChlvieIPlC3YtH4dg1KMNhYIuBmBmpSum6S0eVTEiPQw==}
+    peerDependencies:
+      '@antv/x6': ^2.x
+    dependencies:
+      '@antv/x6': 2.18.1
+    dev: true
 
   /@antv/x6-plugin-snapline@2.1.7(@antv/x6@2.18.1):
     resolution: {integrity: sha512-AsysoCb9vES0U2USNhEpYuO/W8I0aYfkhlbee5Kt4NYiMfQfZKQyqW/YjDVaS2pm38C1NKu1LdPVk/BBr4CasA==}

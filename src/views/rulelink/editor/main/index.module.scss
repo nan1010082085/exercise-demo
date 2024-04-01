@@ -18,3 +18,11 @@
   color: #000;
   background-color: #fff;
 }
+
+.snapline {
+  :global(.x6-widget-snapline-vertical),
+  :global(.x6-widget-snapline-horizontal) {
+    stroke: var(--td-brand-color-7);
+    stroke-width: 1px;
+  }
+}
