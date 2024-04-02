@@ -1,3 +1,6 @@
+import type { KDashboardParam } from '@/views/dashboard/editor/types';
+import type { KRuleParam } from '@/views/rulelink/editor/types';
+
 export const languageKeyByLabel = {
   zh_CN: '简体中文',
   // zh_TW: '繁体中文',
@@ -18,4 +21,13 @@ export const languageKeyByValue = {
   // 俄语: 'ru_RU',
   // 意大利语: 'it_IT',
   // 阿拉伯语: 'ar_KW'
+};
+
+/**
+ * 仪表 & 流程
+ * @description 工具栏按钮
+ */
+export const drawerPropertyTypeValue: Partial<Record<KDashboardParam | KRuleParam, string>> = {
+  widget: '部件',
+  property: '属性'
 };

@@ -4,6 +4,8 @@ import styles from './index.module.scss';
 import { Content } from 'tdesign-vue-next';
 import { useLayoutStore } from '@/store/layout-store';
 
+const urlNames = ['editor', 'rule-editor'];
+
 const LContainer = defineComponent({
   name: 'LContainer',
   setup() {
@@ -11,9 +13,7 @@ const LContainer = defineComponent({
     const layoutStore = useLayoutStore();
     const menuDisplay = computed(() => !layoutStore.showMenu);
 
-    const isEditorDashboard = computed(() => {
-      return route.path.includes('editor');
-    });
+    const isEditorDashboard = computed(() => urlNames.some((k) => route.path.includes(k)));
 
     return () => {
       return (

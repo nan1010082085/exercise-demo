@@ -19,7 +19,8 @@ const RuleEditor = defineComponent({
     const { confirm } = useDialog();
     const buttonType = ref('');
     const drawer = ref<DrawerRulePropertyType>({
-      widget: true
+      widget: true,
+      property: false,
     });
     provide(DrawerRuleTypeKey, drawer);
     const Graph = ref();

@@ -5,19 +5,10 @@
   width: 100%;
   height: calc(100% - 50px);
 
-  .container {
-    position: relative;
+  .canvas {
+    position: absolute;
     left: 0;
     top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-
-    .canvas {
-      position: absolute;
-      left: 0;
-      top: 0;
-    }
   }
 
   .lt {
@@ -50,19 +41,18 @@
     position: absolute;
     left: 0;
     top: 0;
-    span {
+    div {
       position: absolute;
-      display: inline-block;
     }
   }
-  .h span {
+  .h div {
     height: 2px;
   }
-  .v span {
+  .v div {
     width: 2px;
   }
   .line {
-    background-color: #003cab;
+    background-color: #0052d9;
   }
 }
 

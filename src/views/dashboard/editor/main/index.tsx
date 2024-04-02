@@ -1,15 +1,15 @@
-import { computed, defineComponent, inject, onMounted, ref, watchEffect } from 'vue';
+import { computed, defineComponent, inject, ref } from 'vue';
 import styles from './index.module.scss';
 import { DrawerTypeKey } from '../inject.key';
 import { widgetDefualt, type ManifestModels, type WidgetModels } from '@/constants/widget.models';
-import { _uuid, isUndefinedOrNull } from '@/utils';
+import { _uuid } from '@/utils';
 import EWidgetRender, { type LayerSize, type TouchType, type OffsetType } from '@/components/e-widget-render';
 import { dashboardStore } from '@/store/dashboard-store';
 import * as Widgets from '@/widget';
 import { cloneDeep } from 'lodash-es';
 import useElement from '@/composables/useElement';
 import useWidgetRenderFunc, { type AuxiliaryResult } from '@/composables/useWidgetRender';
-import { useMouseInElement } from '@vueuse/core';
+import { useElementSize } from '@vueuse/core'
 
 const EditorView = defineComponent({
   name: 'EditorView',
@@ -22,7 +22,7 @@ const EditorView = defineComponent({
     const { changeTouchWidget, getAuxiliary } = useWidgetRenderFunc();
     const drawer = inject(DrawerTypeKey);
     const viewRef = ref(null);
-    // const { x, y, elementX, elementY, isOutside } = useMouseInElement(viewRef);
+    const { width, height } = useElementSize(viewRef);
     const widgets = computed(() => {
       return board?.widgets as WidgetModels[];
     });
@@ -90,7 +90,6 @@ const EditorView = defineComponent({
         }
         // 拖拽点
         if (isTouchStart.value) {
-          console.log(ev.layerX, ev.layerY);
           changeTouchWidget(activeWidget.value, {
             type: activeTouchType.value,
             offset: activeOffset.value,
@@ -147,7 +146,7 @@ const EditorView = defineComponent({
     // 辅助线对齐
     const auxiliaryAlgin = () => {
       if (auxiliarys.value && activeWidget.value) {
-        const { h, v } = auxiliarys.value;
+        let { h, v } = auxiliarys.value;
         if (h.length) {
           activeWidget.value.general.position.y = h[0].algin;
         }
@@ -165,60 +164,60 @@ const EditorView = defineComponent({
           onMousedown={clearActiveWidget}
           class={[styles['main-wrapper'], drawer?.value.widget ? styles.visible : '']}
         >
-          <div class={styles.container}>
-            <div
-              ref={viewRef}
-              class={[styles.canvas, isTouchCursor.value ? styles[activeTouchType.value] : '']}
-              style={canvasStyle.value}
-              onMousedown={clearActiveWidget}
-              onMousemove={onMousemove}
-              onMouseup={clearWidget}
-            >
-              {widgets.value.map((widget) => {
-                const { x, y, width: w, height: h } = widget.general.position;
-                return (
-                  <EWidgetRender
-                    key={widget.id}
-                    widget={widget}
-                    x={x}
-                    y={y}
-                    w={w}
-                    h={h}
-                    isActive={widget.id === activeWidget.value?.id}
-                    onActive={active}
-                    onDown={activeWidgetDown}
-                    onOffset={(offset) => (activeOffset.value = offset)}
-                    onUp={clearWidget}
-                    onTouch={activeTouch}
-                  >
-                    {widget.name}
-                  </EWidgetRender>
-                );
-              })}
-            </div>
+          <div
+            ref={viewRef}
+            class={[styles.canvas, isTouchCursor.value ? styles[activeTouchType.value] : '']}
+            style={canvasStyle.value}
+            onMousedown={clearActiveWidget}
+            onMousemove={onMousemove}
+            onMouseup={clearWidget}
+          >
+            {widgets.value.map((widget) => {
+              const { x, y, width: w, height: h } = widget.general.position;
+              return (
+                <EWidgetRender
+                  key={widget.id}
+                  widget={widget}
+                  x={x}
+                  y={y}
+                  w={w}
+                  h={h}
+                  isActive={widget.id === activeWidget.value?.id}
+                  onActive={active}
+                  onDown={activeWidgetDown}
+                  onOffset={(offset) => (activeOffset.value = offset)}
+                  onUp={clearWidget}
+                  onTouch={activeTouch}
+                >
+                  {widget.name}
+                </EWidgetRender>
+              );
+            })}
+          </div>
 
-            <div class={styles.h}>
-              {auxiliarys.value?.h.map((h, i) => {
-                return (
-                  <span
-                    key={i}
-                    style={{ left: `${h.x}px`, top: `${h.y}px`, width: `${h.len}px` }}
-                    class={[styles.line]}
-                  ></span>
-                );
-              })}
-            </div>
-            <div class={styles.v}>
-              {auxiliarys.value?.v.map((v, i) => {
-                return (
-                  <span
-                    key={i}
-                    style={{ left: `${v.x}px`, top: `${v.y}px`, height: `${v.len}px` }}
-                    class={[styles.line]}
-                  ></span>
-                );
-              })}
-            </div>
+          <div class={styles.h}>
+            {auxiliarys.value?.h.map((h, i) => {
+              return (
+                <div
+                  key={i}
+                  // style={{ left: `${h.x}px`, top: `${h.y}px`, width: `${h.len}px` }}
+                  style={{ left: `0px`, top: `${h.y}px`, width: `${width.value}px` }}
+                  class={[styles.line]}
+                ></div>
+              );
+            })}
+          </div>
+          <div class={styles.v}>
+            {auxiliarys.value?.v.map((v, i) => {
+              return (
+                <div
+                  key={i}
+                  // style={{ left: `${v.x}px`, top: `${v.y}px`, height: `${v.len}px` }}
+                  style={{ left: `${v.x}px`, top: `0`, height: `${height.value}px` }}
+                  class={[styles.line]}
+                ></div>
+              );
+            })}
           </div>
         </div>
       );
@@ -228,4 +227,4 @@ const EditorView = defineComponent({
 
 export default EditorView;
 
-export interface EditorViewInstance extends InstanceType<typeof EditorView> {}
+export interface EditorViewInstance extends InstanceType<typeof EditorView> { }

@@ -40,7 +40,6 @@ const useWidgetRenderFunc = () => {
     const { offset, type, layer, size } = option;
     const [x, y] = [layer.x - offset.l, layer.y - offset.t];
     let result = {};
-    console.log(type)
     if (type.includes('l')) {
       const w = size.width - (x - size.x);
       const h = size.height - (y - size.y);
@@ -105,7 +104,7 @@ const useWidgetRenderFunc = () => {
       .forEach((w) => {
         const wSize = getElementSize(document.getElementById(w.id));
         if (wSize) {
-          const { x, y, width, height } = wSize;
+          let { x, y, width, height } = wSize;
           // 竖线(垂直)
           // 中心
           if (x + width / 2 === aSize.x + aSize.width / 2) {
@@ -127,14 +126,6 @@ const useWidgetRenderFunc = () => {
               const len = y > aSize.y ? y - aSize.y + height : aSize.y - y + aSize.height;
               const left = x > aSize.x ? x : aSize.x;
               const algin = x > aSize.x ? aSize.x : x + width;
-              v.push({ algin, x: left, y: top, len });
-            }
-            // 左中 右中
-            if (x === aSize.x + aSize.width / 2 || x + width / 2 === aSize.x) {
-              const top = y > aSize.y ? aSize.y : y;
-              const len = y > aSize.y ? y - aSize.y + height : aSize.y - y + aSize.height;
-              const left = x > aSize.x ? x : aSize.x;
-              const algin = x > aSize.x ? aSize.x : x + width / 2;
               v.push({ algin, x: left, y: top, len });
             }
           }
@@ -160,14 +151,6 @@ const useWidgetRenderFunc = () => {
               const top = y > aSize.y ? aSize.y + aSize.height : y + height;
               const algin = y > aSize.y ? aSize.y : y + height;
               h.push({ algin, x: left, y: top, len: len });
-            }
-            // 中上，中底
-            if (y === aSize.y + aSize.height / 2 || y + height / 2 === aSize.y) {
-              const left = x > aSize.x ? aSize.x : x;
-              const len = x > aSize.x ? x - aSize.x + width : aSize.x - x + aSize.width;
-              const top = y > aSize.y ? y : y + height / 2;
-              const algin = y > aSize.y ? aSize.y : y + height / 2;
-              h.push({ algin, x: left, y: top, len });
             }
           }
         }

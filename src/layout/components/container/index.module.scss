@@ -1,11 +1,10 @@
 .layoutContainer {
-  margin: 16px 16px 16px;
   padding: 15px;
   height: calc(100% - 32px);
   background-color: #fff;
   border-radius: 8px;
-  box-sizing: border-box;
-  overflow: scroll;
+  // box-sizing: border-box;
+  overflow-y: scroll;
   transform: translate3d(0px, 0, 0);
   transition: width 0.28s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
@@ -16,7 +15,8 @@
 }
 
 .editor {
-  padding: 0px;
+  padding-bottom: 0;
+  height: 100%;
   border-radius: 0px;
   background-color: transparent;
 }

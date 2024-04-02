@@ -1,4 +1,4 @@
-import { defineComponent, ref, type PropType, onMounted, inject, computed, watch, watchPostEffect, reactive } from 'vue';
+import { defineComponent, ref, type PropType, onMounted, inject, computed, watch, reactive } from 'vue';
 import styles from './index.module.scss';
 import { DrawerRuleTypeKey } from '../inject.key';
 import { _uuid } from '@/utils';
@@ -8,7 +8,6 @@ import { getTeleport } from '@antv/x6-vue-shape';
 import RuleText from '@/rule/lib/text';
 import useElement from '@/composables/useElement';
 import { ActiveEdge, Connecting, Grid, Highlighting, Panning, Ports } from './x6-config';
-import { usePortsInteractive } from './useInteractive';
 import { usePlugin } from './x6-use';
 import { useEdgetFuntion, useNodeFunction } from './x6-function';
 import { CustomRegister } from './x6-custom-register';
@@ -27,7 +26,6 @@ const RuleEditorView = defineComponent({
     const drawer = inject(DrawerRuleTypeKey);
     const mainRef = ref();
     const { getElRect } = useElement();
-    // const { visiblePorts } = usePortsInteractive();
 
     const size = computed(() => getElRect(mainRef.value as HTMLDivElement))
     const container = ref<{ left: number, top: number }>();
@@ -106,13 +104,13 @@ const RuleEditorView = defineComponent({
       CustomRegister().vueNode(RuleText);
 
       // 选中的节点
-      graph.value.on('node:click', ({ node }: any) => {
+      graph.value.on('node:selected', ({ node }: any) => {
         // console.log('node:click', node);
         activeNode.value = node;
       })
 
       // 选中的连接线（边）
-      graph.value.on('edge:click', ({ edge }: any) => {
+      graph.value.on('edge:selected', ({ edge }: any) => {
         // console.log('edge:click', edge);
         resetEdget.value = edge.getAttrs();
         edge.setAttrs(ActiveEdge)

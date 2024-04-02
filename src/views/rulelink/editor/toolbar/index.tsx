@@ -2,26 +2,29 @@ import { defineComponent, inject, ref } from 'vue';
 import styles from './index.module.scss';
 import { Button, Space, Tooltip, Divider, MessagePlugin } from 'tdesign-vue-next';
 import { DrawerRuleTypeKey, RuleGraphHistoryKey, RuleGraphKey } from '../inject.key';
-import type { DrawerRulePropertyType } from '../types';
+import type { KRuleParam } from '../types';
 import { Fullscreen2Icon, FullscreenExit1Icon, RollbackIcon, RollfrontIcon } from 'tdesign-icons-vue-next';
 import ruleStore from '@/store/rule-store';
+import { drawerPropertyTypeValue } from '@/constants';
+
+const btns: Array<KRuleParam> = ['property', 'widget'];
 
 const RuleToobar = defineComponent({
   name: 'RuleToobar',
-  emits: ['propertyChange', 'screen', 'save', 'undo', 'redo'],
+  emits: ['save', 'undo', 'redo'],
   setup(_, { emit }) {
     const drawer = inject(DrawerRuleTypeKey);
     const graph = inject(RuleGraphKey);
     const hisotry = inject(RuleGraphHistoryKey);
     const screen = ref(false);
-    
-    const themeChange = (type: keyof DrawerRulePropertyType) => (drawer?.value[type] ? 'primary' : 'default');
-    
-    const onDrawer = (type: keyof DrawerRulePropertyType) => {
+
+    const themeChange = (type: KRuleParam) => (drawer?.value[type] ? 'primary' : 'default');
+
+    const onDrawer = (type: KRuleParam) => {
       if (!drawer) return;
       drawer.value[type] = !drawer.value[type];
     };
-    
+
     const onScreen = () => {
       screen.value = !screen.value;
       const { body } = ruleStore();
@@ -62,9 +65,13 @@ const RuleToobar = defineComponent({
             <Tooltip content={screen.value ? '退出全屏' : '全屏'}>
               <Button onClick={onScreen} icon={() => (screen.value ? <FullscreenExit1Icon /> : <Fullscreen2Icon />)} />
             </Tooltip>
-            <Button theme={themeChange('widget')} onClick={() => onDrawer('widget')}>
-              部件
-            </Button>
+            {
+              btns.map((key, i) => {
+                return <Button key={i} theme={themeChange(key)} onClick={() => onDrawer(key)}>
+                  {drawerPropertyTypeValue[key]}
+                </Button>
+              })
+            }
           </Space>
         </div>
       );
