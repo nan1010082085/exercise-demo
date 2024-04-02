@@ -1,9 +1,10 @@
 import { defineComponent, inject, ref } from 'vue';
 import styles from './index.module.scss';
-import { Button, Space, Tooltip } from 'tdesign-vue-next';
+import { Button, Space, Tooltip, Divider, MessagePlugin } from 'tdesign-vue-next';
 import { DrawerRuleTypeKey, RuleGraphHistoryKey, RuleGraphKey } from '../inject.key';
 import type { DrawerRulePropertyType } from '../types';
 import { Fullscreen2Icon, FullscreenExit1Icon, RollbackIcon, RollfrontIcon } from 'tdesign-icons-vue-next';
+import ruleStore from '@/store/rule-store';
 
 const RuleToobar = defineComponent({
   name: 'RuleToobar',
@@ -13,16 +14,23 @@ const RuleToobar = defineComponent({
     const graph = inject(RuleGraphKey);
     const hisotry = inject(RuleGraphHistoryKey);
     const screen = ref(false);
-
+    
     const themeChange = (type: keyof DrawerRulePropertyType) => (drawer?.value[type] ? 'primary' : 'default');
-
+    
     const onDrawer = (type: keyof DrawerRulePropertyType) => {
       if (!drawer) return;
       drawer.value[type] = !drawer.value[type];
     };
-
+    
     const onScreen = () => {
-      emit('screen', (screen.value = !screen.value));
+      screen.value = !screen.value;
+      const { body } = ruleStore();
+      if (document.fullscreenEnabled) {
+        screen.value ? body?.requestFullscreen() : document?.exitFullscreen();
+      } else {
+        screen.value = false;
+        MessagePlugin.warning('当前浏览器不支持全屏');
+      }
     };
 
     const onSave = () => {
@@ -42,7 +50,7 @@ const RuleToobar = defineComponent({
           <Space class={styles.toolbarLeft} size={'small'}>
             <Button onClick={onSave}>保存</Button>
           </Space>
-          <Space class={styles.content} size={'small'}>
+          <Space class={styles.content} size={'small'} separator={() => <Divider layout="vertical" />}>
             <Tooltip content={'后退'}>
               <Button disabled={!hisotry?.undo} size={'small'} icon={() => <RollbackIcon />} onClick={onUndo}></Button>
             </Tooltip>

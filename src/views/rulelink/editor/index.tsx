@@ -1,20 +1,21 @@
-import { defineComponent, provide, reactive, ref } from 'vue';
+import { defineComponent, onMounted, provide, reactive, ref } from 'vue';
 import styles from './index.module.scss';
 import type { DrawerRulePropertyType } from './types';
 import { DrawerRuleTypeKey, RuleGraphHistoryKey, RuleGraphKey } from './inject.key';
 import RuleToobar from './toolbar';
 import RuleDrawer from './rule-drawer';
 import RuleEditorView from './main';
-import { MessagePlugin } from 'tdesign-vue-next';
 import { onBeforeRouteLeave, useRouter } from 'vue-router';
 import useDialog from '@/composables/useDialog';
 import defaultRuleBaseJson from '@assets/default-json/rule.base.json';
+import ruleStore from '@/store/rule-store';
 
 const RuleEditor = defineComponent({
   name: 'RuleEditor',
   setup() {
     const router = useRouter();
-    const ruleEditorRef = ref();
+    const { addBody } = ruleStore();
+    const ruleEditorRef = ref<HTMLDivElement>();
     const { confirm } = useDialog();
     const buttonType = ref('');
     const drawer = ref<DrawerRulePropertyType>({
@@ -49,14 +50,6 @@ const RuleEditor = defineComponent({
       }
     });
 
-    const screenChange = (value: boolean) => {
-      if (document.fullscreenEnabled) {
-        value ? ruleEditorRef.value?.requestFullscreen() : document?.exitFullscreen();
-      } else {
-        MessagePlugin.warning('当前浏览器不支持全屏');
-      }
-    };
-
     const saveChange = () => {
       // buttonType.value = 'save';
       // confirm('确认', '确认保存当前规则链吗？', { theme: 'info' }).then(({ trigger }) => {
@@ -70,10 +63,14 @@ const RuleEditor = defineComponent({
       console.log(json)
     };
 
+    onMounted(() => {
+      addBody(ruleEditorRef);
+    })
+
     return () => {
       return (
         <div ref={ruleEditorRef} class={styles['editor-rule']}>
-          <RuleToobar onScreen={screenChange} onSave={saveChange} />
+          <RuleToobar onSave={saveChange} />
           <RuleDrawer />
           <RuleEditorView v-model={Graph.value} data={data.value} onHistory={historyChange} />
         </div>

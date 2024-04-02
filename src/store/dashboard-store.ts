@@ -1,11 +1,16 @@
 import type { DashboardModels } from '@/constants/dashboard.models';
 import type { WidgetModels } from '@/constants/widget.models';
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import { ref, toValue, type Ref } from 'vue';
 import dashboardBase from '@/assets/default-json/dashboard.base.json';
 
 export const dashboardStore = defineStore('dashboard', () => {
+  const body = ref();
   const board = ref<DashboardModels>(dashboardBase);
+
+  const addBody = (el: Ref<HTMLDivElement | undefined>) => {
+    body.value = toValue(el)
+  }
 
   const createdBoard = (data: DashboardModels) => {
     board.value = data;
@@ -29,7 +34,9 @@ export const dashboardStore = defineStore('dashboard', () => {
   };
 
   return {
+    body,
     board,
+    addBody,
     createdBoard,
     getWidgets,
     getWidget,

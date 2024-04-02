@@ -1,4 +1,4 @@
-import { defineComponent, ref, provide } from 'vue';
+import { defineComponent, ref, provide, onMounted } from 'vue';
 import { onBeforeRouteLeave, useRouter } from 'vue-router';
 import styles from './index.module.scss';
 import useDialog from '@/composables/useDialog';
@@ -6,15 +6,16 @@ import WidgetDrawer from './widget-drawer';
 import Toolbar from './toolbar';
 import type { DrawerPropertyType } from './types';
 import { DrawerTypeKey } from './inject.key';
-import { MessagePlugin } from 'tdesign-vue-next';
 import EditorView from './main';
+import { dashboardStore } from '@/store/dashboard-store';
 
 const Editor = defineComponent({
   name: 'Editor',
   setup() {
     const router = useRouter();
     const { confirm } = useDialog();
-    const editorRef = ref<HTMLElement>();
+    const editorRef = ref<HTMLDivElement>();
+    const { addBody } = dashboardStore();
     const buttonType = ref<'' | 'save'>('');
 
     const drawer = ref<DrawerPropertyType>({
@@ -37,18 +38,6 @@ const Editor = defineComponent({
       }
     });
 
-    const drwerPropertyChange = (type: keyof DrawerPropertyType) => {
-      drawer.value[type] = !drawer.value[type];
-    };
-
-    const screenChange = (value: boolean) => {
-      if (document.fullscreenEnabled) {
-        value ? editorRef.value?.requestFullscreen() : document?.exitFullscreen();
-      } else {
-        MessagePlugin.warning('当前浏览器不支持全屏');
-      }
-    };
-
     const saveChange = () => {
       buttonType.value = 'save';
       confirm('确认', '确认保存当前仪表板吗？', { theme: 'info' }).then(({ trigger }) => {
@@ -60,10 +49,14 @@ const Editor = defineComponent({
       });
     };
 
+    onMounted(() => {
+      addBody(editorRef);
+    })
+
     return () => {
       return (
         <div ref={editorRef} class={styles.editor}>
-          <Toolbar onPropertyChange={drwerPropertyChange} onSave={saveChange} onScreen={screenChange} />
+          <Toolbar onSave={saveChange} />
           <WidgetDrawer />
           <EditorView />
         </div>

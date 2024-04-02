@@ -1,9 +1,10 @@
 import { defineComponent, inject, ref } from 'vue';
 import styles from './index.module.scss';
-import { Button, Space, Tooltip } from 'tdesign-vue-next';
+import { Button, MessagePlugin, Space, Tooltip } from 'tdesign-vue-next';
 import { DrawerTypeKey } from '../inject.key';
 import type { DrawerPropertyType } from '../types';
 import { Fullscreen2Icon, FullscreenExit1Icon } from 'tdesign-icons-vue-next';
+import { dashboardStore } from '@/store/dashboard-store';
 
 const Toolbar = defineComponent({
   name: 'Toolbar',
@@ -15,11 +16,19 @@ const Toolbar = defineComponent({
     const themeChange = (type: keyof DrawerPropertyType) => (drawer?.value[type] ? 'primary' : 'default');
 
     const onDrawer = (type: keyof DrawerPropertyType) => {
-      emit('propertyChange', type);
+      if (!drawer) return;
+      drawer.value[type] = !drawer.value[type];
     };
 
     const onScreen = () => {
-      emit('screen', (screen.value = !screen.value));
+      screen.value = !screen.value;
+      const { body } = dashboardStore();
+      if (document.fullscreenEnabled) {
+        screen.value ? body?.requestFullscreen() : document?.exitFullscreen();
+      } else {
+        screen.value = false;
+        MessagePlugin.warning('当前浏览器不支持全屏');
+      }
     };
 
     const onSave = () => {
@@ -49,4 +58,4 @@ const Toolbar = defineComponent({
 
 export default Toolbar;
 
-export interface ToolbarInstance extends InstanceType<typeof Toolbar> {}
+export interface ToolbarInstance extends InstanceType<typeof Toolbar> { }
