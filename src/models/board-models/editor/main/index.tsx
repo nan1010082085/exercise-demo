@@ -5,7 +5,7 @@ import { widgetDefualt, type ManifestModels, type WidgetModels } from '@/constan
 import { _uuid } from '@/utils';
 import EWidgetRender, { type LayerSize, type TouchType, type OffsetType } from '@/components/e-widget-render';
 import { dashboardStore } from '@/store/dashboard-store';
-import * as Widgets from '@/widget';
+import * as Widgets from '@board-models/widget/lib';
 import { cloneDeep } from 'lodash-es';
 import useElement from '@/composables/useElement';
 import useWidgetRenderFunc, { type AuxiliaryResult } from '@/composables/useWidgetRender';

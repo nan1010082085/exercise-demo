@@ -49,19 +49,19 @@ export default <RouteRecordRaw[]>[
         name: 'widget',
         path: '/assets/widget',
         meta: {
-          title: '部件库',
+          title: '仪表板部件',
           icon: 'share'
         },
-        component: () => import('@/widget')
+        component: () => import('@board-models/widget')
       },
       {
-        name: 'rule',
-        path: '/assets/rule',
+        name: 'flow',
+        path: '/assets/flow',
         meta: {
-          title: '规则库',
+          title: '流程部件',
           icon: 'link'
         },
-        component: () => import('@/rule')
+        component: () => import('@flow-models/widget')
       }
     ]
   },

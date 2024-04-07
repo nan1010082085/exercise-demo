@@ -44,7 +44,7 @@ const WidgetDrawer = defineComponent({
               return (
                 <CollapsePanel key={widgetKey.title} class={styles['widget-panel']} header={widgetKey.title}>
                   {widgtKeys.map((type: string) => {
-                    const manifest = mainfestInstall(type, 'borad-models');
+                    const manifest = mainfestInstall(type, 'board-models');
                     return (
                       <div
                         key={type}

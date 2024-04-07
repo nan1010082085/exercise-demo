@@ -2,15 +2,14 @@ import { createRouter, createWebHashHistory, type RouteRecordRaw, type Router } 
 import { useGlobalStore } from '@/store/global-store';
 import PagePaths from './path/page';
 import TextView from './path/text-view';
-import boardWidgetPaths from './path/board';
-import RulePaths from './path/flow';
+import FlowPaths from './path/flow';
 
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
     redirect: '/login',
     component: () => import('@/layout'),
-    children: [...PagePaths, ...boardWidgetPaths, ...RulePaths]
+    children: [...PagePaths, ...FlowPaths]
   },
   {
     path: '/test-v',

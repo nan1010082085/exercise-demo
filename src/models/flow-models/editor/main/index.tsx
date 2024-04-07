@@ -2,7 +2,6 @@ import { defineComponent, ref, type PropType, onMounted, inject, computed, watch
 import styles from './index.module.scss';
 import { DrawerRuleTypeKey } from '../inject.key';
 import { _uuid } from '@/utils';
-import type { RuleWidgetModels } from '@/constants/rule-widget.models';
 import { Graph } from '@antv/x6';
 import { getTeleport } from '@antv/x6-vue-shape';
 import * as flowWidgets from '@flow-models/widget/lib';
@@ -56,7 +55,7 @@ const RuleEditorView = defineComponent({
     const onDrop = (e: DragEvent) => {
       e.preventDefault();
       const data = e.dataTransfer?.getData('widget') as string;
-      const widget = JSON.parse(data) as RuleWidgetModels;
+      const widget = JSON.parse(data);
       const ev = e as DragEvent
       const { left = 0, top = 0 } = container.value ?? {}
       // proprety
@@ -67,7 +66,7 @@ const RuleEditorView = defineComponent({
       widget.position.x = x;
       widget.position.y = y;
       console.log('rule end drop', widget);
-      addNode(widget.type as string, { x, y, w: 240, h: 40 }, widget);
+      addNode(widget.type as string, { x, y, w: 100, h: 100 }, widget);
     };
 
     const addNode = (shape: string, option: { x: number, y: number, w?: number, h?: number }, data?: any) => {

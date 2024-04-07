@@ -9,8 +9,8 @@ import { DrawerTypeKey } from './inject.key';
 import EditorView from './main';
 import { dashboardStore } from '@/store/dashboard-store';
 
-const Editor = defineComponent({
-  name: 'Editor',
+const BoardEditor = defineComponent({
+  name: 'BoardEditor',
   setup() {
     const router = useRouter();
     const { confirm } = useDialog();
@@ -65,4 +65,4 @@ const Editor = defineComponent({
   }
 });
 
-export default Editor;
+export default BoardEditor;

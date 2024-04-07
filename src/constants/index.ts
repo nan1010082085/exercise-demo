@@ -1,5 +1,5 @@
-import type { KDashboardParam } from '@/views/dashboard/editor/types';
-import type { KRuleParam } from '@/views/rulelink/editor/types';
+import type { KDashboardParam } from '@board-models/editor/types';
+import type { KRuleParam } from '@flow-models/editor/types';
 
 export const languageKeyByLabel = {
   zh_CN: '简体中文',

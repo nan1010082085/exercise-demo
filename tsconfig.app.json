@@ -9,6 +9,7 @@
       "@board-models/*": ["src/models/board-models/*"],
       "@flow-models/*": ["src/models/flow-models/*"],
       "@composables/*": ["src/composables/*"],
+      "@components/*": ["src/components/*"],
       "@public/*": ["public/*"],
       "@assets/*": ["src/assets/*"],
       "@workers/*": ["src/workers/*"],

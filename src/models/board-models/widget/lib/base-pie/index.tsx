@@ -12,7 +12,7 @@ import {
 import { LabelLayout, UniversalTransition } from 'echarts/features';
 import { CanvasRenderer } from 'echarts/renderers';
 import { option, type ECOption } from './config/default';
-import widgetDefaultProps, { type widgetDefaultData } from '@/widget/constants/customProps';
+import widgetDefaultProps, { type widgetDefaultData } from '@board-models/widget/constants/customProps';
 
 echarts.use([
   PieChart,

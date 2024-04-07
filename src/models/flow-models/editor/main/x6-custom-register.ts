@@ -26,7 +26,6 @@ export const customRegister = () => {
    * @returns 返回创建实例
    */
   const vueNode = (component: any) => {
-    console.log(component)
     return register({
       shape: String(component.name).toLowerCase(),
       width: 100,

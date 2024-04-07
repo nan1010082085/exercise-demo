@@ -1,7 +1,7 @@
 import { defineComponent, reactive } from 'vue';
 import styles from './styles/index.module.scss';
 import { Button, Pagination } from 'tdesign-vue-next';
-import EContainer from '@/components/e-container';
+import EContainer from '@components/e-container';
 
 const RuleList = defineComponent({
   name: 'RuleList',

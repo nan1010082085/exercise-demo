@@ -52,6 +52,7 @@ export default defineConfig(({ command, mode }) => {
         '@flow-models': fileURLToPath(new URL('./src/models/flow-models', import.meta.url)),
         '@public': fileURLToPath(new URL('./public', import.meta.url)),
         '@composables': fileURLToPath(new URL('./src/composables', import.meta.url)),
+        '@components': fileURLToPath(new URL('./src/components', import.meta.url)),
         '@assets': fileURLToPath(new URL('./src/assets', import.meta.url)),
         '@workers': fileURLToPath(new URL('./src/workers', import.meta.url)),
       }

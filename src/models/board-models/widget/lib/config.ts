@@ -9,6 +9,10 @@
 import type { WidgetConfigOpiton } from '@/constants/widget.models';
 
 const widgetConfig: WidgetConfigOpiton = {
+  base: {
+    title: '基础图表',
+    children: []
+  },
   line: {
     title: '折线图',
     children: ['base-line']

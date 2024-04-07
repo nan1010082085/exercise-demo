@@ -75,11 +75,10 @@ const Dashboard = defineComponent({
 
     const editDashboard = () => {
       createdBoard(cloneDeep(dashboardBase));
-
       let query = {
         type: 'add'
       };
-      router.push({ path: '/editor', query });
+      router.push({ path: '/board-editor', query });
     };
 
     const init = () => {

@@ -2,13 +2,12 @@ import { defineComponent, reactive, ref } from 'vue';
 import styles from './styles/index.module.scss';
 import { Button, Pagination, Image } from 'tdesign-vue-next';
 import { useRouter } from 'vue-router';
-import ECard, { type TData } from '../components/e-card';
 import AddDashboard, { type EAddDashboardInstance } from '@/views/dashboard/add-dashboard';
 import { cloneDeep } from 'lodash-es';
 import dashboardBase from '@/assets/default-json/dashboard.base.json';
 import { dashboardStore } from '@/store/dashboard-store';
-import './lib/manifest';
-import EContainer from '@/components/e-container';
+import EContainer from '@components/e-container';
+import ECard, { type TData } from '@components/e-card';
 
 const Widget = defineComponent({
   name: 'Widget',

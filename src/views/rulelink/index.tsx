@@ -16,12 +16,12 @@ const RuleLink = defineComponent({
 
     const onAdd = () => {
       console.log('onAdd');
-      router.push({ name: 'RuleEditor' });
+      router.push({ name: 'FlowEditor' });
     };
 
     onMounted(() => {
       // #TODO 直接跳转规则编辑界面（测试）
-      router.push({ name: 'RuleEditor' });
+      router.push({ name: 'FlowEditor' });
     });
 
     return () => {

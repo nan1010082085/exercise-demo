@@ -2,8 +2,17 @@ import type { RouteRecordRaw } from 'vue-router';
 
 export default <RouteRecordRaw[]>[
   {
-    name: 'RuleEditor',
-    path: '/rule-editor',
+    name: 'BoardEditor',
+    path: '/board-editor',
+    meta: {
+      title: '编辑仪表盘',
+      icon: ''
+    },
+    component: () => import('@board-models/editor')
+  },
+  {
+    name: 'FlowEditor',
+    path: '/flow-editor',
     meta: {
       title: '编辑规则链',
       icon: ''
