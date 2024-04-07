@@ -1,16 +1,16 @@
 import { createRouter, createWebHashHistory, type RouteRecordRaw, type Router } from 'vue-router';
 import { useGlobalStore } from '@/store/global-store';
 import PagePaths from './path/page';
-import WidgetPaths from './path/widget';
 import TextView from './path/text-view';
-import RulePaths from './path/rule';
+import boardWidgetPaths from './path/board';
+import RulePaths from './path/flow';
 
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
     redirect: '/login',
     component: () => import('@/layout'),
-    children: [...PagePaths, ...WidgetPaths, ...RulePaths]
+    children: [...PagePaths, ...boardWidgetPaths, ...RulePaths]
   },
   {
     path: '/test-v',

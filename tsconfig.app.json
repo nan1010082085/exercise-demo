@@ -6,6 +6,8 @@
     "types": ["tdesign-vue-next/global.d.ts", "vitest/importMeta"],
     "paths": {
       "@/*": ["src/*"],
+      "@board-models/*": ["src/models/board-models/*"],
+      "@flow-models/*": ["src/models/flow-models/*"],
       "@composables/*": ["src/composables/*"],
       "@public/*": ["public/*"],
       "@assets/*": ["src/assets/*"],

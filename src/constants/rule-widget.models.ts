@@ -20,8 +20,9 @@ interface Common {
 export interface ElementsNode extends Common {
   id?: string;
   label: string;
-  type?: 'input' | 'otput' | string;
-  icon: string,
+  component: string;
+  type?: string;
+  icon: string;
   position?: {
     x: number;
     y: number;

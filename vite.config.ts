@@ -48,11 +48,12 @@ export default defineConfig(({ command, mode }) => {
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
+        '@board-models': fileURLToPath(new URL('./src/models/board-models', import.meta.url)),
+        '@flow-models': fileURLToPath(new URL('./src/models/flow-models', import.meta.url)),
         '@public': fileURLToPath(new URL('./public', import.meta.url)),
         '@composables': fileURLToPath(new URL('./src/composables', import.meta.url)),
         '@assets': fileURLToPath(new URL('./src/assets', import.meta.url)),
         '@workers': fileURLToPath(new URL('./src/workers', import.meta.url)),
-        '@widget': fileURLToPath(new URL('./src/widget', import.meta.url))
       }
     },
     plugins: [
