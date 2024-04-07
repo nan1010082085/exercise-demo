@@ -1,4 +1,4 @@
 import type { DefineComponent } from 'vue';
-import RuleCircle from './component';
+import BaseCircle from './component';
 
-export default RuleCircle as DefineComponent;
+export default BaseCircle as DefineComponent;

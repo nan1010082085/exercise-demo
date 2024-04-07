@@ -1,4 +1,4 @@
 import type { DefineComponent } from 'vue';
-import RuleText from './component';
+import BaseText from './component';
 
-export default RuleText as DefineComponent;
+export default BaseText as DefineComponent;

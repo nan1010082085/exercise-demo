@@ -4,7 +4,7 @@ import styles from './index.module.scss';
 import { Content } from 'tdesign-vue-next';
 import { useLayoutStore } from '@/store/layout-store';
 
-const urlNames = ['editor', 'rule-editor'];
+const urlNames = ['board-editor', 'flow-editor'];
 
 const LContainer = defineComponent({
   name: 'LContainer',
@@ -21,7 +21,7 @@ const LContainer = defineComponent({
           class={[
             styles.layoutContainer,
             menuDisplay.value ? styles.translateLeft150 : '',
-            isEditorDashboard.value ? styles.editor : ''
+            isEditorDashboard.value ? styles.editor : styles.list
           ]}
         >
           <RouterView />

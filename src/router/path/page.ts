@@ -23,7 +23,7 @@ export default <RouteRecordRaw[]>[
     name: 'rulelink',
     path: '/rulelink',
     meta: {
-      title: '规则链',
+      title: '流程图',
       icon: 'link-1'
     },
     component: () => import('@/views/rulelink')

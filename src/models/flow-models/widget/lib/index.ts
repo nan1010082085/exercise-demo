@@ -1,4 +1,4 @@
-import RuleText from './text';
-import RuleCircle from './cricle';
+import BaseText from './text';
+import BaseCircle from './cricle';
 
-export { RuleText, RuleCircle };
+export { BaseText, BaseCircle };

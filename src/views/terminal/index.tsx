@@ -9,7 +9,7 @@ const TerminalView = defineComponent({
     return () => {
       return (
         <div class={styles.terminalView}>
-          <TermToobar />
+          {/* <TermToobar /> */}
           <div class={styles['term-content']}>
             <ETermianl />
           </div>

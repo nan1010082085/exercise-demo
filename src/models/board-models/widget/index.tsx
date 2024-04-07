@@ -1,4 +1,4 @@
-import { defineComponent, reactive, ref } from 'vue';
+import { computed, defineComponent, reactive, ref } from 'vue';
 import styles from './styles/index.module.scss';
 import { Button, Pagination, Image } from 'tdesign-vue-next';
 import { useRouter } from 'vue-router';
@@ -8,6 +8,8 @@ import dashboardBase from '@/assets/default-json/dashboard.base.json';
 import { dashboardStore } from '@/store/dashboard-store';
 import EContainer from '@components/e-container';
 import ECard, { type TData } from '@components/e-card';
+import widgetConfig from './lib/config';
+import { mainfestInstall } from '@/utils';
 
 const Widget = defineComponent({
   name: 'Widget',
@@ -21,7 +23,10 @@ const Widget = defineComponent({
     });
     const AddDashboardInstance = ref<EAddDashboardInstance>();
     const formData = ref({});
-    const widgets = ref<TData[]>([{ name: '测试', imageUrl: '' }]);
+    const widgets = computed(() => {
+      const componentKeys = Object.values(widgetConfig).flatMap((c) => c.children) as string[];
+      return componentKeys.map((k) => mainfestInstall(k, 'board-models'));
+    })
 
     const craeteDashboard = (row: any) => {
       // 创建仪表盘
@@ -52,8 +57,8 @@ const Widget = defineComponent({
               default: () =>
                 widgets.value.map((item, i) => {
                   return (
-                    <ECard key={i} data={item} lookBtn={false}>
-                      <Image src={item.imageUrl} fit="fill" style={{ height: '100%' }} />
+                    <ECard key={i} data={item} footer={false}>
+                      <Image src={item.icon} fit="fill" style={{ height: '100%' }} />
                     </ECard>
                   );
                 }),

@@ -17,6 +17,10 @@ const ECard = defineComponent({
         title: ''
       })
     },
+    footer: {
+      type: Boolean as PropType<boolean>,
+      default: true
+    },
     lookBtn: {
       type: Boolean as PropType<boolean>,
       default: true
@@ -64,13 +68,13 @@ const ECard = defineComponent({
                 {slots.default?.()}
               </div>
             ),
-            footer: () => (
+            footer: _.footer ? () => (
               <Space size={'small'}>
                 {_.lookBtn ? btns.value.look : null}
                 {btns.value.edit}
                 {btns.value.del}
               </Space>
-            )
+            ) : null
           }}
         </Card>
       );
