@@ -1,5 +1,8 @@
 import { v4 as uuidV4 } from 'uuid';
 import type { ManifestModels } from '@/constants/widget.models';
+//@ts-ignore
+import html2canvas from 'html2canvas';
+
 /**
  * 获取一个8位ID
  * @description: 工具函数
@@ -24,4 +27,24 @@ export const mainfestInstall = (type: ManifestModels['type'], prefix: string) =>
   const filterManifest = Object.keys(manifestDefault).filter((item) => item.includes(prefix));
   const key = filterManifest[filterManifest.findIndex((item) => item.includes(type))];
   return manifestDefault[key] as ManifestModels;
+};
+
+export const domToImage = async (el: HTMLElement) => {
+  if (!el) return null;
+  const { width, height } = el.getBoundingClientRect();
+  const cvs = (await html2canvas(el, {
+    width,
+    height,
+    backgroundColor: null
+  })) as HTMLCanvasElement;
+  cvs.toBlob((blob) => {
+    console.log(blob);
+    if (blob) {
+      let url = URL.createObjectURL(blob);
+      let a = document.createElement('a');
+      a.setAttribute('download', 'dom-to-image')
+      a.href = url;
+      a.click();
+    }
+  }, 'image/png');
 };

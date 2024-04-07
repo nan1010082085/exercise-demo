@@ -1,4 +1,5 @@
-import BaseText from './text';
-import BaseCircle from './cricle';
+import BaseText from './base-text';
+import BaseCircle from './base-cricle';
+import BaseRect from './base-rect';
 
-export { BaseText, BaseCircle };
+export { BaseText, BaseCircle, BaseRect };

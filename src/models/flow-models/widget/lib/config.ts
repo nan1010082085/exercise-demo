@@ -9,6 +9,6 @@ export const categoryConfig: RuleConfigCollapse[] = [
   {
     key: 'base',
     label: '基础',
-    children: ['text', 'cricle', 'rect']
+    children: ['base-text', 'base-cricle', 'base-rect']
   }
 ];

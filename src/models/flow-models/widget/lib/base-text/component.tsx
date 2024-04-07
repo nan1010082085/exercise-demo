@@ -3,7 +3,7 @@ import styles from './styles/index.module.scss';
 import { Node } from '@antv/x6'
 
 export default defineComponent({
-  name: 'Text',
+  name: 'Base-Text',
   setup(_) {
     const node: (() => Node<Node.Properties> | undefined) | undefined = inject('getNode');
     const text = ref('');

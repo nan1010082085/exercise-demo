@@ -1,10 +1,11 @@
 import type { ManifestModels } from '@/constants/widget.models';
+import icon from '../assets/icon.png';
 
 const manifest: ManifestModels = {
-  id: 'base-rect',
-  name: '矩形',
-  type: 'rect',
-  icon: 'https://tdesign.gtimg.com/demo/demo-image-1.png',
+  id: 'base-cricle',
+  name: '圆',
+  type: 'cricle',
+  icon: icon,
   fields: [
     {
       label: '',

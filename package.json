@@ -38,6 +38,7 @@
     "dayjs": "^1.11.10",
     "echarts": "^5.4.3",
     "graphql": "^16.8.1",
+    "html2canvas": "^1.4.1",
     "jsencrypt": "^3.3.2",
     "lodash-es": "^4.17.21",
     "normalcss": "^2.0.5",
