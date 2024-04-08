@@ -38,7 +38,6 @@ export const domToImage = async (el: HTMLElement) => {
     backgroundColor: null
   })) as HTMLCanvasElement;
   cvs.toBlob((blob) => {
-    console.log(blob);
     if (blob) {
       let url = URL.createObjectURL(blob);
       let a = document.createElement('a');

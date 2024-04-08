@@ -32,11 +32,13 @@
   "dependencies": {
     "@ant-design/icons-vue": "^7.0.1",
     "@antv/x6": "^2.18.1",
+    "@element-plus/icons-vue": "^2.3.1",
     "@micro-zoe/micro-app": "1.0.0-rc.4",
     "@vueuse/core": "^10.4.1",
     "axios": "^1.5.0",
     "dayjs": "^1.11.10",
     "echarts": "^5.4.3",
+    "element-plus": "^2.6.3",
     "graphql": "^16.8.1",
     "html2canvas": "^1.4.1",
     "jsencrypt": "^3.3.2",

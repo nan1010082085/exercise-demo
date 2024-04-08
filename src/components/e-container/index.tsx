@@ -1,5 +1,6 @@
 import EPageHeader from '@/components/e-page-header';
-import { defineComponent} from 'vue';
+import { defineComponent } from 'vue';
+import { ElScrollbar } from 'element-plus';
 import styles from './index.module.scss';
 
 
@@ -17,7 +18,7 @@ const EContainer = defineComponent({
         <div class={styles.widget}>
           <EPageHeader title={_.title}>{slots.header?.()}</EPageHeader>
           <div class={styles.container}>
-            <div class={[styles.cards, 'scrollbar', 'scrollbar-y']}>{slots.default?.()}</div>
+            <ElScrollbar class={[styles.cards]}>{slots.default?.()}</ElScrollbar>
             <div class={styles.footer}>{slots.footer?.()}</div>
           </div>
           {slots.plugin?.()}

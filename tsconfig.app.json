@@ -3,7 +3,7 @@
   "compilerOptions": {
     "composite": true,
     "baseUrl": ".",
-    "types": ["tdesign-vue-next/global.d.ts", "vitest/importMeta"],
+    "types": ["tdesign-vue-next/global.d.ts", "vitest/importMeta", "element-plus/global"],
     "paths": {
       "@/*": ["src/*"],
       "@board-models/*": ["src/models/board-models/*"],

@@ -1,6 +1,7 @@
 import type { Pinia } from 'pinia';
 import type { App } from 'vue';
 import type { Router } from 'vue-router';
+import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
 // wujie
 import WujieVue from 'wujie-vue3';
@@ -11,6 +12,10 @@ import WujieVue from 'wujie-vue3';
 // initWujie params 可以使用扩展运算符动态循环use
 export const initWujie = (app: App<Element>, router: Router, pinpa?: Pinia) => {
   const mount = () => {
+    // element-plus-icons
+    for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+      app.component(key, component)
+    }
     app.use(router);
     if (pinpa) app.use(pinpa);
     // vue use WujieVue Component

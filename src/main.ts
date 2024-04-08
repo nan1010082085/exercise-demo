@@ -4,6 +4,7 @@ import './assets/index.scss';
 import App from './App';
 import router from './router';
 import 'tdesign-vue-next/es/style/index.css';
+import 'element-plus/dist/index.css'
 import 'dayjs/locale/zh-cn';
 import dayjs from 'dayjs';
 import { createPinia } from 'pinia';

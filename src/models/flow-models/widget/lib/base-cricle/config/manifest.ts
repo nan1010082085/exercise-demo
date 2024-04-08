@@ -4,7 +4,7 @@ import icon from '../assets/icon.png';
 const manifest: ManifestModels = {
   id: 'base-cricle',
   name: '圆',
-  type: 'cricle',
+  type: 'base-cricle',
   icon: icon,
   fields: [
     {

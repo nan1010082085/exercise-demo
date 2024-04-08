@@ -59,13 +59,13 @@ const RuleEditorView = defineComponent({
       const ev = e as DragEvent
       const { left = 0, top = 0 } = container.value ?? {}
       // proprety
-      widget.id = _uuid('r');
+      widget.id = _uuid('r_');
       // poisiton 
       const [x, y] = [ev.pageX - left, ev.pageY - top];
       if (!widget.position) widget.position = { x: 0, y: 0 };
       widget.position.x = x;
       widget.position.y = y;
-      console.log('rule end drop', widget);
+      // console.log('rule end drop', widget);
       addNode(widget.type as string, { x, y, w: 100, h: 100 }, widget);
     };
 

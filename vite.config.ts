@@ -7,6 +7,7 @@ import { fileURLToPath, URL } from 'node:url';
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import { TDesignResolver } from 'unplugin-vue-components/resolvers';
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 // --- env ---
 // console.log(process.env.NODE_ENV)
@@ -68,8 +69,8 @@ export default defineConfig(({ command, mode }) => {
       JSX({
         isCustomElement: (tag) => isCustomElementArrys.includes(tag),
       }),
-      AutoImport({ resolvers: [TDesignResolver({ library: 'vue-next' })] }),
-      Components({ resolvers: [TDesignResolver({ library: 'vue-next' })] })
+      AutoImport({ resolvers: [TDesignResolver({ library: 'vue-next' }), ElementPlusResolver()] }),
+      Components({ resolvers: [TDesignResolver({ library: 'vue-next' }), ElementPlusResolver()] })
     ],
     define: {
       'import.meta.vitest': process.env.NODE_ENV=== 'development' ? true : false
