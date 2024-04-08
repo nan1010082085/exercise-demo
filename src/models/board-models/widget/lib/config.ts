@@ -6,7 +6,7 @@
  * @Description 部件分组配置
  */
 
-import type { WidgetConfigOpiton } from '@/constants/widget.models';
+import type { WidgetConfigOpiton } from '@/@types/widget';
 
 const widgetConfig: WidgetConfigOpiton = {
   base: {

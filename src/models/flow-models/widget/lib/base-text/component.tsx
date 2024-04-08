@@ -11,7 +11,7 @@ export default defineComponent({
     watchPostEffect(() => {
       if (node) {
         const { data } = node()!;
-        text.value = data.text ?? '';
+        text.value = data.text ?? 'text';
       }
     })
 

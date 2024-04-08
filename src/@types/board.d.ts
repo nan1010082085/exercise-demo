@@ -6,8 +6,8 @@
  * @Description 仪表盘
  */
 
-import type { BaseGeneralModels, MetadataModels } from './base.models';
-import type { WidgetModels } from './widget.models';
+import type { BaseGeneralModels, MetadataModels } from './base';
+import type { WidgetModels } from './widget';
 
 // 仪表板列表
 export interface DashboardListModels {

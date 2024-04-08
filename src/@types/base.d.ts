@@ -15,3 +15,11 @@ export interface BaseModel {
   width: number;
   height: number;
 }
+
+// menus
+export interface MenuExtend {
+  meta: {
+    title: string;
+    icon: string;
+  };
+}

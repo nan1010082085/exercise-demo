@@ -1,11 +1,5 @@
+import type { MenuExtend } from '@/@types/base';
 import pageRoute from '@/router/path/page';
-
-export interface MenuExtend {
-  meta: {
-    title: string;
-    icon: string;
-  };
-}
 
 export interface EMenu extends MenuExtend {
   name: string;

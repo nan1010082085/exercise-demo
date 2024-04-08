@@ -1,5 +1,5 @@
 import { v4 as uuidV4 } from 'uuid';
-import type { ManifestModels } from '@/constants/widget.models';
+import type { ManifestModels } from '@/@types/widget';
 //@ts-ignore
 import html2canvas from 'html2canvas';
 

@@ -1,4 +1,4 @@
-import type { ManifestModels } from '@/constants/widget.models';
+import type { ManifestModels } from '@/@types/widget';
 
 const manifest: ManifestModels = {
   id: 'base-pie',

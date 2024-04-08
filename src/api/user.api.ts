@@ -1,4 +1,4 @@
-import type { UserAdminModels, UserInfoModels, UserRoleModels } from '@/constants/user.models';
+import type { UserAdminModels, UserInfoModels, UserRoleModels } from '@/@types/user';
 import apiHttp, { Method } from '@/plugins/axios-http';
 
 export const getUserInfo = () => {

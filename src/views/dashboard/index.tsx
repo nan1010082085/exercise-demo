@@ -2,7 +2,7 @@
 import { computed, defineComponent, onMounted, reactive, ref } from 'vue';
 import styles from './index.module.scss';
 import { getDashboardList } from '@/api/dashboard.api';
-import type { DashboardListModels } from '@/constants/dashboard.models';
+import type { DashboardListModels } from '@/@types/board';
 import { Pagination, Space, MessagePlugin, Button, Image } from 'tdesign-vue-next';
 import { useRoute, useRouter } from 'vue-router';
 import usePlugin from '@/composables/usePlugin';

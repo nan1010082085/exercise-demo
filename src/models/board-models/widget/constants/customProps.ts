@@ -1,5 +1,5 @@
-import type { BaseGeneralModels } from '@/constants/base.models';
-import type { WidgetModels } from '@/constants/widget.models';
+import type { BaseGeneralModels } from '@/@types/base';
+import type { WidgetModels } from '@/@types/widget';
 import { type PropType } from 'vue';
 
 export interface widgetDefaultData {

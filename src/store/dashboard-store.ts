@@ -1,5 +1,5 @@
-import type { DashboardModels } from '@/constants/dashboard.models';
-import type { WidgetModels } from '@/constants/widget.models';
+import type { DashboardModels } from '@/@types/board';
+import type { WidgetModels } from '@/@types/widget';
 import { defineStore } from 'pinia';
 import { ref, toValue, type Ref } from 'vue';
 import dashboardBase from '@/assets/default-json/dashboard.base.json';

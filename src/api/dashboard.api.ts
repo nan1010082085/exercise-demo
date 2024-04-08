@@ -1,4 +1,4 @@
-import type { DashboardListModels } from '@/constants/dashboard.models';
+import type { DashboardListModels } from '@/@types/board';
 import apiHttp, { Method } from '@/plugins/axios-http';
 
 export const getDashboardList = () => {

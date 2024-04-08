@@ -10,12 +10,12 @@ import {
   type TableRowData
 } from 'tdesign-vue-next';
 import { getUserAmdinList } from '@/api/user.api';
-import type { UserAdminModels } from '@/constants/user.models';
 import { DebugType } from '@/constants/debug.models';
 import usePlugin from '@/composables/usePlugin';
 import { useRoute } from 'vue-router';
 import useIndexedDB from '@/composables/useIndexedDB';
 import EContainer from '@/components/e-container';
+import type { UserAdminModels } from '@/@types/user';
 
 const columnDatas = [
   {

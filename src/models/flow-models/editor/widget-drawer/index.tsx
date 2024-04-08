@@ -5,7 +5,7 @@ import usePlugin from '@/composables/usePlugin';
 import { Collapse, CollapsePanel, Image as TImage } from 'tdesign-vue-next';
 import { categoryConfig } from '@flow-models/widget/lib/config';
 import { mainfestInstall } from '@/utils';
-import type { ManifestModels } from '@/constants/widget.models';
+import type { ManifestModels } from '@/@types/widget';
 
 const RuleDrawer = defineComponent({
   name: 'RuleDrawer',

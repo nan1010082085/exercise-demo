@@ -7,7 +7,7 @@
  */
 
 import type { OffsetType, TouchType } from '@/components/e-widget-render';
-import type { WidgetModels } from './../constants/widget.models';
+import type { WidgetModels } from '../@types/widget';
 import { isUndefinedOrNull } from '@/utils';
 import { dashboardStore } from '@/store/dashboard-store';
 import useElement from './useElement';

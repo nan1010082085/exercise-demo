@@ -1,13 +1,14 @@
 import { computed, defineComponent, inject, onMounted, ref } from 'vue';
 import styles from './index.module.scss';
 import { DrawerTypeKey } from '../inject.key';
-import { widgetDefualt, type ManifestModels, type WidgetModels } from '@/constants/widget.models';
+import { type ManifestModels, type WidgetModels } from '@/@types/widget';
 import { Collapse, CollapsePanel, Image as TImage } from 'tdesign-vue-next';
 import widgetConfig from '@board-models/widget/lib/config';
 import { dashboardStore } from '@/store/dashboard-store';
 import { cloneDeep } from 'lodash-es';
 import { _uuid, mainfestInstall } from '@/utils';
 import usePlugin from '@/composables/usePlugin';
+import { widgetDefualt } from '@/constants/widget.models';
 
 const WidgetDrawer = defineComponent({
   name: 'WidgetDrawer',

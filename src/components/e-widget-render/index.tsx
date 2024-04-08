@@ -1,6 +1,6 @@
 import { computed, defineComponent, ref, type PropType } from 'vue';
 import styles from './index.module.scss';
-import type { WidgetModels } from '@/constants/widget.models';
+import type { WidgetModels } from '@/@types/widget';
 
 export type LayerSize = { layerX: number; layerY: number };
 export type OffsetType = { l: number; t: number };

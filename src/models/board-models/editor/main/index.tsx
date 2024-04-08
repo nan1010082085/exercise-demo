@@ -1,7 +1,7 @@
 import { computed, defineComponent, inject, ref } from 'vue';
 import styles from './index.module.scss';
 import { DrawerTypeKey } from '../inject.key';
-import { widgetDefualt, type ManifestModels, type WidgetModels } from '@/constants/widget.models';
+import { type ManifestModels, type WidgetModels } from '@/@types/widget';
 import { _uuid } from '@/utils';
 import EWidgetRender, { type LayerSize, type TouchType, type OffsetType } from '@/components/e-widget-render';
 import { dashboardStore } from '@/store/dashboard-store';
@@ -10,6 +10,7 @@ import { cloneDeep } from 'lodash-es';
 import useElement from '@/composables/useElement';
 import useWidgetRenderFunc, { type AuxiliaryResult } from '@/composables/useWidgetRender';
 import { useElementSize } from '@vueuse/core'
+import { widgetDefualt } from '@/constants/widget.models';
 
 const EditorView = defineComponent({
   name: 'EditorView',

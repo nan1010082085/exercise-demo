@@ -1,4 +1,4 @@
-import type { ManifestModels } from '@/constants/widget.models';
+import type { ManifestModels } from '@/@types/widget';
 import icon from '../assets/icon.png';
 
 const manifest: ManifestModels = {
