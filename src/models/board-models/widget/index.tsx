@@ -57,7 +57,7 @@ const Widget = defineComponent({
               default: () =>
                 widgets.value.map((item, i) => {
                   return (
-                    <ECard key={i} data={item} footer={false}>
+                    <ECard key={i} data={item} title={item.name} footer={false}>
                       <Image src={item.icon} fit="fill" style={{ height: '100%' }} />
                     </ECard>
                   );

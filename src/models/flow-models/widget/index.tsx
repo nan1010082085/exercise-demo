@@ -4,7 +4,7 @@ import { Button, Pagination, Image } from 'tdesign-vue-next';
 import EContainer from '@components/e-container';
 import { mainfestInstall } from '@/utils'
 import { categoryConfig } from './lib/config'
-import ECard, { type TData } from '@components/e-card';
+import ECard from '@components/e-card';
 
 const RuleList = defineComponent({
   name: 'RuleList',
@@ -27,7 +27,7 @@ const RuleList = defineComponent({
             {{
               default: () => list.value.map((item, i) => {
                 return (
-                  <ECard key={i} data={item} footer={false} lookBtn={false}>
+                  <ECard key={i} data={item} title={item.name} footer={false} lookBtn={false}>
                     <Image src={item.icon} fit="fill" style={{ height: '100%' }} />
                   </ECard>
                 );

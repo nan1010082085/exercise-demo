@@ -107,6 +107,7 @@ const Dashboard = defineComponent({
                     <ECard
                       key={i}
                       data={item}
+                      title={item.name}
                       onImageClick={editDashboard}
                       onLook={onRowClick}
                       onEdit={onEdit}

@@ -17,6 +17,10 @@ const ECard = defineComponent({
         title: ''
       })
     },
+    title: {
+      type: String as PropType<string>,
+      defult: '标题',
+    },
     footer: {
       type: Boolean as PropType<boolean>,
       default: true
@@ -61,7 +65,7 @@ const ECard = defineComponent({
 
     return () => {
       return (
-        <Card title={_card.value?.name} class={styles['card-wrapper']} bordered hoverShadow>
+        <Card title={_.title} class={styles['card-wrapper']} bordered hoverShadow>
           {{
             default: () => (
               <div class={styles['card-image']} onClick={() => emit('imageClick', _card.value)}>

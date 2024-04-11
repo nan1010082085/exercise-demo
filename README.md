@@ -9,6 +9,8 @@
 ```text
 > tdesign-icons-vue-next;
 > tdesign-vue-next;
+> element-plus;
+> @mdi/js
 ```
 
 ## 规则链
@@ -30,6 +32,10 @@
 
 ```text
 > 目录 src/test-v
+>  || js-components
+>  || vue-components
+>  || wujie-components
+>  || microApp-components
 ```
 
 通过动态识别路由 **import.meta.glob** 和 **path.match** 实现导航

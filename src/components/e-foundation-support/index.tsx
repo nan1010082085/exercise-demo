@@ -205,6 +205,7 @@ const EWidgetRender = defineComponent({
       eventf = events.touch;
       elementDown(e)
     }
+    
     const mouseDown = (e: MouseEvent) => {
       eventf = events.mouse;
       emit('click', e);

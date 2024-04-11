@@ -5,11 +5,11 @@ import { _uuid } from '@/utils';
 import { Graph } from '@antv/x6';
 import { getTeleport } from '@antv/x6-vue-shape';
 import * as flowWidgets from '@flow-models/widget/lib';
-import useElement from '@composables/useElement';
 import { ActiveEdge, Connecting, Grid, Highlighting, Panning, Ports } from './x6-config';
 import { usePlugin } from './x6-use';
 import { useEdgetFuntion, useNodeFunction } from './x6-function';
 import { customRegister } from './x6-custom-register';
+import { useElementBounding } from '@vueuse/core';
 
 const TeleportComponent = getTeleport();
 
@@ -24,10 +24,8 @@ const RuleEditorView = defineComponent({
   setup(_, { emit }) {
     const drawer = inject(DrawerRuleTypeKey);
     const mainRef = ref();
-    const { getElRect } = useElement();
 
-    const size = computed(() => getElRect(mainRef.value as HTMLDivElement))
-    const container = ref<{ left: number, top: number }>();
+    const size = useElementBounding(mainRef.value as HTMLDivElement)
 
     const graph = ref();
     const graphRef = ref()
@@ -41,27 +39,18 @@ const RuleEditorView = defineComponent({
     // reset styles
     const resetEdget = ref()
 
-    // watch mounted el.size
-    watch(() => size.value, (val) => {
-      if (val) {
-        container.value = {
-          left: val.x,
-          top: val.y
-        }
-      }
-    }, { flush: 'post' })
-
 
     const onDrop = (e: DragEvent) => {
       e.preventDefault();
       const data = e.dataTransfer?.getData('widget') as string;
       const widget = JSON.parse(data);
       const ev = e as DragEvent
-      const { left = 0, top = 0 } = container.value ?? {}
+      const { left, top } = useElementBounding(mainRef.value as HTMLDivElement)
+      console.log(left.value, top.value)
       // proprety
       widget.id = _uuid('r_');
       // poisiton 
-      const [x, y] = [ev.pageX - left, ev.pageY - top];
+      const [x, y] = [ev.pageX - left.value, ev.pageY - top.value];
       if (!widget.position) widget.position = { x: 0, y: 0 };
       widget.position.x = x;
       widget.position.y = y;
