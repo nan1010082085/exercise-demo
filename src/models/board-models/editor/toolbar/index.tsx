@@ -4,7 +4,6 @@ import { Button, MessagePlugin, Space, Tooltip } from 'tdesign-vue-next';
 import { DrawerTypeKey } from '../inject.key';
 import type { KDashboardParam } from '../types';
 import { Fullscreen2Icon, FullscreenExit1Icon } from 'tdesign-icons-vue-next';
-import { dashboardStore } from '@/store/dashboard-store';
 import { drawerPropertyTypeValue } from '@/constants';
 
 const btns: Array<KDashboardParam> = ['widget']
@@ -15,6 +14,7 @@ const Toolbar = defineComponent({
   setup(_, { emit }) {
     const drawer = inject(DrawerTypeKey);
     const screen = ref(false);
+    const toolRef = ref();
 
     const themeChange = (type: KDashboardParam) => (drawer?.value[type] ? 'primary' : 'default');
 
@@ -25,9 +25,8 @@ const Toolbar = defineComponent({
 
     const onScreen = () => {
       screen.value = !screen.value;
-      const { body } = dashboardStore();
       if (document.fullscreenEnabled) {
-        screen.value ? body?.requestFullscreen() : document?.exitFullscreen();
+        screen.value ? toolRef.value?.parentElement?.requestFullscreen() : document?.exitFullscreen();
       } else {
         screen.value = false;
         MessagePlugin.warning('当前浏览器不支持全屏');
@@ -40,7 +39,7 @@ const Toolbar = defineComponent({
 
     return () => {
       return (
-        <div class={styles.toolbar}>
+        <div ref={toolRef} class={styles.toolbar}>
           <Space size={'small'} class={styles.btns}>
             <Button onClick={onSave}>保存</Button>
           </Space>

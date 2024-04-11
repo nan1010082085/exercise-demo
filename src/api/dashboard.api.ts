@@ -1,5 +1,5 @@
 import type { DashboardListModels } from '@/@types/board';
-import apiHttp, { Method } from '@/plugins/axios-http';
+import apiHttp, { Method } from '@/plugins/http';
 
 export const getDashboardList = () => {
   return apiHttp.requset<DashboardListModels[]>({

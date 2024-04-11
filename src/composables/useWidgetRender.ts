@@ -6,17 +6,15 @@
  * @Description 部件渲染操作函数
  */
 
-import type { OffsetType, TouchType } from '@/components/e-widget-render';
 import type { WidgetModels } from '../@types/widget';
 import { isUndefinedOrNull } from '@/utils';
-import { dashboardStore } from '@/store/dashboard-store';
 import useElement from './useElement';
 
 export interface ChangeTouchOption {
   // 鼠标在元素上位置 由 layer 计算得出
-  offset: OffsetType;
+  offset: any;
   // 拖拽类型
-  type: TouchType;
+  type: any;
   //
   layer: { x: number; y: number };
   // 部件的 size

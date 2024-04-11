@@ -36,7 +36,7 @@ class DebugGlobal {
                       border-radius:2px;
                       padding:2px 2px;
                       font-weight:bold;
-                      color:#000;`;
+                      color:#fff;`;
     const bgType = `background: linear-gradient(#00f, #00f);
                     border-radius:2px;
                     padding:2px 2px;
@@ -58,11 +58,11 @@ class DebugGlobal {
   getStatus(status: DebugGlobalProps['status']): { t: string; c: string } {
     switch (status) {
       case 'error':
-        return { t: `error`, c: '#f00, #fff,#fff, #f00' };
+        return { t: `error`, c: '#f00, #f00,#f00, #f00' };
       case 'success':
-        return { t: `success`, c: '#0f0, #fff, #fff, #0f0' };
+        return { t: `success`, c: '#0f0, #0f0, #0f0, #0f0' };
       default:
-        return { t: `info`, c: '#00f, #fff, #fff, #00f' };
+        return { t: `info`, c: '#00f, #00f, #00f, #00f' };
     }
   }
 }

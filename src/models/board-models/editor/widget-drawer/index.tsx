@@ -13,7 +13,7 @@ import { widgetDefualt } from '@/constants/widget.models';
 const WidgetDrawer = defineComponent({
   name: 'WidgetDrawer',
   setup() {
-    const { addWidget } = dashboardStore();
+    const { add } = dashboardStore();
     const widgetsConfig = computed<string[]>(() => Object.keys(widgetConfig));
     const drawer = inject(DrawerTypeKey);
     const defaultValue = ref([0]);
@@ -21,9 +21,9 @@ const WidgetDrawer = defineComponent({
 
     const widgetClick = (e: MouseEvent, manifest: ManifestModels) => {
       const widget = cloneDeep(widgetDefualt) as WidgetModels;
-      widget.id = _uuid('w');
+      widget.id = _uuid('w_');
       widget.manifest = manifest;
-      addWidget(widget);
+      add(widget);
     };
 
     const onDragStart = (e: DragEvent, manifest: ManifestModels) => {

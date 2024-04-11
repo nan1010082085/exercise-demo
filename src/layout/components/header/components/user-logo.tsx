@@ -4,8 +4,7 @@ import { Button, Divider, Popup, Space, MessagePlugin } from 'tdesign-vue-next';
 import { Call1Icon, LogoQqIcon, LogoWechatIcon } from 'tdesign-icons-vue-next';
 import { useRouter } from 'vue-router';
 import VERSION from '@/utils/v.json';
-import type { UserInfoModels } from '@/constants/user.models';
-import { getUserInfo } from '@/api/user.api';
+import type { UserInfoModels } from '@/@types/user';
 
 const UserLogo = defineComponent({
   setup() {
@@ -14,9 +13,7 @@ const UserLogo = defineComponent({
     const userInfo = ref<UserInfoModels>();
 
     const init = () => {
-      getUserInfo().then((res) => {
-        userInfo.value = res.data;
-      });
+
     };
 
     const onUserEdit = () => {

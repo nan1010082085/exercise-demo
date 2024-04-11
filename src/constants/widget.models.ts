@@ -7,7 +7,8 @@ export const widgetDefualt = {
       x: 0,
       y: 0,
       width: 300,
-      height: 150
+      height: 150,
+      z: 1
     }
   },
   metadata: {},

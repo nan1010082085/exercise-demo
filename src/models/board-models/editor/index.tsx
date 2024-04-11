@@ -1,4 +1,4 @@
-import { defineComponent, ref, provide, onMounted } from 'vue';
+import { defineComponent, ref, provide, onMounted, Suspense, nextTick } from 'vue';
 import { onBeforeRouteLeave, useRouter } from 'vue-router';
 import styles from './index.module.scss';
 import useDialog from '@/composables/useDialog';
@@ -8,6 +8,10 @@ import type { DrawerPropertyType } from './types';
 import { DrawerTypeKey } from './inject.key';
 import EditorView from './main';
 import { dashboardStore } from '@/store/dashboard-store';
+import { ElScrollbar } from 'element-plus';
+import dashboardBase from '@/assets/default-json/dashboard.base.json';
+import TooolFooter from './footer';
+import ToolRuler from './ruler';
 
 const BoardEditor = defineComponent({
   name: 'BoardEditor',
@@ -15,11 +19,12 @@ const BoardEditor = defineComponent({
     const router = useRouter();
     const { confirm } = useDialog();
     const editorRef = ref<HTMLDivElement>();
-    const { addBody } = dashboardStore();
+    const { createdBoard, scroll } = dashboardStore();
     const buttonType = ref<'' | 'save'>('');
 
     const drawer = ref<DrawerPropertyType>({
       widget: true,
+      ruler: true,
       auxiliary: true
     });
     provide(DrawerTypeKey, drawer);
@@ -49,16 +54,35 @@ const BoardEditor = defineComponent({
       });
     };
 
+    const handleScroll = (scrollTop: number, scrollLeft: number) => {
+      // console.log(scrollTop, scrollLeft);
+      scroll({
+        scrollTop,
+        scrollLeft
+      })
+    }
+
     onMounted(() => {
-      addBody(editorRef);
+      createdBoard(dashboardBase)
     })
 
     return () => {
       return (
         <div ref={editorRef} class={styles.editor}>
           <Toolbar onSave={saveChange} />
-          <WidgetDrawer />
-          <EditorView />
+          <div class={styles.container}>
+            <WidgetDrawer />
+            <div id="board-canvas-view" class={[styles.scroll, {
+              [styles.visibale_widget]: !drawer.value.widget,
+            }]}>
+              <ToolRuler />
+              <ElScrollbar
+                onScroll={({ scrollTop, scrollLeft }) => { handleScroll(scrollTop, scrollLeft) }}>
+                <EditorView />
+              </ElScrollbar>
+            </div>
+          </div>
+          <TooolFooter />
         </div>
       );
     };

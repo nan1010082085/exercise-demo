@@ -20,9 +20,9 @@ const initUserAdmin = () => {
           name: 'Yang Dong nan',
           wechat: 'nan1010082085',
           qq: '1010082085',
-          email: '',
-          phone: '15117960621',
-          role: '',
+          email: 'nan1010082085@163.com',
+          phone: '',
+          role: '普通管理员',
           createdAt: '2023-11-23 16:26:06',
           updatedAt: '2023年11月23日 16:26:13'
         }

@@ -26,7 +26,7 @@ export interface DashboardListModels {
 export interface DashboardModels {
   id: string | number;
   name: string;
-  general: BaseGeneralModels;
+  general: BaseGeneralModels & { scroll: { scrollLeft: number; scrollTop: number } };
   metadata: MetadataModels;
   widgets: WidgetModels[];
 }

@@ -1,24 +1,13 @@
-import type { Pinia } from 'pinia';
+/**
+ * @description: 注册微前端
+ */
+
 import type { App } from 'vue';
-import type { Router } from 'vue-router';
-import * as ElementPlusIconsVue from '@element-plus/icons-vue'
-
-// wujie
 import WujieVue from 'wujie-vue3';
+import microApp from '@micro-zoe/micro-app';
 
-// jd micro-app
-// import microApp from '@micro-zoe/micro-app';
-
-// initWujie params 可以使用扩展运算符动态循环use
-export const initWujie = (app: App<Element>, router: Router, pinpa?: Pinia) => {
+export const initWujie = (app: App<Element>) => {
   const mount = () => {
-    // element-plus-icons
-    for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
-      app.component(key, component)
-    }
-    app.use(router);
-    if (pinpa) app.use(pinpa);
-    // vue use WujieVue Component
     app.use(WujieVue);
     app.mount('#app');
   };
@@ -41,3 +30,7 @@ export const initWujie = (app: App<Element>, router: Router, pinpa?: Pinia) => {
     mount();
   }
 };
+
+export const startMicroApp = () => {
+  microApp.start({ iframe: true });
+}

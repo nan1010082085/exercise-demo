@@ -2,11 +2,16 @@
   "id": 1,
   "name": "测试",
   "general": {
+    "scroll": {
+      "scrollLeft": 0,
+      "scrollTop": 0
+    },
     "position": {
       "x": 0,
       "y": 0,
       "width": 1920,
-      "height": 1080
+      "height": 1080,
+      "z": 1
     }
   },
   "metadata": {},
@@ -20,7 +25,8 @@
           "x": 397,
           "y": 194,
           "width": 300,
-          "height": 200
+          "height": 200,
+          "z": 1
         }
       },
       "metadata": {},
@@ -47,7 +53,8 @@
           "x": 197,
           "y": 294,
           "width": 300,
-          "height": 200
+          "height": 200,
+          "z": 2
         }
       },
       "metadata": {},
@@ -74,7 +81,8 @@
           "x": 97,
           "y": 14,
           "width": 300,
-          "height": 200
+          "height": 200,
+          "z": 3
         }
       },
       "metadata": {},

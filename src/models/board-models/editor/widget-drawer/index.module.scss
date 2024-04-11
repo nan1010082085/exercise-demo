@@ -1,15 +1,15 @@
 $width: 300px;
 .widget-drawer {
-  position: absolute;
-  left: 0;
-  top: 50px;
   width: $width;
-  height: calc(100% - 50px);
+  height: 100%;
   background: #fff;
   border-right: 1px solid #e5e5e5;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
   overflow-y: auto;
-  transform: translate3d(-310px, 0, 0);
+  flex-basis: 0%;
+  transform: translate3d(-300px, 0, 0);
+  transition: all .3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  animation: vis 0.2s linear;
 
   .widget-card {
     width: calc(($width - 22px) / 2);
@@ -50,15 +50,6 @@ $width: 300px;
 }
 
 .visible {
+  flex-basis: 300px;
   transform: translate3d(0, 0, 0);
-  animation: visibleFrames 0.2s linear;
-}
-
-@keyframes visibleFrames {
-  0% {
-    transform: translate3d(-300px, 0, 0);
-  }
-  100% {
-    transform: translate3d(0, 0, 0);
-  }
 }

@@ -9,12 +9,12 @@ import {
   type TableRowData,
   Tag
 } from 'tdesign-vue-next';
-import type { UserRoleModels } from '@/constants/user.models';
 import { useRoute } from 'vue-router';
 import usePlugin from '@/composables/usePlugin';
 import { DebugType } from '@/constants/debug.models';
 import useIndexedDB from '@/composables/useIndexedDB';
 import EContainer from '@/components/e-container';
+import type { UserRoleModels } from '@/@types/user';
 
 const columnDatas = [
   {

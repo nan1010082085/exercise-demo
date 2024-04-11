@@ -1,6 +1,7 @@
 
 export interface DrawerPropertyType {
   widget: boolean;
+  ruler: boolean;
   auxiliary: boolean
 }
 

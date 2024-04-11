@@ -3,8 +3,6 @@ import EPageHeader from '@/components/e-page-header';
 import styels from './index.module.scss';
 import { defineComponent, onMounted, ref } from 'vue';
 import { Button, Form, FormItem, Input, Space, Switch, Tooltip } from 'tdesign-vue-next';
-import { getUserInfo } from '@/api/user.api';
-import type { UserInfoModels } from '@/constants/user.models';
 import {
   UserOutlined,
   MailOutlined,
@@ -18,6 +16,7 @@ import { DebugType } from '@/constants/debug.models';
 import { getDebugMessage } from '@/utils/debug';
 import { useRoute } from 'vue-router';
 import useIndexedDB from '@/composables/useIndexedDB';
+import type { UserInfoModels } from '@/@types/user';
 
 const EUser = defineComponent({
   name: 'EUser',
@@ -34,12 +33,6 @@ const EUser = defineComponent({
       isPush: false
     });
 
-    // const getUser = () => {
-    //   getUserInfo().then((res) => {
-    //     userInfo.value = res.data;
-    //   });
-    // };
-
     const onSave = () => {
       const path = route.path + ' -> user.on-save';
       debug({ type: DebugType.USER, path, message: getDebugMessage('user.on-save'), status: 'info' });
@@ -49,7 +42,6 @@ const EUser = defineComponent({
       getDBDataById(['userAdmin', 1], ['list'], 'readonly', 'list', 1, (e) => {
         userInfo.value = (e.target as IDBRequest<UserInfoModels>)?.result;
       });
-      // getUser();
     });
 
     return () => {

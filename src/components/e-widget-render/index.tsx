@@ -1,124 +1,86 @@
-import { computed, defineComponent, ref, type PropType } from 'vue';
-import styles from './index.module.scss';
+import { computed, defineComponent, onMounted, onUnmounted, toValue, type PropType } from 'vue';
 import type { WidgetModels } from '@/@types/widget';
-
-export type LayerSize = { layerX: number; layerY: number };
-export type OffsetType = { l: number; t: number };
-export type TouchType = 'lt' | 'lc' | 'lb' | 'ltc' | 'rt' | 'rc' | 'rb' | 'rbc';
-const touchKeys: TouchType[] = ['lt', 'lc', 'lb', 'ltc', 'rt', 'rc', 'rb', 'rbc'];
+import useElementSize, { type ElRect } from '@/composables/useElement';
+import EFoundationSupport from '../e-foundation-support'
+import { dashboardStore } from '@/store/dashboard-store';
+import { useElementBounding } from '@vueuse/core';
 
 const EWidgetRender = defineComponent({
   name: 'EWidgetRender',
   props: {
-    static: {
-      type: Boolean as PropType<boolean>,
-      default: false
-    },
     widget: {
       type: Object as PropType<WidgetModels>,
       default: () => ({})
     },
-    x: {
-      type: Number,
-      validator(value: number) {
-        return !isNaN(value);
-      },
-      default: 0
-    },
-    y: {
-      type: Number,
-      validator(value: number) {
-        return !isNaN(value);
-      },
-      default: 0
-    },
-    w: {
-      type: Number,
-      validator(value: number) {
-        return !isNaN(value);
-      },
-      default: 0
-    },
-    h: {
-      type: Number,
-      validator(value: number) {
-        return !isNaN(value);
-      },
-      default: 0
-    },
-    // 是否选中，选中显示拖拽点
-    isActive: {
+    disabled: {
       type: Boolean as PropType<boolean>,
       default: false
-    }
+    },
+    page: {
+      type: String as PropType<string | HTMLDivElement>,
+      default: null
+    },
+    parent: {
+      type: Boolean as PropType<boolean>,
+      default: false
+    },
   },
-  emits: ['active', 'offset', 'down', 'up', 'touch'],
+  emits: [],
   setup(_, { emit, slots }) {
-    const stylesheet = computed(() => {
-      const {x, y, w, h} = _;
-      return {
-        width: `${w}px`,
-        height: `${h}px`,
-        transform: `translate3d(${x}px, ${y}px, 0)`
-      };
-    });
-    const widget = computed(() => _.widget);
-    const isDown = ref(false);
-    const timer = ref<NodeJS.Timeout>();
-    const onMousedown = (e: MouseEvent & LayerSize) => {
-      if (_.static) return;
-      e.stopPropagation();
-      timer.value && clearTimeout(timer.value);
-      timer.value = setTimeout(() => {
-        isDown.value = true;
-        const [l, t] = [e.layerX - _.x, e.layerY - _.y];
-        emit('offset', { l, t });
-        emit('down');
-      }, 16);
-      emit('active', widget.value);
-    };
+    const { resetToBounbs } = useElementSize();
+    const boardStore = dashboardStore
 
-    const onMouseup = (e: MouseEvent) => {
-      e.stopPropagation();
-      if (isDown.value) {
-        emit('up');
-      }
-    };
+    const activeSet = computed(() => new Set(boardStore().active))
 
-    const onTouch = (e: MouseEvent & LayerSize, type: TouchType) => {
-      e.stopPropagation();
-      if (isDown.value) {
-        const [l, t] = [e.layerX - _.x, e.layerY - _.y];
-        emit('offset', { l, t });
-        emit('touch', type);
-      }
-    };
+    const getParentSize = () => {
+      let el = _.page instanceof HTMLDivElement ? _.page : document.querySelector(_.page) as HTMLDivElement;
+      const { width, height } = useElementBounding(el);
+      return [toValue(width), toValue(height)];
+    }
+
+    const handleActivated = (widget: WidgetModels, shiftKey?: boolean) => {
+      boardStore().activated(widget, shiftKey)
+    }
+
+    const hanldeResizing = (widget: WidgetModels, position: ElRect) => {
+      const [maxLeft, maxTop] = getParentSize()
+      let x = resetToBounbs(position.left, 0, maxLeft - position.width)
+      let y = resetToBounbs(position.top, 0, maxTop - position.height);
+      widget.general.position.x = x;
+      widget.general.position.y = y;
+      widget.general.position.width = position.width;
+      widget.general.position.height = position.height;
+    }
+
+    onMounted(() => { });
+
+    onUnmounted(() => { })
 
     return () => {
-      const touchDom = _.isActive
-        ? touchKeys.map((key, i) => {
-            return (
-              <div
-                key={i}
-                class={[styles.round, styles[key]]}
-                onMousedown={(e) => onTouch(e as MouseEvent & LayerSize, key)}
-                onMouseup={onMouseup}
-              ></div>
-            );
-          })
-        : null;
+      const { id, general } = _.widget;
+      const { x, y, width, height, z } = general.position;
+      const active = activeSet.value.has(_.widget)
+
       return (
-        <div
-          id={widget.value.id}
-          class={[styles.eWidgetContainer]}
-          style={stylesheet.value}
-          onMousedown={(e) => onMousedown(e as MouseEvent & LayerSize)}
-          onMouseup={onMouseup}
+        <EFoundationSupport
+          key={id}
+          id={id}
+          x={x}
+          y={y}
+          w={width}
+          h={height}
+          page={_.page}
+          parent={_.parent}
+          zIndex={z}
+          active={active}
+          disabled={_.disabled}
+          onActivated={(shiftKey?: boolean) => handleActivated(_.widget, shiftKey)}
+          onResizing={(position) => {
+            hanldeResizing(_.widget, position);
+          }}
         >
           {slots.default?.()}
-          {/* 选中后显示拖拽位置点 */}
-          {touchDom}
-        </div>
+        </EFoundationSupport>
       );
     };
   }

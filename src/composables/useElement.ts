@@ -1,41 +1,47 @@
-const useElement = () => {
-  const getElementSize = (el: Element | null) => {
-    if (!el) return;
-    const style = getComputedStyle(el);
-    const w = style.getPropertyValue('width');
-    const h = style.getPropertyValue('height');
-    const transform = style.getPropertyValue('transform');
-    const axis = transform.replace(/[a-z()]+/g, '').split(', ');
-    return {
-      x: isNaN(Number(axis[4])) ? 0 : Number(axis[4]),
-      y: isNaN(Number(axis[5])) ? 0 : Number(axis[5]),
-      width: Number(w.replace('px', '')),
-      height: Number(h.replace('px', ''))
-    };
+const useElementSize = () => {
+  const getPositionSize = (el: HTMLElement | HTMLDivElement | null) => {
+    let position = { left: 0, top: 0 };
+    if (!el) return position;
+    const tran = el.style.transform.match(/^translate\((.+)\)/) ?? [];
+    const [x, y] = tran[1].split(',').map((str) => Number(str.replace(/px/, '')));
+    position.left += x;
+    position.top += y;
+    return position;
   };
 
-  const getElRect = (el: Element | null) => {
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    return {
-      x: rect.x,
-      y: rect.y,
-      w: rect.width,
-      h: rect.height
-    };
+  const getComputedSize = (el: HTMLElement | HTMLDivElement | null): [number, number] => {
+    if (!el) return [0, 0];
+    const style = window.getComputedStyle(el);
+    return [parseFloat(style.getPropertyValue('width')), parseFloat(style.getPropertyValue('height'))];
   };
 
-  const getParentSize = (el: Element | null) => {
-    // const parent = document.querySelector('.main-wrapper');
-    // const parentSize = getElementSize(parent);
-    // return parentSize;
+  const resetToBounbs = (val: number, min: number | null, max: number | null) => {
+    console.log(val, min, max);
+    if (min !== null && val < min) {
+      return min;
+    }
+    if (max !== null && val > max) {
+      return max;
+    }
+    return val;
   };
 
   return {
-    getElementSize,
-    getParentSize,
-    getElRect
+    getPositionSize,
+    getComputedSize,
+    resetToBounbs
   };
 };
 
-export default useElement;
+export interface ElRect {
+  x: number;
+  y: number;
+  left: number;
+  top: number;
+  width: number;
+  height: number;
+}
+
+export type ParentElRect = ElRect;
+
+export default useElementSize;
