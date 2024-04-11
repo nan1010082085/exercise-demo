@@ -3,16 +3,11 @@ import styles from './index.module.scss';
 import { Button, Card, Space } from 'tdesign-vue-next';
 import { DataSearchIcon, CreditcardAddIcon, DeleteIcon } from 'tdesign-icons-vue-next';
 
-export interface TData {
-  name: string;
-  imageUrl: string;
-}
-
 const ECard = defineComponent({
   name: 'ECard',
   props: {
     data: {
-      type: Object as PropType<Partial<TData>>,
+      type: Object as PropType<Partial<any>>,
       defult: () => ({
         title: ''
       })
@@ -87,3 +82,10 @@ const ECard = defineComponent({
 });
 
 export default ECard;
+
+export interface ECardInstance extends InstanceType<typeof ECard> {
+  imageClick: (data: object) => void;
+  look: (data: object) => void;
+  edit: (data: object) => void;
+  del: (data: object) => void;
+}
