@@ -4,10 +4,10 @@ import 'tdesign-vue-next/es/style/index.css';
 import 'element-plus/dist/index.css';
 import type { App } from 'vue';
 import { ElLoading } from 'element-plus';
-import * as ElementPlusIconsVue from '@element-plus/icons-vue'
-// mock 
+import * as ElementPlusIconsVue from '@element-plus/icons-vue';
+// mock
 // import '@plugins/mock';
-
+import SvgIcon from '@jamescoyle/vue-icon';
 
 /**
  * 注册 Element-plus/icons
@@ -18,6 +18,8 @@ const installComponent = (app: App<Element>) => {
   for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     app.component(key, component);
   }
+
+  app.component('svg-icon', SvgIcon);
 };
 
 /**

@@ -1,9 +1,9 @@
 .toolFooter {
+  padding: 0 10px;
   height: 30px;
-  background-color: #fff;
-
-  display: flex;
   justify-content: flex-end;
-  align-items: center;
-  padding: 0 15px;
-}
+  background-color: #fff;
+  :global(.el-button) {
+    padding: 5px;
+  }
+} 

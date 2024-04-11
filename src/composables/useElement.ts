@@ -16,7 +16,6 @@ const useElementSize = () => {
   };
 
   const resetToBounbs = (val: number, min: number | null, max: number | null) => {
-    console.log(val, min, max);
     if (min !== null && val < min) {
       return min;
     }

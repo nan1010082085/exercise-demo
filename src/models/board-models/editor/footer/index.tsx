@@ -1,8 +1,8 @@
 import { defineComponent, inject } from "vue";
 import styles from './index.module.scss';
-import { ElButton } from "element-plus";
 import { DrawerTypeKey } from "../inject.key";
-import { ScaleToOriginal } from "@element-plus/icons-vue";
+import { mdiRulerSquare } from '@mdi/js';
+import { Button, Space } from "tdesign-vue-next";
 
 const TooolFooter = defineComponent({
   emits: [],
@@ -15,9 +15,11 @@ const TooolFooter = defineComponent({
     }
 
     return () => {
-      return <div class={styles.toolFooter}>
-        <ElButton type={drawer?.value['ruler'] ? 'primary' : 'default'} size={'small'} onClick={visible} icon={<ScaleToOriginal />}></ElButton>
-      </div>
+      return <Space align="center" class={styles.toolFooter}>
+        <Button theme={drawer?.value['ruler'] ? 'primary' : 'default'} size={'small'} onClick={visible}>
+          <svg-icon type='mdi' size={16} path={mdiRulerSquare} />
+        </Button>
+      </Space>
     }
   }
 })
