@@ -11,6 +11,7 @@
       "@composables/*": ["src/composables/*"],
       "@components/*": ["src/components/*"],
       "@public/*": ["public/*"],
+      "@plugins/*": ["src/plugins/*"],
       "@assets/*": ["src/assets/*"],
       "@workers/*": ["src/workers/*"],
       "@widget/*": ["src/widget/*"]

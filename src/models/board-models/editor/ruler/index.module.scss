@@ -1,0 +1,39 @@
+$s: 25px;
+.ruler_xais {
+  position: absolute;
+  left: $s;
+  top: 0;
+  height: $s;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.ruler_yais {
+  position: absolute;
+  left: 0;
+  top: $s;
+  width: 100px;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.tool_ruler {
+  position: relative;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+  background-color: #fff;
+}
+
+.clear {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: #fff;
+  :global(.el-button) {
+    width: 20px;
+    height: 20px;
+  }
+}
