@@ -1,5 +1,4 @@
 import type { Meta, StoryObj, StoryContext } from '@storybook/vue3';
-
 import ECard, { type ECardInstance } from '@components/e-card';
 
 const meta: Meta<ECardInstance> = {
@@ -9,17 +8,17 @@ const meta: Meta<ECardInstance> = {
       control: 'function',
       description: '内容点击事件',
       table: {
-        defaultValue: { summary: '(props.data) => void' },
+        defaultValue: { summary: '(data) => void' },
         type: {
           summary: 'Function'
         }
       }
     },
     look: {
-      control: 'function',
+      control: 'click',
       description: '查看按钮',
       table: {
-        defaultValue: { summary: '(props.data) => void' },
+        defaultValue: { summary: '(data) => void' },
         type: {
           summary: 'Function'
         }
@@ -29,7 +28,7 @@ const meta: Meta<ECardInstance> = {
       control: 'function',
       description: '编辑按钮',
       table: {
-        defaultValue: { summary: '(props.data) => void' },
+        defaultValue: { summary: '(data) => void' },
         type: {
           summary: 'Function'
         }
@@ -39,7 +38,7 @@ const meta: Meta<ECardInstance> = {
       control: 'function',
       description: '删除按钮',
       table: {
-        defaultValue: { summary: '(props.data) => void' },
+        defaultValue: { summary: '(data) => void' },
         type: {
           summary: 'Function'
         }
@@ -91,6 +90,16 @@ const meta: Meta<ECardInstance> = {
 export default meta;
 type Story = StoryObj<typeof ECard>;
 
+const parameters = {
+  docs: {
+    source: {
+      transform: (code: string, storyContext: StoryContext) => {
+        return code.replace(/undefined/, 'ECard')
+      }
+    }
+  },
+}
+
 /**
  * @description Typescript tsx
  * @param {*} data
@@ -98,12 +107,12 @@ type Story = StoryObj<typeof ECard>;
  * @param {*} footer
  * @param {*} lookBtn
  */
-export const Basic: Story = {
+export const Parimry: Story = {
   render: (args) => ({
     components: { ECard },
     setup() {
       return () => {
-        return <ECard title={args.title} footer lookBtn>
+        return <ECard title={args.title} footer={args.footer} lookBtn={args.lookBtn}>
           <div>内容</div>
         </ECard>
       }
@@ -117,13 +126,41 @@ export const Basic: Story = {
     footer: true,
     lookBtn: true
   },
-  parameters: {
-    docs: {
-      source: {
-        transform: (code: string, storyContext: StoryContext) => {
-          return code.replace(/undefined/, 'ECard')
-        }
+  parameters
+};
+
+export const Footer: Story = {
+  render: (args) => ({
+    components: { ECard },
+    setup() {
+      return () => {
+        return <ECard title={args.title} footer={args.footer}>
+          <div>内容</div>
+        </ECard>
       }
-    },
+    }
+  }),
+  args: {
+    title: '标题',
+    footer: false,
   },
+  parameters
+};
+
+export const LookBtn: Story = {
+  render: (args) => ({
+    components: { ECard },
+    setup() {
+      return () => {
+        return <ECard title={args.title} lookBtn={args.lookBtn}>
+          <div>内容</div>
+        </ECard>
+      }
+    }
+  }),
+  args: {
+    title: '标题',
+    lookBtn: false,
+  },
+  parameters
 };

@@ -1,17 +1,26 @@
-import { Meta, Title, Subtitle, Source, Canvas, Controls } from '@storybook/blocks';
+import { Meta, Title, Subtitle, Source, Canvas, Controls, Story } from '@storybook/blocks';
 import * as ECardStories from './ECard.stories';
 
 <Meta of={ECardStories} />
 
 <Title> ECard Docs </Title>
 
-<Subtitle>卡片组件</Subtitle>
+## 卡片组件
 <Canvas />
 
-<Subtitle>Code</Subtitle>
-<Source of={ECardStories.Basic} dark={true} />
+## Parimry
+<Story of={ECardStories.Parimry} />
+<Source of={ECardStories.Parimry} dark={true} />
 
-<Subtitle>属性</Subtitle>
-<Controls />
+## Footer 
+<Subtitle>隐藏底部按钮集合 (footer=false)</Subtitle>
+<Story of={ECardStories.Footer} />
+<Source of={ECardStories.Footer} dark={true} />
 
+## LookBtn 
+<Subtitle>隐藏查看按钮 (lookBtn=false)</Subtitle>
+<Story of={ECardStories.LookBtn} />
+<Source of={ECardStories.LookBtn} dark={true} />
 
+## 属性
+<Controls of={ECardStories.Parimry} />
