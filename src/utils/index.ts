@@ -16,10 +16,6 @@ export const isUndefinedOrNull = (value: any) => {
 };
 
 /**
- * @Author Yang (yang dong nan)
- * @Date 2023-12-01 13:52:34
- * @LastEditorAuthors yangdongnan
- * @LastDate 2023-12-01 13:52:34
  * @Description 导出部件配置
  */
 export const mainfestInstall = (type: ManifestModels['type'], prefix: string) => {

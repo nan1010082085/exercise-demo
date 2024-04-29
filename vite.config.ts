@@ -77,7 +77,7 @@ export default defineConfig(({ command, mode }) => {
       'import.meta.vitest': process.env.NODE_ENV=== 'development' ? true : false
     },
     test: {
-      includeSource: ['src/**/*.{js,ts,tsx}']
+      includeSource: ['src/**/*.test.{js,ts,tsx}']
     }
   };
 });

@@ -18,7 +18,7 @@ const axiosDefaults = {
   timeout: 30000
 };
 
-class Client {
+abstract class Client {
   public instance: AxiosInstance;
 
   constructor(public option: CreateAxiosDefaults = axiosDefaults) {
