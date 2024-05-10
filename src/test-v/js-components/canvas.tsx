@@ -1,5 +1,5 @@
 import { defineComponent, onMounted, ref } from "vue";
-import styles from './canvas.module.scss';
+import styles from './styles/canvas.module.scss';
 
 const CanvasComponent = defineComponent({
   name: 'CanvasComponent',

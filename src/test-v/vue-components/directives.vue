@@ -31,7 +31,6 @@ const vScroll = {
   },
 }
 
-
 const vResizeOb = {
   reob: ref<ResizeObserver>(),
   mounted(el: Element, binding: DirectiveBinding) {

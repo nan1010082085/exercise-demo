@@ -1,5 +1,5 @@
 import { defineComponent } from 'vue';
-import styles from './late-text.module.scss';
+import styles from './styles/late-text.module.scss';
 
 const LateTextComponent = defineComponent({
   setup() {

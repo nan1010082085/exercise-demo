@@ -14,12 +14,10 @@ dayjs.locale('zh-cn');
 const pinpa = createPinia();
 const app = createApp(App);
 
-app.use(pinpa).use(router);
-
-initalGlobalRegister(app);
+app.use(pinpa).use(router).use(initalGlobalRegister).use(initWujie);
 
 /// wujie
-initWujie(app);
+// initWujie(app);
 
 // jd micro
 startMicroApp();

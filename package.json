@@ -93,6 +93,7 @@
     "unplugin-auto-import": "^0.16.7",
     "unplugin-vue-components": "^0.25.2",
     "vite": "^4.5.3",
+    "vite-plugin-copy": "^0.1.6",
     "vitest": "^0.34.6",
     "vue-tsc": "^1.8.27"
   },

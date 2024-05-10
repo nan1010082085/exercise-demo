@@ -1,5 +1,5 @@
 import { defineComponent, onMounted, ref, computed } from 'vue';
-import styles from './mouse.module.scss';
+import styles from './styles/mouse.module.scss';
 
 type MouseType = 'page' | 'client' | 'screen';
 

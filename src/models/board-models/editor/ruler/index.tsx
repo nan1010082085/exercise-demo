@@ -1,4 +1,4 @@
-import { Transition, defineComponent, inject, onMounted, ref, watchPostEffect, watchSyncEffect } from "vue";
+import { Transition, defineComponent, inject, ref } from "vue";
 import RulerXAxis from "./xAxis";
 import RulerYAxis from "./yAxis";
 import styles from "./index.module.scss";

@@ -1,0 +1,48 @@
+:root {
+  --input-height: 32px;
+}
+.input-box {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 40px;
+  width: 200px;
+  border-bottom: 1px solid gray;
+  position: relative;
+  input {
+    border: none;
+    outline: none;
+    width: 100%;
+    height: var(--input-height);
+    /* 撑开 shadow-root 内容 */
+    font-size: 22px;
+  }
+  label {
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: gray;
+    font-size: 16px;
+    transition: transform 0.2s linear;
+  }
+  span {
+    position: relative;
+    width: 100%;
+    display: block;
+    height: 0;
+    border: 1px solid #000;
+    transform-origin: 50%;
+    transform: scale(0);
+    transition: transform 0.2s ease-in-out;
+  }
+
+  input:valid ~ label,
+  input:focus ~ label {
+    transform: translateY(-24px);
+    color: #333;
+  }
+
+  input:focus ~ span {
+    width: 100%;
+    transform: scale(1);
+  }
+}

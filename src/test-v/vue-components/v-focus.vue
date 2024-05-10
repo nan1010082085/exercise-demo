@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import { computed, ref, type DirectiveBinding } from "vue"
+import { ref, type DirectiveBinding } from "vue"
 
 const state = ref(false)
 
@@ -9,7 +9,7 @@ const state = ref(false)
  * 确保当切换`state`时,元素随着状态值获取/失去焦点
  *
 */
-const VFocus = {
+const vFocus = {
   updated: (el: HTMLInputElement, binding: DirectiveBinding) => binding.value ? el.focus() : el.blur()
 }
 

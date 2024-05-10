@@ -57,6 +57,7 @@ export default defineConfig(({ command, mode }) => {
         '@components': fileURLToPath(new URL('./src/components', import.meta.url)),
         '@assets': fileURLToPath(new URL('./src/assets', import.meta.url)),
         '@workers': fileURLToPath(new URL('./src/workers', import.meta.url)),
+        '@test-v': fileURLToPath(new URL('./src/test-v', import.meta.url)),
       }
     },
     plugins: [

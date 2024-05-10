@@ -1,6 +1,6 @@
 import { defineComponent, nextTick, onMounted, ref } from 'vue';
-import styles from './waterfall.module.scss';
-import { dataset } from './waterfall.dataset';
+import styles from './styles/waterfall.module.scss';
+import { dataset } from './utils/waterfall.dataset'
 
 const Waterfall = defineComponent({
   setup() {

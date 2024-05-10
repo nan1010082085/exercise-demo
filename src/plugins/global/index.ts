@@ -30,5 +30,5 @@ const installComponent = (app: App<Element>) => {
 export const initalGlobalRegister = (app: App<Element>) => {
   app.directive('loading', ElLoading.directive);
 
-  installComponent(app);
+  app.use(installComponent)
 };

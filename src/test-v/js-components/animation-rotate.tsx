@@ -1,5 +1,5 @@
 import { defineComponent, ref } from 'vue';
-import styles from './animation-rotate.module.scss';
+import styles from './styles/animation-rotate.module.scss';
 
 const AnimationRotate = defineComponent({
   name: 'AnimationRotate',
