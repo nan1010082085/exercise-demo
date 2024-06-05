@@ -1,0 +1,37 @@
+.textErasure {
+  position: relative;
+  width: 800px;
+  height: 100%;
+  p {
+    padding: 0;
+    margin: 0;
+    font-size: 24px;
+    line-height: 2;
+    color: #000;
+  }
+}
+
+.erasure {
+  position: absolute;
+  top: 0;
+  inset: 0;
+}
+
+.text {
+  --p: 0%;
+  color: transparent;
+  background: linear-gradient(to right, #0000 var(--p), #fff calc(var(--p) + 30px));
+  animation: erausre 10s linear infinite forwards;
+}
+
+@property --p {
+  syntax: '<percentage>';
+  initial-value: 0%;
+  inherits: false;
+}
+
+@keyframes erausre {
+  to {
+    --p: 100%;
+  }
+}

@@ -71,7 +71,7 @@ export default defineConfig(({ command, mode }) => {
       JSX({
         isCustomElement: (tag) => isCustomElementArrys.includes(tag),
       }),
-      AutoImport({ resolvers: [TDesignResolver({ library: 'vue-next' }), ElementPlusResolver()] }),
+      AutoImport({ imports: ['vue', 'vue-router'], resolvers: [TDesignResolver({ library: 'vue-next' }), ElementPlusResolver()] }),
       Components({ resolvers: [TDesignResolver({ library: 'vue-next' }), ElementPlusResolver()] })
     ],
     define: {
