@@ -53,3 +53,5 @@ const CvsArc = defineComponent({
     }
   }
 })
+
+export default CvsArc;
