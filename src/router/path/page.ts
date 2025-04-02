@@ -75,6 +75,16 @@ export default <RouteRecordRaw[]>[
     component: () => import('@/views/user')
   },
   {
+    name: 'Map',
+    path: '/map',
+    meta: {
+      title: '地图',
+      icon: 'map'
+    },
+    component: () => import('@/views/map'),
+    children: []
+  },
+  {
     name: 'Admin',
     path: '/admin',
     meta: {

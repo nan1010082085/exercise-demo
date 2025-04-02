@@ -18,4 +18,8 @@ declare global {
     __MICRO_APP_BASE_APPLICATION__: any;
     unmount: () => void;
   }
+
+  interface ComponentPublicInstance {
+    $pinia: Pinia;
+  }
 }
