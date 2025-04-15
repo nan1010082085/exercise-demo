@@ -89,7 +89,7 @@ export default <RouteRecordRaw[]>[
     path: '/univer-doc',
     meta: {
       title: '电子文档',
-      icon: 'docs'
+      icon: 'file-word'
     },
     component: () => import('@/views/univer-doc'),
     children: []
@@ -99,7 +99,7 @@ export default <RouteRecordRaw[]>[
     path: '/univer-sheet',
     meta: {
       title: '电子表格',
-      icon: 'sheet'
+      icon: 'table'
     },
     component: () => import('@/views/univer-sheet'),
     children: []
