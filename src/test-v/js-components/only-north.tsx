@@ -11,7 +11,6 @@ import img9 from '@public/test-v/only_north/9.png';
 import img10 from '@public/test-v/only_north/10.png';
 import img11 from '@public/test-v/only_north/11.png';
 import img12 from '@public/test-v/only_north/12.png';
-import img13 from '@public/test-v/only_north/13.png';
 
 const source = [
   { name: '巫师', color: '#9a75a6', tColor: '#fff', img: img1 },
@@ -26,7 +25,6 @@ const source = [
   { name: '文龙', color: '#A8E1F2FF', tColor: '#000', img: img10 },
   { name: '123', color: 'black', tColor: '#fff', img: img11 },
   { name: '月老', color: '#328cf3', tColor: '#fff', img: img12 },
-  { name: '小韩', color: '#95C486', tColor: 'black', img: img13 },
 ]
 
 const OnlyNorth = defineComponent({

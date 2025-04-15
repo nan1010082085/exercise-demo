@@ -1,4 +1,4 @@
-import { defineComponent, defineAsyncComponent, watch } from 'vue';
+import { defineComponent } from 'vue';
 import styles from './index.module.scss';
 import { useGlobalStore } from '@/store/global-store';
 import { Breadcrumb, BreadcrumbItem, Tag } from 'tdesign-vue-next';
@@ -15,7 +15,7 @@ const EBreadcrumb = defineComponent({
       router.push(item.path);
     };
 
-    const onCloeBreadcrumb = (e: MouseEvent, index: number) => {
+    const onCloseBreadcrumb = (e: MouseEvent, index: number) => {
       e.stopPropagation();
       closeBreadcrumb(index);
     };
@@ -31,7 +31,7 @@ const EBreadcrumb = defineComponent({
                   theme={item.path == route.path ? 'primary' : 'default'}
                   closable={item.path != route.path}
                   onClick={() => to(item)}
-                  onClose={(ctx) => onCloeBreadcrumb(ctx.e, index)}
+                  onClose={(ctx) => onCloseBreadcrumb(ctx.e, index)}
                 >
                   {item?.meta?.title || item.name}
                 </Tag>

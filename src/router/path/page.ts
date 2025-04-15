@@ -85,6 +85,26 @@ export default <RouteRecordRaw[]>[
     children: []
   },
   {
+    name: 'UniverDoc',
+    path: '/univer-doc',
+    meta: {
+      title: '电子文档',
+      icon: 'docs'
+    },
+    component: () => import('@/views/univer-doc'),
+    children: []
+  },
+  {
+    name: 'UniverSheet',
+    path: '/univer-sheet',
+    meta: {
+      title: '电子表格',
+      icon: 'sheet'
+    },
+    component: () => import('@/views/univer-sheet'),
+    children: []
+  },
+  {
     name: 'Admin',
     path: '/admin',
     meta: {

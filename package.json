@@ -22,6 +22,9 @@
     }
   },
   "ava": {
+    "files": [
+      "**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"
+    ],
     "extensions": [
       "ts"
     ],
@@ -37,6 +40,7 @@
     "@mdi/js": "^7.4.47",
     "@micro-zoe/micro-app": "1.0.0-rc.4",
     "@storybook/test": "8.0.6",
+    "@univerjs/presets": "^0.6.9",
     "@vueuse/core": "^10.9.0",
     "axios": "^1.6.8",
     "axios-mock-adapter": "^1.22.0",
