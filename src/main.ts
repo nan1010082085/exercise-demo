@@ -8,6 +8,7 @@ import { initWujie, startMicroApp } from './utils/micro';
 
 import 'dayjs/locale/zh-cn';
 import { dayjs } from 'element-plus';
+import 'virtual:windi.css'
 
 dayjs.locale('zh-cn');
 

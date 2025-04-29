@@ -31,11 +31,13 @@ const UniverSheet = defineComponent({
 
     onMounted(async () => {
       await init();
-      univerInstance.value?.createWorkbook({ name: 'sheet' });
+      const sheet1 =  univerInstance.value?.createWorkbook({ name: 'sheet' });
+      console.log(sheet1);
+      
     });
 
     return () => {
-      return <div id="univer-sheet" class={styles['univerSheet']}></div>;
+      return <div id="univer-sheet" class={[styles['univerSheet'], 'p-10px']}></div>;
     };
   }
 });

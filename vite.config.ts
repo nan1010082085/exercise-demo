@@ -9,10 +9,12 @@ import Components from 'unplugin-vue-components/vite';
 import { TDesignResolver } from 'unplugin-vue-components/resolvers';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
+import WindiCSS from 'vite-plugin-windicss'
+
 // --- env ---
 // console.log(process.env.NODE_ENV)
 
-const isCustomElementArrys = ['micro-app'];
+const isCustomElementArrays = ['micro-app'];
 
 const target = 'http://localhost:6606/';
 
@@ -22,6 +24,13 @@ const proxy = {
   //   changeOrigin: true,
   // },
   '/assets': {
+    target: 'http://localhost:6606/public',
+    changeOrigin: true,
+    // rewrite: (path: string) => {
+    //   return path.replace(/^\/public/, '');
+    // }
+  },
+  '/cmaps': {
     target: 'http://localhost:6606/public',
     changeOrigin: true,
     // rewrite: (path: string) => {
@@ -64,21 +73,25 @@ export default defineConfig(({ command, mode }) => {
       vue({
         template: {
           compilerOptions: {
-            isCustomElement: (tag) => isCustomElementArrys.includes(tag),
+            isCustomElement: (tag) => isCustomElementArrays.includes(tag),
           }
         }
       }),
       JSX({
-        isCustomElement: (tag) => isCustomElementArrys.includes(tag),
+        isCustomElement: (tag) => isCustomElementArrays.includes(tag),
       }),
       AutoImport({ imports: ['vue', 'vue-router'], resolvers: [TDesignResolver({ library: 'vue-next' }), ElementPlusResolver()] }),
-      Components({ resolvers: [TDesignResolver({ library: 'vue-next' }), ElementPlusResolver()] })
+      Components({ resolvers: [TDesignResolver({ library: 'vue-next' }), ElementPlusResolver()] }),
+      WindiCSS()
     ],
     define: {
       'import.meta.vitest': process.env.NODE_ENV=== 'development' ? true : false
     },
     test: {
       includeSource: ['src/**/*.test.{js,ts,tsx}']
-    }
+    },
+    optimizeDeps: {
+      exclude: ['pdfjs-dist'],
+    },
   };
 });

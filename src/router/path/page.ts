@@ -105,6 +105,26 @@ export default <RouteRecordRaw[]>[
     children: []
   },
   {
+    name: 'ExcelToTable',
+    path: '/excel-to-table',
+    meta: {
+      title: 'xls转表格',
+      icon: 'table'
+    },
+    component: () => import('@/views/excelToTable'),
+    children: []
+  },
+  {
+    name: 'PreviewPdf',
+    path: '/preview-pdf',
+    meta: {
+      title: 'PDF预览',
+      icon: 'table'
+    },
+    component: () => import('@/views/previewPdf'),
+    children: []
+  },
+  {
     name: 'Admin',
     path: '/admin',
     meta: {
