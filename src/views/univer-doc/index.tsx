@@ -1,7 +1,7 @@
-import { defineComponent, onMounted, ref } from 'vue';
+import { defineComponent, nextTick, onMounted, ref } from 'vue';
 import styles from './index.module.scss';
 import { createUniver, defaultTheme, FUniver, LocaleType, merge } from '@univerjs/presets';
-import { UniverDocsCorePreset } from '@univerjs/presets/preset-docs-core';
+import { type FDocument, UniverDocsCorePreset } from '@univerjs/presets/preset-docs-core';
 import docsCoreZhCN from '@univerjs/presets/preset-docs-core/locales/zh-CN';
 import { UniverDocsDrawingPreset } from '@univerjs/presets/preset-docs-drawing';
 import docsDrawingZhCN from '@univerjs/presets/preset-docs-drawing/locales/zh-CN';
@@ -15,9 +15,10 @@ import '@univerjs/presets/lib/styles/preset-docs-hyper-link.css';
 
 const UniverDoc = defineComponent({
   setup() {
-    const univerInstance = ref<FUniver>();
+    const univerDom = ref<HTMLDivElement>();
+    const univerInstance = ref<FDocument>();
 
-    const init = async () => {
+    const init: () => Promise<FUniver> = async () => {
       return new Promise((resolve) => {
         const { univerAPI } = createUniver({
           locale: LocaleType.ZH_CN,
@@ -27,24 +28,24 @@ const UniverDoc = defineComponent({
           theme: defaultTheme,
           presets: [
             UniverDocsCorePreset({
-              container: 'univer-docs'  //指定容器渲染
+              container: univerDom.value //指定容器渲染
             }),
             UniverDocsDrawingPreset(),
             UniverDocsHyperLinkPreset()
           ]
         });
-        univerInstance.value = univerAPI;
-        resolve(univerInstance.value);
+        resolve(univerAPI);
       });
     };
 
     onMounted(async () => {
-      await init();
-      univerInstance.value?.createUniverDoc(DOCUMENT_DATA);
+      const funiver = await init();
+      univerInstance.value = funiver?.createUniverDoc(DOCUMENT_DATA);
+      console.log(univerInstance.value);
     });
 
     return () => {
-      return <div id="univer-docs" class={styles['univerDoc']}></div>;
+      return <div ref={univerDom} class={styles['univerDoc']}></div>;
     };
   }
 });

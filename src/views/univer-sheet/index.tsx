@@ -1,16 +1,16 @@
 import { defineComponent, onMounted, ref } from 'vue';
 import styles from './index.module.scss';
 import { createUniver, defaultTheme, FUniver, LocaleType, merge } from '@univerjs/presets';
-import { UniverSheetsCorePreset } from '@univerjs/presets/preset-sheets-core';
+import { type FWorkbook, UniverSheetsCorePreset } from '@univerjs/presets/preset-sheets-core';
 import UniverPresetSheetsCoreZhCN from '@univerjs/presets/preset-sheets-core/locales/zh-CN';
 
 import '@univerjs/presets/lib/styles/preset-sheets-core.css';
 
 const UniverSheet = defineComponent({
   setup() {
-    const univerInstance = ref<FUniver>();
+    const univerInstance = ref<FWorkbook>();
 
-    const init = async () => {
+    const init: () => Promise<FUniver> = async () => {
       return new Promise((resolve) => {
         const { univerAPI } = createUniver({
           locale: LocaleType.ZH_CN,
@@ -24,16 +24,14 @@ const UniverSheet = defineComponent({
             })
           ]
         });
-        univerInstance.value = univerAPI;
-        resolve(univerInstance.value);
+        resolve(univerAPI);
       });
     };
 
     onMounted(async () => {
-      await init();
-      const sheet1 =  univerInstance.value?.createWorkbook({ name: 'sheet' });
-      console.log(sheet1);
-      
+      const funiver = await init();
+      univerInstance.value = funiver?.createWorkbook({ name: 'sheet' });
+      console.log(univerInstance.value);
     });
 
     return () => {

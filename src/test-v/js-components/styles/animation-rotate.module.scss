@@ -32,7 +32,7 @@
     color: #ff0;
   }
   50% {
-    transform: scale(1.6);
+    transform: scale(1.8);
     color: #f00;
   }
   75% {
@@ -65,8 +65,9 @@
     font-weight: bold;
     background-color: #fff;
     animation: 
-     rotateX 10s cubic-bezier(0.46, 0, 0.54, 1) var(--dx) infinite alternate,
-     rotateY 10s cubic-bezier(0.46, 0, 0.54, 1) var(--dy) infinite alternate,
-     rotateScale 20s cubic-bezier(0.46, 0, 0.54, 1) var(--dy) infinite alternate;
+      rotateX 10s cubic-bezier(0.46, 0, 0.54, 1) var(--dx) infinite alternate,
+      rotateY 10s cubic-bezier(0.46, 0, 0.54, 1) var(--dy) infinite alternate,
+      rotateScale 20s cubic-bezier(0.46, 0, 0.54, 1) var(--dy) infinite alternate;
+    animation-play-state: running;
   }
 }
