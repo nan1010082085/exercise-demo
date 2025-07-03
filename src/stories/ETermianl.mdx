@@ -1,0 +1,22 @@
+import { Meta, Title, Story, Canvas, Controls } from '@storybook/blocks';
+import * as ETermianlStories from './ETermianl.stories';
+
+<Meta of={ETermianlStories} />
+
+<Title>ETermianl 终端模拟器</Title>
+
+## 组件说明
+终端模拟器组件，基于xterm.js实现，提供类似命令行的交互体验。
+
+## 基础用法
+<Canvas />
+
+## 示例
+<Story of={ETermianlStories.Primary} />
+
+## 特性
+- 基于xterm.js
+- 支持键盘输入
+- 支持回车和退格
+- 自定义主题样式
+- 防抖处理

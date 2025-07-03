@@ -1,0 +1,27 @@
+import { Meta, Title, Story, Canvas, Controls } from '@storybook/blocks';
+import * as EPdfFileStories from './EPdfFile.stories';
+
+<Meta of={EPdfFileStories} />
+
+<Title>EPdfFile PDF预览</Title>
+
+## 组件说明
+PDF文件预览组件，基于vue-pdf-embed实现，支持在线预览PDF文档。
+
+## 基础用法
+<Canvas />
+
+## 示例
+<Story of={EPdfFileStories.Primary} />
+
+## 空源文件
+<Story of={EPdfFileStories.EmptySource} />
+
+## 属性
+<Controls of={EPdfFileStories.Primary} />
+
+## 特性
+- 支持PDF在线预览
+- 显示页码信息
+- 滚动条支持
+- 加载状态显示

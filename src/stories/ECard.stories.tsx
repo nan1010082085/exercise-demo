@@ -5,7 +5,6 @@ const meta: Meta<ECardInstance> = {
   component: ECard,
   argTypes: {
     imageClick: {
-      control: 'function',
       description: '内容点击事件',
       table: {
         defaultValue: { summary: '(data) => void' },
@@ -15,7 +14,6 @@ const meta: Meta<ECardInstance> = {
       }
     },
     look: {
-      control: 'click',
       description: '查看按钮',
       table: {
         defaultValue: { summary: '(data) => void' },
@@ -25,7 +23,6 @@ const meta: Meta<ECardInstance> = {
       }
     },
     edit: {
-      control: 'function',
       description: '编辑按钮',
       table: {
         defaultValue: { summary: '(data) => void' },
@@ -35,7 +32,6 @@ const meta: Meta<ECardInstance> = {
       }
     },
     del: {
-      control: 'function',
       description: '删除按钮',
       table: {
         defaultValue: { summary: '(data) => void' },

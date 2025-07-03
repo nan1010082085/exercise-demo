@@ -13,13 +13,13 @@ const ExcelToTable = defineComponent({
           requestFailMethod
         }[uploadMethod.value])
     );
-    const pdfUrl = ref('');
+    const excelUrl = ref('');
 
     const requestSuccessMethod = (files: UploadFile | UploadFile[]): Promise<RequestMethodResponse> => {
       console.log(files);
       const data = (Array.isArray(files) ? files[0].raw : files.raw) as File;
       const url = URL.createObjectURL(new Blob([data], { type: data.type }));
-      pdfUrl.value = url;
+      excelUrl.value = url;
       return new Promise((resolve) => {
         resolve({
           status: 'success',
@@ -38,16 +38,16 @@ const ExcelToTable = defineComponent({
             url: ''
           }
         });
-      });
+      }); 
     };
 
     const onRemove = () => {
-      URL.revokeObjectURL(pdfUrl.value);
-      pdfUrl.value = '';
+      URL.revokeObjectURL(excelUrl.value);
+      excelUrl.value = '';
     };
 
     onUnmounted(() => {
-      if (pdfUrl.value) URL.revokeObjectURL(pdfUrl.value);
+      if (excelUrl.value) URL.revokeObjectURL(excelUrl.value);
     });
 
     return () => {

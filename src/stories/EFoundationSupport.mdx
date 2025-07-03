@@ -1,0 +1,29 @@
+import { Meta, Title, Story, Canvas, Controls } from '@storybook/blocks';
+import * as EFoundationSupportStories from './EFoundationSupport.stories';
+
+<Meta of={EFoundationSupportStories} />
+
+<Title>EFoundationSupport 基础支撑组件</Title>
+
+## 组件说明
+基础支撑组件，为其他组件提供拖拽、缩放、定位等基础交互功能。
+
+## 基础用法
+<Canvas />
+
+## 示例
+<Story of={EFoundationSupportStories.Primary} />
+
+## 禁用状态
+<Story of={EFoundationSupportStories.Disabled} />
+
+## 属性
+<Controls of={EFoundationSupportStories.Primary} />
+
+## 特性
+- 支持拖拽移动
+- 支持缩放调整
+- 支持边界限制
+- 支持激活状态
+- 支持禁用状态
+- 响应式位置计算

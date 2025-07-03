@@ -1,0 +1,28 @@
+import { Meta, Title, Story, Canvas, Controls } from '@storybook/blocks';
+import * as EWidgetRenderStories from './EWidgetRender.stories';
+
+<Meta of={EWidgetRenderStories} />
+
+<Title>EWidgetRender 组件渲染器</Title>
+
+## 组件说明
+组件渲染器，用于渲染可拖拽的组件实例，基于EFoundationSupport提供交互功能。
+
+## 基础用法
+<Canvas />
+
+## 示例
+<Story of={EWidgetRenderStories.Primary} />
+
+## 禁用状态
+<Story of={EWidgetRenderStories.Disabled} />
+
+## 属性
+<Controls of={EWidgetRenderStories.Primary} />
+
+## 特性
+- 基于组件数据模型渲染
+- 支持拖拽和缩放
+- 自动边界检测
+- 状态管理集成
+- 支持多选激活
