@@ -35,6 +35,15 @@ importers:
       '@vueuse/core':
         specifier: ^10.11.1
         version: 10.11.1(vue@3.5.17(typescript@5.4.5))
+      '@xterm/addon-attach':
+        specifier: ^0.11.0
+        version: 0.11.0(@xterm/xterm@5.5.0)
+      '@xterm/addon-fit':
+        specifier: ^0.10.0
+        version: 0.10.0(@xterm/xterm@5.5.0)
+      '@xterm/xterm':
+        specifier: ^5.5.0
+        version: 5.5.0
       axios:
         specifier: ^1.10.0
         version: 1.10.0
@@ -101,15 +110,6 @@ importers:
       vue-router:
         specifier: ^4.5.1
         version: 4.5.1(vue@3.5.17(typescript@5.4.5))
-      xterm:
-        specifier: ^5.3.0
-        version: 5.3.0
-      xterm-addon-attach:
-        specifier: ^0.9.0
-        version: 0.9.0(xterm@5.3.0)
-      xterm-addon-fit:
-        specifier: ^0.8.0
-        version: 0.8.0(xterm@5.3.0)
     devDependencies:
       '@antv/x6-plugin-history':
         specifier: ^2.2.4
@@ -144,9 +144,6 @@ importers:
       '@tsconfig/node18':
         specifier: ^18.2.4
         version: 18.2.4
-      '@types/echarts':
-        specifier: ^5.0.0
-        version: 5.0.0
       '@types/leaflet':
         specifier: ^1.9.19
         version: 1.9.19
@@ -1622,10 +1619,6 @@ packages:
   '@types/conventional-commits-parser@5.0.1':
     resolution: {integrity: sha512-7uz5EHdzz2TqoMfV7ee61Egf5y6NkcO4FB/1iCCQnbeiI1F3xzv3vK5dBCXUCLQgGYS+mUeigK1iKQzvED+QnQ==}
 
-  '@types/echarts@5.0.0':
-    resolution: {integrity: sha512-5uc/16BlYpzH8kU/u8aeRRgY2FV6yRY7RjPnYfUFPowl0F3kvNgfaz09PmeVdLkqdAtMft3XkCfqiJPJjG2DNQ==}
-    deprecated: This is a stub types definition. echarts provides its own type definitions, so you do not need this installed.
-
   '@types/eslint-scope@3.7.7':
     resolution: {integrity: sha512-MzMFlSLBqNF2gcHWO0G1vP/YQyfvrxZ0bF+u7mzUdZ1/xK4A4sru+nraZz5i3iEIk1l1uyicaDVTB4QbbEkAYg==}
 
@@ -2415,6 +2408,19 @@ packages:
 
   '@windicss/plugin-utils@1.9.4':
     resolution: {integrity: sha512-GUAX0z+wnq6Rn3+YGJli/keGja73+a6I/PtTpH8EMlNNHrHBbqsbyY5+25QagV39rHwTe/IbkiSdD3csP8L6MA==}
+
+  '@xterm/addon-attach@0.11.0':
+    resolution: {integrity: sha512-JboCN0QAY6ZLY/SSB/Zl2cQ5zW1Eh4X3fH7BnuR1NB7xGRhzbqU2Npmpiw/3zFlxDaU88vtKzok44JKi2L2V2Q==}
+    peerDependencies:
+      '@xterm/xterm': ^5.0.0
+
+  '@xterm/addon-fit@0.10.0':
+    resolution: {integrity: sha512-UFYkDm4HUahf2lnEyHvio51TNGiLK66mqP2JoATy7hRZeXaGMRDr00JiSF7m63vR5WKATF605yEggJKsw0JpMQ==}
+    peerDependencies:
+      '@xterm/xterm': ^5.0.0
+
+  '@xterm/xterm@5.5.0':
+    resolution: {integrity: sha512-hqJHYaQb5OptNunnyAnkHyM8aCjZ1MEIDTQu1iIbbTD/xops91NB5yq1ZK/dC2JDbVWtF23zUtl9JE2NqwT87A==}
 
   '@xtuc/ieee754@1.2.0':
     resolution: {integrity: sha512-DX8nKgqcGwsc0eJSqYt5lwP4DH5FlHnmuWWBRy7X0NcaGR0ZtuyeESgMwTYVEtxmsNGY+qit4QYT/MIYTOTPeA==}
@@ -5092,22 +5098,6 @@ packages:
       utf-8-validate:
         optional: true
 
-  xterm-addon-attach@0.9.0:
-    resolution: {integrity: sha512-NykWWOsobVZPPK3P9eFkItrnBK9Lw0f94uey5zhqIVB1bhswdVBfl+uziEzSOhe2h0rT9wD0wOeAYsdSXeavPw==}
-    deprecated: This package is now deprecated. Move to @xterm/addon-attach instead.
-    peerDependencies:
-      xterm: ^5.0.0
-
-  xterm-addon-fit@0.8.0:
-    resolution: {integrity: sha512-yj3Np7XlvxxhYF/EJ7p3KHaMt6OdwQ+HDu573Vx1lRXsVxOcnVJs51RgjZOouIZOczTsskaS+CpXspK81/DLqw==}
-    deprecated: This package is now deprecated. Move to @xterm/addon-fit instead.
-    peerDependencies:
-      xterm: ^5.0.0
-
-  xterm@5.3.0:
-    resolution: {integrity: sha512-8QqjlekLUFTrU6x7xck1MsPzPA571K5zNqWm0M0oroYEWVOptZ0+ubQSkQ3uxIEhcIHRujJy6emDWX4A7qyFzg==}
-    deprecated: This package is now deprecated. Move to @xterm/xterm instead.
-
   y18n@5.0.8:
     resolution: {integrity: sha512-0pfFzegeDWJHJIAmTLRP2DwHjdF5s7jo9tuztdQxAhINCdvS+3nGINqPd00AphqJR/0LhANUS6/+7SCb98YOfA==}
     engines: {node: '>=10'}
@@ -6467,10 +6457,6 @@ snapshots:
     dependencies:
       '@types/node': 20.19.4
     optional: true
-
-  '@types/echarts@5.0.0':
-    dependencies:
-      echarts: 5.6.0
 
   '@types/eslint-scope@3.7.7':
     dependencies:
@@ -8502,6 +8488,16 @@ snapshots:
       windicss: 3.5.6
     transitivePeerDependencies:
       - supports-color
+
+  '@xterm/addon-attach@0.11.0(@xterm/xterm@5.5.0)':
+    dependencies:
+      '@xterm/xterm': 5.5.0
+
+  '@xterm/addon-fit@0.10.0(@xterm/xterm@5.5.0)':
+    dependencies:
+      '@xterm/xterm': 5.5.0
+
+  '@xterm/xterm@5.5.0': {}
 
   '@xtuc/ieee754@1.2.0': {}
 
@@ -11308,16 +11304,6 @@ snapshots:
       signal-exit: 4.1.0
 
   ws@8.18.3: {}
-
-  xterm-addon-attach@0.9.0(xterm@5.3.0):
-    dependencies:
-      xterm: 5.3.0
-
-  xterm-addon-fit@0.8.0(xterm@5.3.0):
-    dependencies:
-      xterm: 5.3.0
-
-  xterm@5.3.0: {}
 
   y18n@5.0.8: {}
 

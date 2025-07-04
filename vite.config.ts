@@ -53,7 +53,10 @@ export default defineConfig(({ command, mode }) => {
     server: {
       cors: true,
       port: 6606,
-      proxy
+      proxy,
+      hmr: {
+        overlay: false
+      }
     },
     css: {
       preprocessorOptions: {
@@ -96,7 +99,8 @@ export default defineConfig(({ command, mode }) => {
         script: {
           defineModel: true,
           propsDestructure: true
-        }
+        },
+        reactivityTransform: false
       }),
       JSX({
         isCustomElement: (tag) => isCustomElementArrays.includes(tag)
@@ -115,6 +119,7 @@ export default defineConfig(({ command, mode }) => {
       includeSource: ['src/**/*.test.{js,ts,tsx}']
     },
     optimizeDeps: {
+      include: ['vue', 'vue-router'],
       exclude: ['pdfjs-dist']
     }
   };

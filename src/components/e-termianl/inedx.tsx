@@ -1,9 +1,9 @@
 import { defineComponent, onMounted, ref } from 'vue';
 import styles from './index.module.scss';
-import { Terminal } from 'xterm';
-import 'xterm/css/xterm.css';
-import { AttachAddon } from 'xterm-addon-attach';
-import { FitAddon } from 'xterm-addon-fit';
+import { Terminal } from '@xterm/xterm';
+import '@xterm/xterm/css/xterm.css';
+import { AttachAddon } from '@xterm/addon-attach';
+import { FitAddon } from '@xterm/addon-fit';
 import { debounce } from 'lodash-es';
 
 const ETermianl = defineComponent({
