@@ -1,6 +1,7 @@
 /// <reference types="vitest" />
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
+import react from '@vitejs/plugin-react';
 import JSX from '@vitejs/plugin-vue-jsx';
 import { fileURLToPath, URL } from 'node:url';
 import AutoImport from 'unplugin-auto-import/vite';
@@ -9,7 +10,7 @@ import { TDesignResolver } from 'unplugin-vue-components/resolvers';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import WindiCSS from 'vite-plugin-windicss';
 
-import visualizer from 'rollup-plugin-visualizer';
+// import visualizer from 'rollup-plugin-visualizer';
 
 // --- env ---
 // console.log(process.env.NODE_ENV)
@@ -23,7 +24,7 @@ const target = 'http://localhost:6606/';
 //     process.env.NODE_ENV === 'development' ? visualizer({ open : true }) : null,
 //   ]
 // }
- 
+
 const proxy = {
   // '/sys': {
   //   target: 'http://192.168.200.46:8083/avatar',
@@ -118,8 +119,12 @@ export default defineConfig(({ command, mode }) => {
       }),
       Components({ resolvers: [TDesignResolver({ library: 'vue-next' }), ElementPlusResolver()] }),
       WindiCSS(),
+      // react({
+      //   // 仅处理 .jsx 和 .tsx 文件
+      //   include: ['**/*.jsx', '**/*.tsx']
+      // })
       // ...pluginCondition()
-      visualizer({ open : true })
+      // visualizer({ open : true })
     ],
     define: {
       'import.meta.vitest': process.env.NODE_ENV === 'development' ? true : false
@@ -128,7 +133,7 @@ export default defineConfig(({ command, mode }) => {
       includeSource: ['src/**/*.test.{js,ts,tsx}']
     },
     optimizeDeps: {
-      exclude: ['pdfjs-dist', '@univerjs/presets'],
+      exclude: ['pdfjs-dist']
     },
     build: {
       rollupOptions: {

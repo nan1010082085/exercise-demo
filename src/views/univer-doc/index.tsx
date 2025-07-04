@@ -1,4 +1,4 @@
-import { defineComponent, nextTick, onMounted, ref } from 'vue';
+import { defineComponent, nextTick, onBeforeUnmount, onMounted, ref } from 'vue';
 import styles from './index.module.scss';
 import { createUniver, defaultTheme, FUniver, LocaleType, merge } from '@univerjs/presets';
 import { type FDocument, UniverDocsCorePreset } from '@univerjs/presets/preset-docs-core';
@@ -7,7 +7,7 @@ import { UniverDocsDrawingPreset } from '@univerjs/presets/preset-docs-drawing';
 import docsDrawingZhCN from '@univerjs/presets/preset-docs-drawing/locales/zh-CN';
 import { UniverDocsHyperLinkPreset } from '@univerjs/presets/preset-docs-hyper-link';
 import docsHyperLinkZhCN from '@univerjs/presets/preset-docs-hyper-link/locales/zh-CN';
-import { DOCUMENT_DATA } from '../../../public/default-json/data';
+import { DOCUMENT_DATA } from '@public/default-json/data';
 
 import '@univerjs/presets/lib/styles/preset-docs-core.css';
 import '@univerjs/presets/lib/styles/preset-docs-drawing.css';
@@ -16,7 +16,7 @@ import '@univerjs/presets/lib/styles/preset-docs-hyper-link.css';
 const UniverDoc = defineComponent({
   setup() {
     const univerDom = ref<HTMLDivElement>();
-    const univerInstance = ref<FDocument>();
+    const univerInstance = ref<FDocument | null>(null);
 
     const init: () => Promise<FUniver> = async () => {
       return new Promise((resolve) => {
@@ -42,6 +42,11 @@ const UniverDoc = defineComponent({
       const funiver = await init();
       univerInstance.value = funiver?.createUniverDoc(DOCUMENT_DATA);
       console.log(univerInstance.value);
+    });
+
+    onBeforeUnmount(() => {
+      univerInstance.value?.dispose();
+      univerInstance.value = null;
     });
 
     return () => {
