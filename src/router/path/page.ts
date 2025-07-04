@@ -1,3 +1,4 @@
+import { defineAsyncComponent } from 'vue';
 import type { RouteRecordRaw } from 'vue-router';
 
 export default <RouteRecordRaw[]>[
@@ -91,7 +92,7 @@ export default <RouteRecordRaw[]>[
       title: '电子文档',
       icon: 'file-word'
     },
-    component: () => import('@/views/univer-doc'),
+    component: () => defineAsyncComponent(() => import('@/views/univer-doc')),
     children: []
   },
   {
@@ -101,7 +102,7 @@ export default <RouteRecordRaw[]>[
       title: '电子表格',
       icon: 'table'
     },
-    component: () => import('@/views/univer-sheet'),
+    component: () => defineAsyncComponent(() => import('@/views/univer-sheet')),
     children: []
   },
   {
