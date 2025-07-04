@@ -3,7 +3,8 @@
   "compilerOptions": {
     "composite": true,
     "baseUrl": ".",
-    "types": ["tdesign-vue-next/global.d.ts", "element-plus/global.d.ts", "vitest/importMeta", "node"],
+    "lib": ["ES2022"],
+    "types": ["tdesign-vue-next/global.d.ts", "element-plus/global.d.ts", "vitest/importMeta"],
     "paths": {
       "@/*": ["src/*"],
       "@board-models/*": ["src/models/board-models/*"],
@@ -20,6 +21,6 @@
     "allowJs": true,
     "skipLibCheck": true
   },
-  "include": ["src/**/*", "src/**/*.d.ts"],
-  "exclude": ["src/workers/*", "node_modules", "dist", "public/cmaps"]
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "src/**/*.d.ts"],
+  "exclude": ["src/workers/*"]
 }

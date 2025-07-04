@@ -46,12 +46,12 @@ export default defineComponent({
       return languageDef;
     });
 
-    const workerMessage = (e: MessageEvent) => {
-      console.log('worker.message', e.data);
-    };
-    const workerError = (e: ErrorEvent) => {
-      console.log('worker.error', e);
-    };
+    // const workerMessage = (e: MessageEvent) => {
+    //   console.log('worker.message', e.data);
+    // };
+    // const workerError = (e: ErrorEvent) => {
+    //   console.log('worker.error', e);
+    // };
 
     onMounted(() => {
       initUserAdmin();

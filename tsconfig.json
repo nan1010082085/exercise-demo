@@ -9,4 +9,5 @@
     "tsBuildInfoFile": ".tsbuildinfo"
   },
   "references": [{ "path": "./tsconfig.node.json" }, { "path": "./tsconfig.app.json" }],
+  "exclude": ["node_modules", "dist", "public/cmaps"]
 }

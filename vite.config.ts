@@ -55,7 +55,8 @@ export default defineConfig(({ command, mode }) => {
       port: 6606,
       proxy,
       hmr: {
-        overlay: false
+        overlay: false,
+        clientPort: 6606
       }
     },
     css: {
@@ -100,7 +101,7 @@ export default defineConfig(({ command, mode }) => {
           defineModel: true,
           propsDestructure: true
         },
-        reactivityTransform: false
+        // reactivityTransform: false
       }),
       JSX({
         isCustomElement: (tag) => isCustomElementArrays.includes(tag)
