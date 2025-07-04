@@ -1,5 +1,5 @@
 /// <reference types="vitest" />
-import { defineConfig, loadEnv } from 'vite';
+import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import JSX from '@vitejs/plugin-vue-jsx';
 import { fileURLToPath, URL } from 'node:url';
@@ -7,9 +7,9 @@ import { fileURLToPath, URL } from 'node:url';
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import { TDesignResolver } from 'unplugin-vue-components/resolvers';
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 
-import WindiCSS from 'vite-plugin-windicss'
+import WindiCSS from 'vite-plugin-windicss';
 
 // --- env ---
 // console.log(process.env.NODE_ENV)
@@ -25,14 +25,14 @@ const proxy = {
   // },
   '/assets': {
     target: 'http://localhost:6606/public',
-    changeOrigin: true,
+    changeOrigin: true
     // rewrite: (path: string) => {
     //   return path.replace(/^\/public/, '');
     // }
   },
   '/cmaps': {
     target: 'http://localhost:6606/public',
-    changeOrigin: true,
+    changeOrigin: true
     // rewrite: (path: string) => {
     //   return path.replace(/^\/public/, '');
     // }
@@ -55,6 +55,22 @@ export default defineConfig(({ command, mode }) => {
       port: 6606,
       proxy
     },
+    css: {
+      preprocessorOptions: {
+        scss: {
+          // 抑制弃用警告
+          quietDeps: true,
+          logger: {
+            warn: (message: string) => {
+              // 过滤掉 legacy-js-api 警告
+              if (!message.includes('legacy-js-api')) {
+                console.warn(message);
+              }
+            }
+          }
+        }
+      }
+    },
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
@@ -66,32 +82,40 @@ export default defineConfig(({ command, mode }) => {
         '@components': fileURLToPath(new URL('./src/components', import.meta.url)),
         '@assets': fileURLToPath(new URL('./src/assets', import.meta.url)),
         '@workers': fileURLToPath(new URL('./src/workers', import.meta.url)),
-        '@test-v': fileURLToPath(new URL('./src/test-v', import.meta.url)),
+        '@test-v': fileURLToPath(new URL('./src/test-v', import.meta.url))
       }
     },
     plugins: [
       vue({
         template: {
           compilerOptions: {
-            isCustomElement: (tag) => isCustomElementArrays.includes(tag),
+            isCustomElement: (tag) => isCustomElementArrays.includes(tag)
           }
+        },
+        include: [/\.vue$/],
+        script: {
+          defineModel: true,
+          propsDestructure: true
         }
       }),
       JSX({
-        isCustomElement: (tag) => isCustomElementArrays.includes(tag),
+        isCustomElement: (tag) => isCustomElementArrays.includes(tag)
       }),
-      AutoImport({ imports: ['vue', 'vue-router'], resolvers: [TDesignResolver({ library: 'vue-next' }), ElementPlusResolver()] }),
+      AutoImport({
+        imports: ['vue', 'vue-router'],
+        resolvers: [TDesignResolver({ library: 'vue-next' }), ElementPlusResolver()]
+      }),
       Components({ resolvers: [TDesignResolver({ library: 'vue-next' }), ElementPlusResolver()] }),
       WindiCSS()
     ],
     define: {
-      'import.meta.vitest': process.env.NODE_ENV=== 'development' ? true : false
+      'import.meta.vitest': process.env.NODE_ENV === 'development' ? true : false
     },
     test: {
       includeSource: ['src/**/*.test.{js,ts,tsx}']
     },
     optimizeDeps: {
-      exclude: ['pdfjs-dist'],
-    },
+      exclude: ['pdfjs-dist']
+    }
   };
 });

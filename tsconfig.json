@@ -3,7 +3,11 @@
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "noEmit": true
+    "noEmit": true,
+    "skipLibCheck": true,
+    "incremental": true,
+    "tsBuildInfoFile": ".tsbuildinfo"
   },
-  "references": [{ "path": "./tsconfig.node.json" }, { "path": "./tsconfig.app.json" }]
+  "references": [{ "path": "./tsconfig.node.json" }, { "path": "./tsconfig.app.json" }],
+  "exclude": ["node_modules", "dist", "public/cmaps"]
 }
