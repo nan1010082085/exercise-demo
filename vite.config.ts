@@ -121,6 +121,24 @@ export default defineConfig(({ command, mode }) => {
     optimizeDeps: {
       include: ['vue', 'vue-router'],
       exclude: ['pdfjs-dist']
+    },
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            // 将 Vue 相关库分离
+            vue: ['vue', 'vue-router', 'pinia'],
+            // 将 UI 库分离
+            ui: ['element-plus', 'tdesign-vue-next'],
+            // 将 echarts 分离
+            charts: ['echarts'],
+            // 将其他第三方库分离
+            vendor: ['axios', 'dayjs'],
+            // 将 pdfjs 分离
+            pdfjs: ['pdfjs-dist']
+          }
+        }
+      }
     }
   };
 });
