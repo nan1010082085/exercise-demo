@@ -4,10 +4,10 @@ import { Button, Pagination, Image } from 'tdesign-vue-next';
 import { useRouter } from 'vue-router';
 import AddDashboard, { type EAddDashboardInstance } from '@/views/dashboard/add-dashboard';
 import { cloneDeep } from 'lodash-es';
-import dashboardBase from '@/assets/default-json/dashboard.base.json';
+import dashboardBase from '@public/default-json/dashboard.base.json';
 import { dashboardStore } from '@/store/dashboard-store';
 import EContainer from '@components/e-container';
-import ECard, { type TData } from '@components/e-card';
+import ECard from '@components/e-card';
 import widgetConfig from './lib/config';
 import { mainfestInstall } from '@/utils';
 

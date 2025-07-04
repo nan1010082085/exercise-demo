@@ -21,6 +21,6 @@
     "allowJs": true,
     "skipLibCheck": true
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "src/**/*.d.ts"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "src/**/*.d.ts", "public/default-json/data.ts"],
   "exclude": ["src/workers/*"]
 }

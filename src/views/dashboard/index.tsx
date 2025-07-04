@@ -1,5 +1,5 @@
 /// <reference types="vitest" />
-import { computed, defineComponent, onMounted, reactive, ref } from 'vue';
+import { defineComponent, onMounted, reactive, ref } from 'vue';
 import styles from './index.module.scss';
 import { getDashboardList } from '@/api/dashboard.api';
 import type { DashboardListModels } from '@/@types/board';
@@ -11,7 +11,7 @@ import AddDashboard, { type EAddDashboardInstance } from './add-dashboard';
 import useDialog, { type ResolveType } from '@/composables/useDialog';
 import ECard from '@/components/e-card';
 import { dashboardStore } from '@/store/dashboard-store';
-import dashboardBase from '@/assets/default-json/dashboard.base.json';
+import dashboardBase from '@public/default-json/dashboard.base.json';
 import { cloneDeep } from 'lodash-es';
 import EContainer from '@/components/e-container';
 
@@ -82,7 +82,7 @@ const Dashboard = defineComponent({
     };
 
     const init = () => {
-      getDashboardList().then((res) => {
+      getDashboardList().then((res: { data: DashboardListModels[] | { id: string | number; name: string; description: string; url: string; prevewImage: string; author: string; status: number; createtime: string; updatetime: string; }[]; }) => {
         dashboardData.value = res.data;
       });
     };

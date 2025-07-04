@@ -9,7 +9,7 @@ import { DrawerTypeKey } from './inject.key';
 import EditorView from './main';
 import { dashboardStore } from '@/store/dashboard-store';
 import { ElScrollbar } from 'element-plus';
-import dashboardBase from '@/assets/default-json/dashboard.base.json';
+import dashboardBase from '@public/default-json/dashboard.base.json';
 import TooolFooter from './footer';
 import ToolRuler from './ruler';
 

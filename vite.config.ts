@@ -3,13 +3,13 @@ import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import JSX from '@vitejs/plugin-vue-jsx';
 import { fileURLToPath, URL } from 'node:url';
-
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import { TDesignResolver } from 'unplugin-vue-components/resolvers';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
-
 import WindiCSS from 'vite-plugin-windicss';
+
+import visualizer from 'rollup-plugin-visualizer';
 
 // --- env ---
 // console.log(process.env.NODE_ENV)
@@ -18,6 +18,12 @@ const isCustomElementArrays = ['micro-app'];
 
 const target = 'http://localhost:6606/';
 
+// const pluginCondition = () =>{
+//   return [
+//     process.env.NODE_ENV === 'development' ? visualizer({ open : true }) : null,
+//   ]
+// }
+ 
 const proxy = {
   // '/sys': {
   //   target: 'http://192.168.200.46:8083/avatar',
@@ -111,7 +117,9 @@ export default defineConfig(({ command, mode }) => {
         resolvers: [TDesignResolver({ library: 'vue-next' }), ElementPlusResolver()]
       }),
       Components({ resolvers: [TDesignResolver({ library: 'vue-next' }), ElementPlusResolver()] }),
-      WindiCSS()
+      WindiCSS(),
+      // ...pluginCondition()
+      visualizer({ open : true })
     ],
     define: {
       'import.meta.vitest': process.env.NODE_ENV === 'development' ? true : false
@@ -120,11 +128,13 @@ export default defineConfig(({ command, mode }) => {
       includeSource: ['src/**/*.test.{js,ts,tsx}']
     },
     optimizeDeps: {
-      include: ['vue', 'vue-router'],
-      exclude: ['pdfjs-dist']
+      exclude: ['pdfjs-dist', '@univerjs/presets'],
     },
     build: {
       rollupOptions: {
+        input: {
+          main: './index.html'
+        },
         output: {
           manualChunks: {
             // 将 Vue 相关库分离

@@ -7,7 +7,7 @@ import { UniverDocsDrawingPreset } from '@univerjs/presets/preset-docs-drawing';
 import docsDrawingZhCN from '@univerjs/presets/preset-docs-drawing/locales/zh-CN';
 import { UniverDocsHyperLinkPreset } from '@univerjs/presets/preset-docs-hyper-link';
 import docsHyperLinkZhCN from '@univerjs/presets/preset-docs-hyper-link/locales/zh-CN';
-import { DOCUMENT_DATA } from './data';
+import { DOCUMENT_DATA } from '../../../public/default-json/data';
 
 import '@univerjs/presets/lib/styles/preset-docs-core.css';
 import '@univerjs/presets/lib/styles/preset-docs-drawing.css';

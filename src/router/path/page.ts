@@ -84,26 +84,26 @@ export default <RouteRecordRaw[]>[
     component: () => import('@/views/map'),
     children: []
   },
-  // {
-  //   name: 'UniverDoc',
-  //   path: '/univer-doc',
-  //   meta: {
-  //     title: '电子文档',
-  //     icon: 'file-word'
-  //   },
-  //   component: () => import('@/views/univer-doc'),
-  //   children: []
-  // },
-  // {
-  //   name: 'UniverSheet',
-  //   path: '/univer-sheet',
-  //   meta: {
-  //     title: '电子表格',
-  //     icon: 'table'
-  //   },
-  //   component: () => import('@/views/univer-sheet'),
-  //   children: []
-  // },
+  {
+    name: 'UniverDoc',
+    path: '/univer-doc',
+    meta: {
+      title: '电子文档',
+      icon: 'file-word'
+    },
+    component: () => import('@/views/univer-doc'),
+    children: []
+  },
+  {
+    name: 'UniverSheet',
+    path: '/univer-sheet',
+    meta: {
+      title: '电子表格',
+      icon: 'table'
+    },
+    component: () => import('@/views/univer-sheet'),
+    children: []
+  },
   {
     name: 'ExcelToTable',
     path: '/excel-to-table',

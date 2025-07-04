@@ -1,0 +1,104 @@
+{
+  "id": 1,
+  "name": "测试",
+  "general": {
+    "scroll": {
+      "scrollLeft": 0,
+      "scrollTop": 0
+    },
+    "position": {
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080,
+      "z": 1
+    }
+  },
+  "metadata": {},
+  "widgets": [
+    {
+      "id": "w_99cb3739",
+      "name": "测试",
+      "type": "base-line",
+      "general": {
+        "position": {
+          "x": 397,
+          "y": 194,
+          "width": 300,
+          "height": 200,
+          "z": 1
+        }
+      },
+      "metadata": {},
+      "manifest": {
+        "id": "base-line",
+        "name": "基础折线图",
+        "type": "base-line",
+        "icon": "https://tdesign.gtimg.com/demo/demo-image-1.png",
+        "fields": [
+          {
+            "label": "",
+            "value": "",
+            "description": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "w_992439",
+      "name": "测试2",
+      "type": "base-line",
+      "general": {
+        "position": {
+          "x": 197,
+          "y": 294,
+          "width": 300,
+          "height": 200,
+          "z": 2
+        }
+      },
+      "metadata": {},
+      "manifest": {
+        "id": "base-line",
+        "name": "基础折线图",
+        "type": "base-line",
+        "icon": "https://tdesign.gtimg.com/demo/demo-image-1.png",
+        "fields": [
+          {
+            "label": "",
+            "value": "",
+            "description": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "w_99c5139",
+      "name": "测试3",
+      "type": "base-line",
+      "general": {
+        "position": {
+          "x": 97,
+          "y": 14,
+          "width": 300,
+          "height": 200,
+          "z": 3
+        }
+      },
+      "metadata": {},
+      "manifest": {
+        "id": "base-line",
+        "name": "基础折线图",
+        "type": "base-line",
+        "icon": "https://tdesign.gtimg.com/demo/demo-image-1.png",
+        "fields": [
+          {
+            "label": "",
+            "value": "",
+            "description": ""
+          }
+        ]
+      }
+    }
+  ]
+}
