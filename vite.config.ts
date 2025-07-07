@@ -155,24 +155,27 @@ export default defineConfig(({ command, mode }) => {
       exclude: ['pdfjs-dist']
     },
     build: {
+      minify: 'esbuild',
       // 关闭压缩报告
       reportCompressedSize: false,
-      terserOptions: {
-        compress: {
-          unused: true,
-          dead_code: true
-        }
-      },
+      // terserOptions: {
+      //   compress: {
+      //     unused: true,
+      //     dead_code: true
+      //   }
+      // },
       rollupOptions: {
         output: {
           entryFileNames: `[name]-[hash].js`,
           chunkFileNames: `[name]-[hash].js`,
           assetFileNames: `[name]-[hash].[ext]`,
+          chunkSizeWarningLimit: 5000,
           manualChunks: {
-            'vue-lib': ['vue', 'vue-router', 'pinia'],
-            charts: ['echarts'],
-            lodash: ['lodash-es'],
-            pdfjs: ['pdfjs-dist']
+            'vue-lib': ['vue', 'vue-router', 'pinia', 'axios'],
+            'ui-lib': ['element-plus', 'tdesign-vue-next'],
+            'charts-lib': ['echarts'],
+            'plugin-lib': ['pdfjs-dist'],
+            lodash: ['lodash-es']
           }
         }
       }
