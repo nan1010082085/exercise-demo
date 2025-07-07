@@ -1,7 +1,6 @@
 /// <reference types="vitest" />
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
-import react from '@vitejs/plugin-react';
 import JSX from '@vitejs/plugin-vue-jsx';
 import { fileURLToPath, URL } from 'node:url';
 import AutoImport from 'unplugin-auto-import/vite';
@@ -9,7 +8,9 @@ import Components from 'unplugin-vue-components/vite';
 import { TDesignResolver } from 'unplugin-vue-components/resolvers';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import WindiCSS from 'vite-plugin-windicss';
-
+import imageminPlugin from 'vite-plugin-imagemin';
+import compression from 'vite-plugin-compression';
+import cssnano from 'cssnano';
 // import visualizer from 'rollup-plugin-visualizer';
 
 // --- env ---
@@ -18,12 +19,6 @@ import WindiCSS from 'vite-plugin-windicss';
 const isCustomElementArrays = ['micro-app'];
 
 const target = 'http://localhost:6606/';
-
-// const pluginCondition = () =>{
-//   return [
-//     process.env.NODE_ENV === 'development' ? visualizer({ open : true }) : null,
-//   ]
-// }
 
 const proxy = {
   // '/sys': {
@@ -67,6 +62,14 @@ export default defineConfig(({ command, mode }) => {
       }
     },
     css: {
+      devSourcemap: false, // 开发环境关闭 sourcemap
+      postcss: {
+        plugins: [
+          cssnano({
+            preset: 'cssnano-preset-advanced'
+          })
+        ]
+      },
       preprocessorOptions: {
         scss: {
           // 抑制弃用警告
@@ -107,7 +110,7 @@ export default defineConfig(({ command, mode }) => {
         script: {
           defineModel: true,
           propsDestructure: true
-        },
+        }
         // reactivityTransform: false
       }),
       JSX({
@@ -123,7 +126,22 @@ export default defineConfig(({ command, mode }) => {
       //   // 仅处理 .jsx 和 .tsx 文件
       //   include: ['**/*.jsx', '**/*.tsx']
       // })
-      // ...pluginCondition()
+      // 图片优化
+      imageminPlugin({
+        gifsicle: { interlaced: false },
+        mozjpeg: { quality: 80 },
+        pngquant: { quality: [0.8, 0.9] },
+        svgo: {
+          plugins: [{ removeViewBox: false }]
+        }
+      }),
+      // gzip 压缩
+      compression({
+        algorithm: 'gzip', // 压缩算法
+        ext: '.gz', // 生成后缀
+        threshold: 10240, // 仅压缩 >10KB 的文件
+        deleteOriginFile: false // 保留原始文件
+      })
       // visualizer({ open : true })
     ],
     define: {
@@ -133,24 +151,27 @@ export default defineConfig(({ command, mode }) => {
       includeSource: ['src/**/*.test.{js,ts,tsx}']
     },
     optimizeDeps: {
+      include: ['vue', 'vue-router', 'pinia', 'lodash-es'],
       exclude: ['pdfjs-dist']
     },
     build: {
+      // 关闭压缩报告
+      reportCompressedSize: false,
+      terserOptions: {
+        compress: {
+          unused: true,
+          dead_code: true
+        }
+      },
       rollupOptions: {
-        input: {
-          main: './index.html'
-        },
         output: {
+          entryFileNames: `[name]-[hash].js`,
+          chunkFileNames: `[name]-[hash].js`,
+          assetFileNames: `[name]-[hash].[ext]`,
           manualChunks: {
-            // 将 Vue 相关库分离
-            vue: ['vue', 'vue-router', 'pinia'],
-            // 将 UI 库分离
-            ui: ['element-plus', 'tdesign-vue-next'],
-            // 将 echarts 分离
+            'vue-lib': ['vue', 'vue-router', 'pinia'],
             charts: ['echarts'],
-            // 将其他第三方库分离
-            vendor: ['axios', 'dayjs'],
-            // 将 pdfjs 分离
+            lodash: ['lodash-es'],
             pdfjs: ['pdfjs-dist']
           }
         }
